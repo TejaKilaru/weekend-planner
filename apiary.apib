@@ -6,27 +6,62 @@ HOST: http://weekendplanner.practo.com/
 WeekendPlanner is a simple API allowing Practeons to view Weekend 
 trips and join trips with others.
 
-## Trips Collection [/home]
+## Trips Collection [/trips]
 
 ### List All Trips [GET]
 Gives all active upcoming trips.
 + Response 200 (application/json)
 
         [
-            {
-                "id": "1",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "to": "nandihills"
-            }
+          {
+            "id": 1,
+            "avgCost": 900,
+            "bookEndDate": 883679400000,
+            "deleteStatus": "false",
+            "description": "View of Sunrise is really Good",
+            "endDate": 883679400000,
+            "modifyOn": 1471584952000,
+            "startDate": 883679400000,
+            "totalPeople": 13,
+            "travelBy": "Tempo Traveller",
+            "vacancy": 4,
+            "orgId": 1,
+            "locationId": 1
+          },
+          {
+            "id": 2,
+            "avgCost": 1600,
+            "bookEndDate": 883679400000,
+            "deleteStatus": "true",
+            "description": "View of Sunrise is really Good",
+            "endDate": 883679400000,
+            "modifyOn": 1471584952000,
+            "startDate": 883634500000,
+            "totalPeople": 5,
+            "travelBy": "BMW -----X-----",
+            "vacancy": 2,
+            "orgId": 4,
+            "locationId": 2
+          }
         ]
 
-### Join Trip [POST]
+### Create Trip [POST]
 To Signup for Sepecific trip.
+
 + Request (application/json)
 
         {
-            "id": "1",
-            "email": "abc@def.com"
+            "avgCost": 900,
+            "bookEndDate": 883679400000,
+            "deleteStatus": "false",
+            "description": "View of Sunrise is really Good",
+            "endDate": 883679400000,
+            "startDate": 883679400000,
+            "totalPeople": 13,
+            "travelBy": "Tempo Traveller",
+            "vacancy": 4,
+            "orgId": 1,
+            "locationId": 1
         }
 
 + Response 201 (application/json)
@@ -38,61 +73,22 @@ To Signup for Sepecific trip.
     + Body
 
             {
-                "id": "1",
-                "published_at": "2014-11-11T08:40:51.620Z",
-                "to": "nandihills"
+            "id": 1,
+            "avgCost": 900,
+            "bookEndDate": 883679400000,
+            "deleteStatus": "false",
+            "description": "View of Sunrise is really Good",
+            "endDate": 883679400000,
+            "modifyOn": 1471584952000,
+            "startDate": 883679400000,
+            "totalPeople": 13,
+            "travelBy": "Tempo Traveller",
+            "vacancy": 4,
+            "orgId": 1,
+            "locationId": 1
             }
-            
 
-## Personal Trips [/mytrips]
-
-To Know all the Personal Trips that you hosted and the Trips you signeduo for.
-
-### List My Trips [GET]
-+ Response 200 (application/json)
-
-        [
-            {
-                "id": "1",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "to": "nandihills"
-            }
-        ]
-
-
-
-### Create a New Trip [POST]
-To Create a New Trip.
-+ Request (application/json)
-
-        {
-            "posted_by": "abc@def.com",
-            "to": "wonderla",
-            "start_date": "09-09-2016",
-            "end_date": "10-09-2016",
-            "total_people": "5",
-            "vacancy": "2",
-            "description": "Many rides to enjoy",
-            "travel_type": "Sedan"
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /mytrips/1
-
-    + Body
-
-            {
-                "id": "1",
-                "published_at": "2014-11-11T08:40:51.620Z",
-                "to": "wonderla"
-            }
-            
-
-
-## Eidt Trip [/mytrips/{trip_id}]
+## Modification and Deletion of Trip [/mytrips/{trip_id}]
 
 + Parameters
     + trip_id (number) - ID of the trip
@@ -102,25 +98,158 @@ Make Changes in the Trip Plan.
 + Request (application/json)
 
         {
-            "posted_by": "abc@def.com",
-            "to": "wonderla",
-            "start_date": "09-09-2016",
-            "end_date": "10-09-2016",
-            "total_people": "5",
-            "vacancy": "2",
-            "description": "Many rides to enjoy",
-            "travel_type": "Sedan"
+            "id": 2,
+            "avgCost": 1600,
+            "bookEndDate": 883679400000,
+            "deleteStatus": "true",
+            "description": "View of Sunrise is really Good",
+            "endDate": 883679400000,
+            "modifyOn": 1471584952000,
+            "startDate": 883634500000,
+            "totalPeople": 5,
+            "travelBy": "BMW -----X-----",
+            "vacancy": 2,
+            "orgId": 4,
+            "locationId": 2
         }
 
 + Response 200 (application/json)
 
         {
-            "id": "1",
-            "published_at": "2014-11-11T08:40:51.620Z",
-            "to": "wonderla"
-
+            "id": 2,
+            "avgCost": 1600,
+            "bookEndDate": 883679400000,
+            "deleteStatus": "true",
+            "description": "View of Sunrise is really Good",
+            "endDate": 883679400000,
+            "modifyOn": 1471584952000,
+            "startDate": 883634500000,
+            "totalPeople": 5,
+            "travelBy": "BMW -----X-----",
+            "vacancy": 2,
+            "orgId": 4,
+            "locationId": 2
         }
 
 ### Delete [DELETE]
 Deletes the Trip.
+
 + Response 204
+
+
+## My Trips [/users/{id}/mytrips]
+
++ Parameters
+    + id (number) - ID of the trip
+
+### Personal Trips [GET]
++ Response 200 (application/json)
+
+        [
+          {
+            "id": 1,
+            "avgCost": 900,
+            "bookEndDate": 883679400000,
+            "deleteStatus": "false",
+            "description": "View of Sunrise is really Good",
+            "endDate": 883679400000,
+            "modifyOn": 1471584952000,
+            "startDate": 883679400000,
+            "totalPeople": 13,
+            "travelBy": "Tempo Traveller",
+            "vacancy": 4,
+            "orgId": 1,
+            "locationId": 1
+          },
+          {
+            "id": 2,
+            "avgCost": 1600,
+            "bookEndDate": 883679400000,
+            "deleteStatus": "true",
+            "description": "View of Sunrise is really Good",
+            "endDate": 883679400000,
+            "modifyOn": 1471584952000,
+            "startDate": 883634500000,
+            "totalPeople": 5,
+            "travelBy": "BMW -----X-----",
+            "vacancy": 2,
+            "orgId": 4,
+            "locationId": 2
+          }
+        ]
+
+## My Trips [/users/{id}/ontrips]
+
++ Parameters
+    + id (number) - ID of the trip
+
+### Signedup Trips [GET]
++ Response 200 (application/json)
+
+        [
+          {
+            "id": 1,
+            "avgCost": 900,
+            "bookEndDate": 883679400000,
+            "deleteStatus": "false",
+            "description": "View of Sunrise is really Good",
+            "endDate": 883679400000,
+            "modifyOn": 1471584952000,
+            "startDate": 883679400000,
+            "totalPeople": 13,
+            "travelBy": "Tempo Traveller",
+            "vacancy": 4,
+            "orgId": 1,
+            "locationId": 1
+          },
+          {
+            "id": 2,
+            "avgCost": 1600,
+            "bookEndDate": 883679400000,
+            "deleteStatus": "true",
+            "description": "View of Sunrise is really Good",
+            "endDate": 883679400000,
+            "modifyOn": 1471584952000,
+            "startDate": 883634500000,
+            "totalPeople": 5,
+            "travelBy": "BMW -----X-----",
+            "vacancy": 2,
+            "orgId": 4,
+            "locationId": 2
+          }
+        ]
+
+## All Members in Trip [/trips/{id}/users]
+
++ Parameters
+    + id (number) - ID of the trip
+
+### Signedup Trips [GET]
++ Response 200 (application/json)
+
+        [
+          {
+            "id": 2,
+            "email": "poornateja@practo.com",
+            "mobile": "8985811049",
+            "name": "poornateja"
+          },
+          {
+            "id": 2,
+            "email": "poornateja@practo.com",
+            "mobile": "8985811049",
+            "name": "poornateja"
+          },
+          {
+            "id": 3,
+            "email": "hello@practo.com",
+            "mobile": "1234567890",
+            "name": "hello"
+          },
+          {
+            "id": 4,
+            "email": "hello11@practo.com",
+            "mobile": "1234567890",
+            "name": "hello11"
+          }
+        ]
