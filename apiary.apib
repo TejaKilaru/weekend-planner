@@ -1,0 +1,126 @@
+FORMAT: 1A
+HOST: http://weekendplanner.practo.com/
+
+# WeekendPlanner
+
+WeekendPlanner is a simple API allowing Practeons to view Weekend 
+trips and join trips with others.
+
+## Trips Collection [/home]
+
+### List All Trips [GET]
+Gives all active upcoming trips.
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "1",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "to": "nandihills"
+            }
+        ]
+
+### Join Trip [POST]
+To Signup for Sepecific trip.
++ Request (application/json)
+
+        {
+            "id": "1",
+            "email": "abc@def.com"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /mytrips/1
+
+    + Body
+
+            {
+                "id": "1",
+                "published_at": "2014-11-11T08:40:51.620Z",
+                "to": "nandihills"
+            }
+            
+
+## Personal Trips [/mytrips]
+
+To Know all the Personal Trips that you hosted and the Trips you signeduo for.
+
+### List My Trips [GET]
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "1",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "to": "nandihills"
+            }
+        ]
+
+
+
+### Create a New Trip [POST]
+To Create a New Trip.
++ Request (application/json)
+
+        {
+            "posted_by": "abc@def.com",
+            "to": "wonderla",
+            "start_date": "09-09-2016",
+            "end_date": "10-09-2016",
+            "total_people": "5",
+            "vacancy": "2",
+            "description": "Many rides to enjoy",
+            "travel_type": "Sedan"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /mytrips/1
+
+    + Body
+
+            {
+                "id": "1",
+                "published_at": "2014-11-11T08:40:51.620Z",
+                "to": "wonderla"
+            }
+            
+
+
+## Eidt Trip [/mytrips/{trip_id}]
+
++ Parameters
+    + trip_id (number) - ID of the trip
+
+### Change Trip  [PUT]
+Make Changes in the Trip Plan.
++ Request (application/json)
+
+        {
+            "posted_by": "abc@def.com",
+            "to": "wonderla",
+            "start_date": "09-09-2016",
+            "end_date": "10-09-2016",
+            "total_people": "5",
+            "vacancy": "2",
+            "description": "Many rides to enjoy",
+            "travel_type": "Sedan"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": "1",
+            "published_at": "2014-11-11T08:40:51.620Z",
+            "to": "wonderla"
+
+        }
+
+### Delete [DELETE]
+Deletes the Trip.
++ Response 204
