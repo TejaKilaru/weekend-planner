@@ -68,7 +68,7 @@ To Signup for Sepecific trip.
 
     + Headers
 
-            Location: /mytrips/1
+            Location: /trips/1
 
     + Body
 
@@ -95,6 +95,7 @@ To Signup for Sepecific trip.
 
 ### Change Trip  [PUT]
 Make Changes in the Trip Plan.
+
 + Request (application/json)
 
         {
@@ -139,6 +140,7 @@ Deletes the Trip.
 
 ## My Trips [/users/{id}/mytrips]
 
+Trips that are organised or (Hosted) by the User.
 + Parameters
     + id (number) - ID of the trip
 
@@ -178,8 +180,9 @@ Deletes the Trip.
           }
         ]
 
-## My Trips [/users/{id}/ontrips]
+## Signed Trips [/users/{id}/ontrips]
 
+Trips that are Signedup by the user.
 + Parameters
     + id (number) - ID of the trip
 
@@ -219,12 +222,14 @@ Deletes the Trip.
           }
         ]
 
+
 ## All Members in Trip [/trips/{id}/users]
 
+All the practeons going to this Trip.
 + Parameters
     + id (number) - ID of the trip
 
-### Signedup Trips [GET]
+### Trip Members [GET]
 + Response 200 (application/json)
 
         [
@@ -253,3 +258,27 @@ Deletes the Trip.
             "name": "hello11"
           }
         ]
+        
+## Signup to Trip [/reltripuser/join]
+
++ Request (application/json)
+
+        {
+          "tripId": 1,
+          "userId": 3
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+    + Body
+
+            {
+              "id": 2,
+              "deleteStatus": "false",
+              "modifyOn": 883679400000,
+              "tripId": 1,
+              "modifyById": 3,
+              "userId": 3
+            }
