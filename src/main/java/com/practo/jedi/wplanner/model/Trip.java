@@ -230,7 +230,7 @@ public class Trip implements Serializable {
   }
 
 
-  public Tripentity qgetEntity() {
+  public Tripentity modeltoentity() {
     Tripentity et = new Tripentity();
     et.setModifyOn(getModifyOn());
     et.setStartDate(getStartDate());
@@ -250,7 +250,7 @@ public class Trip implements Serializable {
     return et;
   }
 
-  public void mergeEntity(Tripentity e) {
+  public void entitytomodel(Tripentity e) {
     if (e != null) {
       setModifyOn(e.getModifyOn());
       setStartDate(e.getStartDate());

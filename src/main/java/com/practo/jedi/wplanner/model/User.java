@@ -15,6 +15,11 @@ import com.practo.jedi.wplanner.data.entity.Userentity;
 @Component
 public class User implements Serializable {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+
   @Id
   private int id;
 
@@ -64,7 +69,7 @@ public class User implements Serializable {
   }
 
 
-  public Userentity qgetEntity() {
+  public Userentity modeltoentity() {
     Userentity et = new Userentity();
     et.setEmail(getEmail());
     et.setName(getName());
@@ -74,7 +79,7 @@ public class User implements Serializable {
     return et;
   }
 
-  public void mergeEntity(Userentity e) {
+  public void entitytomodel(Userentity e) {
     if (e != null) {
       setName(e.getName());
       setEmail(e.getEmail());

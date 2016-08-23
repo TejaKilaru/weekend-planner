@@ -2,6 +2,7 @@ package com.practo.jedi.wplanner.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +23,8 @@ public class UserController {
   private UserService service;
 
   @RequestMapping(value = {"/all", ""}, method = RequestMethod.GET)
-  public Iterable<User> getall() {
-    Iterable<User> dto = service.getall();
+  public Iterable<User> getall(Pageable pageable) {
+    Iterable<User> dto = service.getall(pageable);
     return dto;
   }
 
