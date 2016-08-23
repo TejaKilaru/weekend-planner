@@ -1,5 +1,8 @@
 package com.practo.jedi.wplanner.controllers;
 
+import com.practo.jedi.wplanner.model.Trip;
+import com.practo.jedi.wplanner.model.User;
+import com.practo.jedi.wplanner.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -11,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.practo.jedi.wplanner.model.Trip;
-import com.practo.jedi.wplanner.model.User;
-import com.practo.jedi.wplanner.service.UserService;
+
 
 @RestController
 @RequestMapping("/users")
@@ -46,16 +47,28 @@ public class UserController {
     return dto;
   }
 
+  /**
+   * Create.
+   * 
+   * @param obj (User Class)
+   * @return (Response)
+   */
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<User> create(@RequestBody User d) {
-    User dto = service.create(d);
+  public ResponseEntity<User> create(@RequestBody User obj) {
+    User dto = service.create(obj);
     ResponseEntity<User> re = new ResponseEntity<User>(dto, HttpStatus.CREATED);
     return re;
   }
 
+  /**
+   * Update.
+   * 
+   * @param obj (User Class)
+   * @return (Response)
+   */
   @RequestMapping(method = RequestMethod.PUT)
-  public ResponseEntity<User> update(@RequestBody User d) {
-    User dto = service.update(d);
+  public ResponseEntity<User> update(@RequestBody User obj) {
+    User dto = service.update(obj);
     ResponseEntity<User> re = new ResponseEntity<User>(dto, HttpStatus.OK);
     return re;
   }

@@ -1,5 +1,9 @@
 package com.practo.jedi.wplanner.model;
 
+import com.practo.jedi.wplanner.data.entity.Locationentity;
+import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
+import com.practo.jedi.wplanner.data.entity.Tripentity;
+import com.practo.jedi.wplanner.data.entity.Userentity;
 
 import java.beans.Transient;
 import java.io.Serializable;
@@ -12,20 +16,15 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.transaction.Transactional;
 
-import org.springframework.stereotype.Component;
-
-import com.practo.jedi.wplanner.data.entity.Locationentity;
-import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
-import com.practo.jedi.wplanner.data.entity.Tripentity;
-import com.practo.jedi.wplanner.data.entity.Userentity;
 
 
 /**
  * The persistent class for the trips database table.
  * 
  */
-@Component
+@Transactional
 public class Trip implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -165,9 +164,15 @@ public class Trip implements Serializable {
     this.vacancy = vacancy;
   }
 
+  /**
+   * .
+   * 
+   * @return ()
+   */
   public int getOrgId() {
-    if (this.user != null)
+    if (this.user != null) {
       return this.user.getId();
+    }
     return this.orgid;
   }
 
@@ -188,9 +193,15 @@ public class Trip implements Serializable {
     this.locationid = locationid;
   }
 
+  /**
+   * .
+   * 
+   * @return ()
+   */
   public int getLocationId() {
-    if (this.location != null)
+    if (this.location != null) {
       return this.location.getId();
+    }
     return this.locationid;
   }
 
@@ -203,11 +214,17 @@ public class Trip implements Serializable {
     setLocationId(this.location.getId());
   }
 
+  /**
+   * Trip Members.
+   * 
+   * @return (List of Members ids)
+   */
   @Transient
   public Iterable<Integer> getTripUserIds() {
     List<Integer> trip = new ArrayList<Integer>();
-    if (this.relationtripusers == null)
+    if (this.relationtripusers == null) {
       return null;
+    }
     for (RelationTripUserentity temp : this.relationtripusers) {
       trip.add(temp.getUser2().getId());
     }
@@ -217,7 +234,7 @@ public class Trip implements Serializable {
   public void setRelationTripUsers(List<RelationTripUserentity> obj) {
     this.relationtripusers = obj;
   }
-  
+
   @Transient
   public Iterable<RelationTripUserentity> getRelationTripUsers() {
     return this.relationtripusers;
@@ -230,6 +247,11 @@ public class Trip implements Serializable {
   }
 
 
+  /**
+   * Create entity.
+   * 
+   * @return (entity)
+   */
   public Tripentity modeltoentity() {
     Tripentity et = new Tripentity();
     et.setModifyOn(getModifyOn());
@@ -250,22 +272,27 @@ public class Trip implements Serializable {
     return et;
   }
 
-  public void entitytomodel(Tripentity e) {
-    if (e != null) {
-      setModifyOn(e.getModifyOn());
-      setStartDate(e.getStartDate());
-      setEndDate(e.getEndDate());
-      setBookEndDate(e.getBookEndDate());
-      setAvgCost(e.getAvgCost());
-      setDescription(e.getDescription());
-      setVacancy(e.getVacancy());
-      setTotalPeople(e.getTotalPeople());
-      setTravelBy(e.getTravelBy());
-      setDeleteStatus(e.getDeleteStatus());
-      setId(e.getId());
-      setUserentity(e.getUser());
-      setLocationentity(e.getLocationBean());
-      setRelationTripUsers(e.getRelationTripUsers());
+  /**
+   * Populating Model.
+   * 
+   * @param obj (entity)
+   */
+  public void entitytomodel(Tripentity obj) {
+    if (obj != null) {
+      setModifyOn(obj.getModifyOn());
+      setStartDate(obj.getStartDate());
+      setEndDate(obj.getEndDate());
+      setBookEndDate(obj.getBookEndDate());
+      setAvgCost(obj.getAvgCost());
+      setDescription(obj.getDescription());
+      setVacancy(obj.getVacancy());
+      setTotalPeople(obj.getTotalPeople());
+      setTravelBy(obj.getTravelBy());
+      setDeleteStatus(obj.getDeleteStatus());
+      setId(obj.getId());
+      setUserentity(obj.getUser());
+      setLocationentity(obj.getLocationBean());
+      setRelationTripUsers(obj.getRelationTripUsers());
     }
   }
 }

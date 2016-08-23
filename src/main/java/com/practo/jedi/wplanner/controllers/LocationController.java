@@ -1,5 +1,7 @@
 package com.practo.jedi.wplanner.controllers;
 
+import com.practo.jedi.wplanner.model.Location;
+import com.practo.jedi.wplanner.service.LocationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.practo.jedi.wplanner.model.Location;
-import com.practo.jedi.wplanner.service.LocationService;
 
 @RestController
 @RequestMapping("/locations")
@@ -32,9 +31,15 @@ public class LocationController {
     return dto;
   }
 
+  /**
+   * Create.
+   * 
+   * @param obj (Location class)
+   * @return (Response)
+   */
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<Location> create(@RequestBody Location d) {
-    Location dto = service.create(d);
+  public ResponseEntity<Location> create(@RequestBody Location obj) {
+    Location dto = service.create(obj);
     ResponseEntity<Location> re = new ResponseEntity<Location>(dto, HttpStatus.CREATED);
     return re;
   }

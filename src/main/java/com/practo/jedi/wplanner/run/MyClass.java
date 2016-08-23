@@ -32,9 +32,9 @@ public class MyClass {
   void logException() {
     try {
       unsafeMethod();
-    } catch (Exception e) {
+    } catch (Exception obj) {
       // This adds an exception to the logs
-      logger.error("Exception caught", e);
+      logger.error("Exception caught", obj);
     }
   }
 

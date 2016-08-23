@@ -83,6 +83,12 @@ public class Userentity implements Serializable {
     this.relationTripUsers1 = relationTripUsers1;
   }
 
+  /**
+   * .
+   * 
+   * @param relationTripUsers1 ()
+   * @return ()
+   */
   public RelationTripUserentity addRelationTripUsers1(RelationTripUserentity relationTripUsers1) {
     getRelationTripUsers1().add(relationTripUsers1);
     relationTripUsers1.setUser1(this);
@@ -90,7 +96,14 @@ public class Userentity implements Serializable {
     return relationTripUsers1;
   }
 
-  public RelationTripUserentity removeRelationTripUsers1(RelationTripUserentity relationTripUsers1) {
+  /**
+   * .
+   * 
+   * @param relationTripUsers1 ()
+   * @return ()
+   */
+  public RelationTripUserentity removeRelationTripUsers1(
+      RelationTripUserentity relationTripUsers1) {
     getRelationTripUsers1().remove(relationTripUsers1);
     relationTripUsers1.setUser1(null);
 
@@ -105,6 +118,12 @@ public class Userentity implements Serializable {
     this.relationTripUsers2 = relationTripUsers2;
   }
 
+  /**
+   * .
+   * 
+   * @param relationTripUsers2 ()
+   * @return ()
+   */
   public RelationTripUserentity addRelationTripUsers2(RelationTripUserentity relationTripUsers2) {
     getRelationTripUsers2().add(relationTripUsers2);
     relationTripUsers2.setUser2(this);
@@ -112,7 +131,14 @@ public class Userentity implements Serializable {
     return relationTripUsers2;
   }
 
-  public RelationTripUserentity removeRelationTripUsers2(RelationTripUserentity relationTripUsers2) {
+  /**
+   * .
+   * 
+   * @param relationTripUsers2 ()
+   * @return ()
+   */
+  public RelationTripUserentity removeRelationTripUsers2(
+      RelationTripUserentity relationTripUsers2) {
     getRelationTripUsers2().remove(relationTripUsers2);
     relationTripUsers2.setUser2(null);
 
@@ -127,6 +153,13 @@ public class Userentity implements Serializable {
     this.trips = trips;
   }
 
+  /**
+   * .
+   * 
+   * @param trip ()
+   * @return ()
+   * 
+   */
   public Tripentity addTrip(Tripentity trip) {
     getTrips().add(trip);
     trip.setUser(this);
@@ -134,6 +167,12 @@ public class Userentity implements Serializable {
     return trip;
   }
 
+  /**
+   * .
+   * 
+   * @param trip ()
+   * @return ()
+   */
   public Tripentity removeTrip(Tripentity trip) {
     getTrips().remove(trip);
     trip.setUser(null);

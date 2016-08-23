@@ -175,6 +175,12 @@ public class Tripentity implements Serializable {
     this.relationTripUsers = relationTripUsers;
   }
 
+  /**
+   * .
+   * 
+   * @param relationTripUser ()
+   * @return ()
+   */
   public RelationTripUserentity addRelationTripUser(RelationTripUserentity relationTripUser) {
     getRelationTripUsers().add(relationTripUser);
     relationTripUser.setTrip(this);
@@ -182,6 +188,12 @@ public class Tripentity implements Serializable {
     return relationTripUser;
   }
 
+  /**
+   * .
+   * 
+   * @param relationTripUser ()
+   * @return ()
+   */
   public RelationTripUserentity removeRelationTripUser(RelationTripUserentity relationTripUser) {
     getRelationTripUsers().remove(relationTripUser);
     relationTripUser.setTrip(null);

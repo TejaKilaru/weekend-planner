@@ -1,11 +1,12 @@
 package com.practo.jedi.wplanner.service;
 
-import javax.transaction.Transactional;
+import com.practo.jedi.wplanner.model.Trip;
+import com.practo.jedi.wplanner.model.User;
 
 import org.springframework.data.domain.Pageable;
 
-import com.practo.jedi.wplanner.model.Trip;
-import com.practo.jedi.wplanner.model.User;
+import javax.transaction.Transactional;
+
 
 public interface UserService {
 
@@ -13,20 +14,18 @@ public interface UserService {
   User get(Integer id);
 
   @Transactional
-  User create(User d);
+  User create(User obj);
 
   @Transactional
-  User update(User d);
+  User update(User obj);
 
   @Transactional
   void delete(Integer id);
-  
+
   Iterable<User> getall(Pageable pageable);
-  
+
   Iterable<Trip> getusertrips(Integer id);
-  
+
   Iterable<Trip> getuserontrips(Integer id);
-  
-  Class<User> getDTOClass();
-  
+
 }

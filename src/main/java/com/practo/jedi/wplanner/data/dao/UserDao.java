@@ -1,19 +1,48 @@
 package com.practo.jedi.wplanner.data.dao;
 
+import com.practo.jedi.wplanner.data.entity.Userentity;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Repository;
 
-import com.practo.jedi.wplanner.data.entity.Userentity;
-
-@Transactional
 @Repository
-public interface UserDao
-    extends PagingAndSortingRepository<Userentity, Integer>, CrudRepository<Userentity, Integer> {
+public class UserDao {
 
-  public Userentity findByName(String name);
+  @Autowired
+  private HibernateTemplate template;
+
+  @Transactional
+  public Userentity findUser(int id) {
+    return template.load(Userentity.class, id);
+  }
+
+  @Transactional
+  public Iterable<Userentity> getAllUsers(Pageable pageable) {
+    return (Iterable<Userentity>) template.findByCriteria(DetachedCriteria.forClass(Userentity.class),
+        pageable.getOffset(), pageable.getPageSize());
+  }
+
+  @Transactional
+  public Userentity createUser(Userentity obj) {
+    template.save(obj);
+    return obj;
+  }
+
+  @Transactional
+  public Userentity updateUser(Userentity obj) {
+    template.update(obj);
+    return obj;
+  }
+
+  @Transactional
+  public Userentity findByName(String name) {
+    return null;
+  }
 
 }
