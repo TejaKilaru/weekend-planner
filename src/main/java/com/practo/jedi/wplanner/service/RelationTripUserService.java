@@ -10,7 +10,7 @@ public interface RelationTripUserService {
   RelationTripUser get(Integer id);
 
   @Transactional
-  RelationTripUser create(RelationTripUser d);
+  RelationTripUser create(Integer id,RelationTripUser d);
 
   @Transactional
   RelationTripUser update(RelationTripUser d);

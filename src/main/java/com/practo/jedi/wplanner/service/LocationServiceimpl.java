@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import com.practo.jedi.wplanner.data.dao.LocationDao;
 import com.practo.jedi.wplanner.data.entity.Locationentity;
 import com.practo.jedi.wplanner.data.entity.Userentity;
 import com.practo.jedi.wplanner.model.Location;
@@ -16,21 +17,17 @@ import com.practo.jedi.wplanner.model.User;
 public class LocationServiceimpl implements LocationService {
 
   @Autowired
-  private CrudRepository<Locationentity, Integer> repository;
-
-  public CrudRepository<Locationentity, Integer> getRepository() {
-    return repository;
-  }
+  private LocationDao locationrepository;
   
   @Override
   public Iterable<Location> getall() {
-    Iterable<Locationentity> entity = repository.findAll();
+    Iterable<Locationentity> entity = locationrepository.findAll();
     List<Location> allusers = new ArrayList<Location>();
     for (Locationentity temp : entity) {
       System.out.println(temp);
       try {
         Location dto = Location.class.newInstance();
-        dto.mergeEntity(temp);
+        dto.entitytomodel(temp);
         allusers.add(dto);
       } catch (InstantiationException | IllegalAccessException e) {
         System.out.printf("Exception while DAO get for ID :" + e);
@@ -42,10 +39,10 @@ public class LocationServiceimpl implements LocationService {
 
   @Override
   public Location get(Integer id) {
-    Locationentity entity = repository.findOne(id);
+    Locationentity entity = locationrepository.findOne(id);
     try {
       Location dto = getDTOClass().newInstance();
-      dto.mergeEntity(entity);
+      dto.entitytomodel(entity);
       return dto;
     } catch (InstantiationException | IllegalAccessException e) {
       // LOG.error("Exception while DAO get for ID :" + id, e);
@@ -55,23 +52,23 @@ public class LocationServiceimpl implements LocationService {
 
   @Override
   public Location create(Location d) {
-    Locationentity entity = d.qgetEntity();
-    entity = repository.save(entity);
-    d.mergeEntity(entity);
+    Locationentity entity = d.modeltoentity();
+    entity = locationrepository.save(entity);
+    d.entitytomodel(entity);
     return d;
   }
 
   @Override
   public Location update(Location d) {
-    Locationentity entity = d.qgetEntity();
-    entity = repository.save(entity);
-    d.mergeEntity(entity);
+    Locationentity entity = d.modeltoentity();
+    entity = locationrepository.save(entity);
+    d.entitytomodel(entity);
     return d;
   }
 
   @Override
   public void delete(Integer id) {
-    repository.delete(id);
+    locationrepository.delete(id);
   }
 
   @Override

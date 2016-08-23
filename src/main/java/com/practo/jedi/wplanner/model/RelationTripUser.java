@@ -130,7 +130,7 @@ public class RelationTripUser implements Serializable {
     return "User [Modified_on =" + modifyOn + "]";
   }
 
-  public RelationTripUserentity qgetEntity() {
+  public RelationTripUserentity modeltoentity() {
     RelationTripUserentity et = new RelationTripUserentity();
     et.setDeleteStatus(getDeleteStatus());
     et.setModifyOn(getModifyOn());
@@ -142,7 +142,7 @@ public class RelationTripUser implements Serializable {
     return et;
   }
 
-  public void mergeEntity(RelationTripUserentity e) {
+  public void entitytomodel(RelationTripUserentity e) {
     if (e != null) {
       setDeleteStatus(e.getDeleteStatus());
       setModifyOn(e.getModifyOn());

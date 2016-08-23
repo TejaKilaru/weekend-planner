@@ -13,6 +13,8 @@ import com.practo.jedi.wplanner.data.entity.Locationentity;
  */
 public class Location implements Serializable {
 
+  private static final long serialVersionUID = 1L;
+
   @Id
   private int id;
 
@@ -52,7 +54,7 @@ public class Location implements Serializable {
   }
 
 
-  public Locationentity qgetEntity() {
+  public Locationentity modeltoentity() {
     Locationentity et = new Locationentity();
     et.setName(getName());
     et.setType(getType());
@@ -62,7 +64,7 @@ public class Location implements Serializable {
     return et;
   }
 
-  public void mergeEntity(Locationentity e) {
+  public void entitytomodel(Locationentity e) {
     if (e != null) {
       setName(e.getName());
       setType(e.getType());

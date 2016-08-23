@@ -28,9 +28,9 @@ public class RelationTripUserController {
     return dto;
   }
   
-  @RequestMapping(value = "/jointrip", method = RequestMethod.POST)
-  public RelationTripUser create(@RequestBody RelationTripUser d) {
-    RelationTripUser dto = service.create(d);
+  @RequestMapping(value = "/jointrip/{id}", method = RequestMethod.POST)
+  public RelationTripUser create(@PathVariable Integer id,@RequestBody RelationTripUser d) {
+    RelationTripUser dto = service.create(id,d);
     return dto;
   }
   
@@ -41,5 +41,4 @@ public class RelationTripUserController {
     ResponseEntity<Boolean> re = new ResponseEntity<Boolean>(true, HttpStatus.NO_CONTENT);
     return re;
   }
-  
 }
