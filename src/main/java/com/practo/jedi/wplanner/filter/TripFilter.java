@@ -1,11 +1,12 @@
 package com.practo.jedi.wplanner.filter;
 
-import java.util.Date;
-
 import com.practo.jedi.wplanner.data.entity.Locationentity;
-import com.practo.jedi.wplanner.data.entity.QTripentity;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
+import com.practo.jedi.wplanner.data.entity.Tripentity;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+
+import java.util.Date;
 
 public class TripFilter {
 
@@ -24,6 +25,8 @@ public class TripFilter {
   private Date afterdate;
 
   private Date beforedate;
+
+  final int maxLimit = 10000;
 
 
   public TripFilter() {
@@ -100,30 +103,32 @@ public class TripFilter {
     this.beforedate = beforedate;
   }
 
-  public Predicate generatequery() {
-    BooleanExpression predicate = QTripentity.tripentity.deleteStatus.eq("false");
-    System.out.println(getLocationid());
+  /**
+   * Generate's the filter query.
+   * 
+   * @return (DetachedCriteria)
+   */
+  public DetachedCriteria generatequery() {
+    DetachedCriteria criteria = DetachedCriteria.forClass(Tripentity.class);
     if (this.locationid != 0) {
-      predicate = predicate.and(QTripentity.tripentity.locationBean.eq(this.location));
+      criteria = criteria.add(Restrictions.eq("locationBean.id", this.locationid));
     }
-    System.out.println(getVacancy());
     if (this.vacancy != 0) {
-      predicate = predicate.and(QTripentity.tripentity.vacancy.goe(getVacancy()));
+      criteria = criteria.add(Restrictions.ge("vacancy", this.getVacancy()));
     } else {
-      predicate = predicate.and(QTripentity.tripentity.vacancy.goe(1));
+      criteria = criteria.add(Restrictions.ge("vacancy", 1));
     }
-    if (this.maxavgcost != 0) {
-      if (this.minavgcost <= this.maxavgcost) {
-        predicate =
-            predicate.and(QTripentity.tripentity.avgCost.between(getMinavgcost(), getMaxavgcost()));
+    if (this.getMaxavgcost() != 0) {
+      if (this.getMinavgcost() <= this.getMaxavgcost()) {
+        criteria = criteria
+            .add(Restrictions.between("avgCost", this.getMinavgcost(), this.getMaxavgcost()));
       } else {
-        predicate = predicate.and(QTripentity.tripentity.avgCost.between(0, getMaxavgcost()));
+        criteria = criteria.add(Restrictions.between("avgCost", 0, this.getMaxavgcost()));
       }
     } else {
-      predicate = predicate.and(QTripentity.tripentity.avgCost.between(getMinavgcost(), 10000));
+      criteria = criteria.add(Restrictions.between("avgCost", this.getMinavgcost(), this.maxLimit));
     }
-
-    return predicate;
+    return criteria;
   }
 
 

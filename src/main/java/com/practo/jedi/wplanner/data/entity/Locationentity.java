@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,8 +26,8 @@ public class Locationentity implements Serializable {
   private String name;
 
   private String type;
-  
-  //bi-directional many-to-one association to Trip
+
+  // bi-directional many-to-one association to Trip
   @OneToMany(mappedBy = "locationBean")
   private List<Tripentity> trips;
 
@@ -66,6 +65,12 @@ public class Locationentity implements Serializable {
     this.trips = trips;
   }
 
+  /**
+   * .
+   * 
+   * @param trip ()
+   * @return ()
+   */
   public Tripentity addTrip(Tripentity trip) {
     getTrips().add(trip);
     trip.setLocationBean(this);
@@ -73,6 +78,12 @@ public class Locationentity implements Serializable {
     return trip;
   }
 
+  /**
+   * .
+   * 
+   * @param trip ()
+   * @return ()
+   */
   public Tripentity removeTrip(Tripentity trip) {
     getTrips().remove(trip);
     trip.setLocationBean(null);

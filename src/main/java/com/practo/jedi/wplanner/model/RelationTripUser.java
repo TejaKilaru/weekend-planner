@@ -1,5 +1,10 @@
 package com.practo.jedi.wplanner.model;
 
+
+import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
+import com.practo.jedi.wplanner.data.entity.Tripentity;
+import com.practo.jedi.wplanner.data.entity.Userentity;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,24 +12,18 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.practo.jedi.wplanner.data.dao.TripDao;
-import com.practo.jedi.wplanner.data.dao.UserDao;
-import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
-import com.practo.jedi.wplanner.data.entity.Tripentity;
-import com.practo.jedi.wplanner.data.entity.Userentity;
 
 
 /**
  * The persistent class for the relation_trip_user database table.
  * 
  */
-
+@Transactional
 public class RelationTripUser implements Serializable {
   private static final long serialVersionUID = 1L;
- 
+
   @Id
   private int id;
 
@@ -34,17 +33,17 @@ public class RelationTripUser implements Serializable {
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "modify_on")
   private Date modifyOn;
-  
+
   private int modifybyid;
-  
+
   private int tripid;
-  
+
   private int userid;
 
   private Userentity modifyby;
 
   private Tripentity trip;
-  
+
   private Userentity user;
 
   public RelationTripUser() {}
@@ -72,12 +71,12 @@ public class RelationTripUser implements Serializable {
   public void setModifyOn(Date modifyOn) {
     this.modifyOn = modifyOn;
   }
-  
+
   public void setModifyByUserentity(Userentity userentity2) {
     this.modifyby = userentity2;
     setModifyById(this.modifyby.getId());
   }
-  
+
   public Userentity modifybyentityGet() {
     return this.modifyby;
   }
@@ -89,12 +88,12 @@ public class RelationTripUser implements Serializable {
   public int getModifyById() {
     return this.modifybyid;
   }
-  
+
   public void setUserentity(Userentity userentity1) {
     this.user = userentity1;
     setUserId(this.user.getId());
   }
-  
+
   public Userentity userentityGet() {
     return this.user;
   }
@@ -106,12 +105,12 @@ public class RelationTripUser implements Serializable {
   public int getUserId() {
     return this.userid;
   }
-  
+
   public void setTripentity(Tripentity tripentity) {
     this.trip = tripentity;
     setTripId(this.trip.getId());
   }
-  
+
   public Tripentity tripentityGet() {
     return this.trip;
   }
@@ -123,13 +122,18 @@ public class RelationTripUser implements Serializable {
   public int getTripId() {
     return this.tripid;
   }
-  
-  
+
+
   @Override
   public String toString() {
     return "User [Modified_on =" + modifyOn + "]";
   }
 
+  /**
+   * Create Entity.
+   * 
+   * @return (entity)
+   */
   public RelationTripUserentity modeltoentity() {
     RelationTripUserentity et = new RelationTripUserentity();
     et.setDeleteStatus(getDeleteStatus());
@@ -137,19 +141,25 @@ public class RelationTripUser implements Serializable {
     et.setUser1(modifybyentityGet());
     et.setTrip(tripentityGet());
     et.setUser2(userentityGet());
-    if (new Integer(getId()) != null)
+    if (new Integer(getId()) != null) {
       et.setId(getId());
+    }
     return et;
   }
 
-  public void entitytomodel(RelationTripUserentity e) {
-    if (e != null) {
-      setDeleteStatus(e.getDeleteStatus());
-      setModifyOn(e.getModifyOn());
-      setModifyByUserentity(e.getUser1());
-      setTripentity(e.getTrip());
-      setUserentity(e.getUser2());
-      setId(e.getId());
+  /**
+   * Populate Model.
+   * 
+   * @param obj (entity)
+   */
+  public void entitytomodel(RelationTripUserentity obj) {
+    if (obj != null) {
+      setDeleteStatus(obj.getDeleteStatus());
+      setModifyOn(obj.getModifyOn());
+      setModifyByUserentity(obj.getUser1());
+      setTripentity(obj.getTrip());
+      setUserentity(obj.getUser2());
+      setId(obj.getId());
     }
   }
 }

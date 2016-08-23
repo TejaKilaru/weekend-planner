@@ -1,7 +1,10 @@
 package com.practo.jedi.wplanner.controllers;
 
 
-import javax.servlet.http.HttpServletResponse;
+import com.practo.jedi.wplanner.filter.TripFilter;
+import com.practo.jedi.wplanner.model.Trip;
+import com.practo.jedi.wplanner.model.User;
+import com.practo.jedi.wplanner.service.TripService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -13,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.practo.jedi.wplanner.filter.TripFilter;
-import com.practo.jedi.wplanner.model.Trip;
-import com.practo.jedi.wplanner.model.User;
-import com.practo.jedi.wplanner.service.TripService;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/trips")
@@ -26,8 +26,8 @@ public class TripController {
   private TripService service;
 
   @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
-  public Iterable<Trip> search(TripFilter d) {
-    Iterable<Trip> dto = service.filter(d);
+  public Iterable<Trip> search(TripFilter obj, Pageable pageable) {
+    Iterable<Trip> dto = service.filter(obj, pageable);
     return dto;
   }
 
@@ -49,20 +49,39 @@ public class TripController {
     return dto;
   }
 
+  /**
+   * Create.
+   * 
+   * @param obj (Trip Class)
+   * @return (Trip Class)
+   */
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<Trip> create(@RequestBody Trip d) {
-    Trip dto = service.create(d);
+  public ResponseEntity<Trip> create(@RequestBody Trip obj) {
+    Trip dto = service.create(obj);
     ResponseEntity<Trip> re = new ResponseEntity<Trip>(dto, HttpStatus.CREATED);
     return re;
   }
 
+  /**
+   * Update.
+   * 
+   * @param obj (Trip class)
+   * @return (Trip class)
+   */
   @RequestMapping(method = RequestMethod.PUT)
-  public ResponseEntity<Trip> update(@RequestBody Trip d) {
-    Trip dto = service.update(d);
+  public ResponseEntity<Trip> update(@RequestBody Trip obj) {
+    Trip dto = service.update(obj);
     ResponseEntity<Trip> re = new ResponseEntity<Trip>(dto, HttpStatus.OK);
     return re;
   }
 
+  /**
+   * Delete.
+   * 
+   * @param id (Trip id)
+   * @param response ()
+   * @return ()
+   */
   @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id,
       HttpServletResponse response) {

@@ -1,16 +1,18 @@
 package com.practo.jedi.wplanner.model;
 
+import com.practo.jedi.wplanner.data.entity.Locationentity;
 
 import java.io.Serializable;
-
 import javax.persistence.Id;
+import javax.transaction.Transactional;
 
-import com.practo.jedi.wplanner.data.entity.Locationentity;
+
 
 /**
  * The persistent class for the user database table.
  * 
  */
+@Transactional
 public class Location implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -54,6 +56,11 @@ public class Location implements Serializable {
   }
 
 
+  /**
+   * Creates entity.
+   * 
+   * @return (entity)
+   */
   public Locationentity modeltoentity() {
     Locationentity et = new Locationentity();
     et.setName(getName());
@@ -64,11 +71,16 @@ public class Location implements Serializable {
     return et;
   }
 
-  public void entitytomodel(Locationentity e) {
-    if (e != null) {
-      setName(e.getName());
-      setType(e.getType());
-      setId(e.getId());
+  /**
+   * Populates model Parameters.
+   * 
+   * @param obj (Locationentity)
+   */
+  public void entitytomodel(Locationentity obj) {
+    if (obj != null) {
+      setName(obj.getName());
+      setType(obj.getType());
+      setId(obj.getId());
     }
   }
 }

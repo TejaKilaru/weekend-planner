@@ -20,7 +20,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "relation_trip_user")
-@NamedQuery(name = "RelationTripUserentity.findAll", query = "SELECT r FROM RelationTripUserentity r")
+@NamedQuery(name = "RelationTripUserentity.findAll",
+    query = "SELECT r FROM RelationTripUserentity r")
 public class RelationTripUserentity implements Serializable {
   private static final long serialVersionUID = 1L;
 

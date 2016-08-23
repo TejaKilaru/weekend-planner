@@ -1,12 +1,5 @@
 package com.practo.jedi.wplanner.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import com.practo.jedi.wplanner.data.dao.RelationTripUserDao;
 import com.practo.jedi.wplanner.data.dao.UserDao;
@@ -15,6 +8,17 @@ import com.practo.jedi.wplanner.data.entity.Tripentity;
 import com.practo.jedi.wplanner.data.entity.Userentity;
 import com.practo.jedi.wplanner.model.Trip;
 import com.practo.jedi.wplanner.model.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 
 
 @Service
@@ -26,12 +30,13 @@ public class UserServiceimpl implements UserService {
   @Autowired
   private RelationTripUserDao rtripuser;
 
-  final int ItemsPerPage = 2;
+  final int itemsPerPage = 2;
 
+  @Transactional
   @Override
   public Iterable<User> getall(Pageable pageable) {
     Iterable<Userentity> entity = userrepository
-        .findAll(new PageRequest(pageable.getPageNumber(), this.ItemsPerPage, pageable.getSort()));
+        .getAllUsers(new PageRequest(pageable.getPageNumber(), itemsPerPage, pageable.getSort()));
     List<User> allusers = new ArrayList<User>();
     for (Userentity temp : entity) {
       System.out.println(temp);
@@ -39,17 +44,18 @@ public class UserServiceimpl implements UserService {
         User dto = User.class.newInstance();
         dto.entitytomodel(temp);
         allusers.add(dto);
-      } catch (InstantiationException | IllegalAccessException e) {
-        System.out.printf("Exception while DAO get for ID :" + e);
+      } catch (InstantiationException | IllegalAccessException err) {
+        System.out.printf("Exception while DAO get for ID :" + err);
         return null;
       }
     }
     return allusers;
   }
 
+  @Transactional
   @Override
   public Iterable<Trip> getusertrips(Integer id) {
-    Userentity entity = userrepository.findOne(id);
+    Userentity entity = userrepository.findUser(id);
     Iterable<Tripentity> tripentity = entity.getTrips();
     List<Trip> usertrips = new ArrayList<Trip>();
     for (Tripentity temp : tripentity) {
@@ -58,14 +64,15 @@ public class UserServiceimpl implements UserService {
         Trip trip = Trip.class.newInstance();
         trip.entitytomodel(temp);
         usertrips.add(trip);
-      } catch (InstantiationException | IllegalAccessException e) {
-        System.out.printf("Exception while DAO get for ID :" + e);
+      } catch (InstantiationException | IllegalAccessException err) {
+        System.out.printf("Exception while DAO get for ID :" + err);
         return null;
       }
     }
     return usertrips;
   }
 
+  @Transactional
   @Override
   public Iterable<Trip> getuserontrips(Integer id) {
     Iterable<RelationTripUserentity> entity = rtripuser.findByUser2Id(id);
@@ -80,51 +87,45 @@ public class UserServiceimpl implements UserService {
         Trip trip = Trip.class.newInstance();
         trip.entitytomodel(temp);
         userontrips.add(trip);
-      } catch (InstantiationException | IllegalAccessException e) {
-        System.out.printf("Exception while DAO get for ID :" + e);
+      } catch (InstantiationException | IllegalAccessException err) {
+        System.out.printf("Exception while DAO get for ID :" + err);
         return null;
       }
     }
     return userontrips;
   }
 
+  @Transactional
   @Override
   public User get(Integer id) {
-    Userentity entity = userrepository.findOne(id);
-    try {
-      User dto = getDTOClass().newInstance();
-      dto.entitytomodel(entity);
-      return dto;
-    } catch (InstantiationException | IllegalAccessException e) {
-      System.out.printf("Exception while DAO get for ID :" + id, e);
-      return null;
-    }
+    Userentity entity = userrepository.findUser(id);
+    User dto = new User();
+    dto.entitytomodel(entity);
+    return dto;
   }
 
+  @Transactional
   @Override
-  public User create(User d) {
-    Userentity entity = d.modeltoentity();
-    entity = userrepository.save(entity);
-    d.entitytomodel(entity);
-    return d;
+  public User create(User obj) {
+    Userentity entity = obj.modeltoentity();
+    entity = userrepository.createUser(entity);
+    obj.entitytomodel(entity);
+    return obj;
   }
 
+  @Transactional
   @Override
-  public User update(User d) {
-    Userentity entity = d.modeltoentity();
-    entity = userrepository.save(entity);
-    d.entitytomodel(entity);
-    return d;
+  public User update(User obj) {
+    Userentity entity = obj.modeltoentity();
+    entity = userrepository.updateUser(entity);
+    obj.entitytomodel(entity);
+    return obj;
   }
 
+  @Transactional
   @Override
   public void delete(Integer id) {
-    userrepository.delete(id);
-  }
 
-  @Override
-  public Class<User> getDTOClass() {
-    return User.class;
   }
 
 }

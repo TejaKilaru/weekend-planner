@@ -1,7 +1,7 @@
 package com.practo.jedi.wplanner.controllers;
 
-
-import javax.servlet.http.HttpServletResponse;
+import com.practo.jedi.wplanner.model.RelationTripUser;
+import com.practo.jedi.wplanner.service.RelationTripUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.practo.jedi.wplanner.model.RelationTripUser;
-import com.practo.jedi.wplanner.service.RelationTripUserService;
+import javax.servlet.http.HttpServletResponse;
+
 
 @RestController
 @RequestMapping("/reltripuser")
@@ -27,13 +27,20 @@ public class RelationTripUserController {
     RelationTripUser dto = service.get(id);
     return dto;
   }
-  
+
   @RequestMapping(value = "/jointrip/{id}", method = RequestMethod.POST)
-  public RelationTripUser create(@PathVariable Integer id,@RequestBody RelationTripUser d) {
-    RelationTripUser dto = service.create(id,d);
+  public RelationTripUser create(@PathVariable Integer id, @RequestBody RelationTripUser obj) {
+    RelationTripUser dto = service.create(id, obj);
     return dto;
   }
-  
+
+  /**
+   * Delete.
+   * 
+   * @param id (Relation Primary Key)
+   * @param response ()
+   * @return ()
+   */
   @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id,
       HttpServletResponse response) {
