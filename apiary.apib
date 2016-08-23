@@ -175,7 +175,7 @@ Trips that are organised or (Hosted) by the User.
             "totalPeople": 5,
             "travelBy": "BMW -----X-----",
             "vacancy": 2,
-            "orgId": 4,
+            "orgId": 1,
             "locationId": 2
           }
         ]
@@ -286,3 +286,60 @@ All the practeons going to this Trip.
               "modifyById": 3,
               "userId": 3
             }
+            
+#All Users [/users]
+All users in the database.
+
+### Get all users [GET]
++ Response 200 (application/json)
+
+        [
+          {
+            "id": 2,
+            "email": "poornateja@practo.com",
+            "mobile": "8985811049",
+            "name": "poornateja"
+          },
+          {
+            "id": 2,
+            "email": "poornateja@practo.com",
+            "mobile": "8985811049",
+            "name": "poornateja"
+          },
+          {
+            "id": 3,
+            "email": "hello@practo.com",
+            "mobile": "1234567890",
+            "name": "hello"
+          },
+          {
+            "id": 4,
+            "email": "hello11@practo.com",
+            "mobile": "1234567890",
+            "name": "hello11"
+          }
+        ]
+
+##Locations [/locations/all]
+All Locations in Database.
+
+### Get locations [GET]
++ Response 200 (application/json)
+
+        [
+          {
+            "id": 1,
+            "name": "NandiHills",
+            "type": "Hill Station"
+          },
+          {
+            "id": 2,
+            "name": "Kooorg",
+            "type": "Seneric Place"
+          },
+          {
+            "id": 3,
+            "name": "NandiHills",
+            "type": "Hill Station"
+          }
+        ]
