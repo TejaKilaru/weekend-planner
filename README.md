@@ -13,5 +13,8 @@ Java 8, Maven, MySql
 * mvn clean install 
 * Place the created war file in tomcat's directory
 
+
+## [Apiary Documentation](http://docs.weekendplanner1.apiary.io/#)
+
 Travis Mvn Build Status:
 [![Travis-ci Build Status](https://travis-ci.org/TejaKilaru/weekend-planner.svg?branch=master)](https://travis-ci.org/TejaKilaru/weekend-planner)
