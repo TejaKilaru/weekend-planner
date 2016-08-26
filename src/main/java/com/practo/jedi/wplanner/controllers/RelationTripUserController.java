@@ -1,5 +1,6 @@
 package com.practo.jedi.wplanner.controllers;
 
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
 import com.practo.jedi.wplanner.model.RelationTripUser;
 import com.practo.jedi.wplanner.service.RelationTripUserService;
 
@@ -29,7 +30,8 @@ public class RelationTripUserController {
   }
 
   @RequestMapping(value = "/jointrip/{id}", method = RequestMethod.POST)
-  public RelationTripUser create(@PathVariable Integer id, @RequestBody RelationTripUser obj) {
+  public RelationTripUser create(@PathVariable Integer id, @RequestBody RelationTripUser obj)
+      throws NullEntityException {
     RelationTripUser dto = service.create(id, obj);
     return dto;
   }

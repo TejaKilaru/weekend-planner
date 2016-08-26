@@ -23,26 +23,26 @@ public class LocationServiceimpl implements LocationService {
   @Override
   public Iterable<Location> getall() {
     Iterable<Locationentity> entity = locationrepository.getAllLocations();
-    List<Location> allusers = new ArrayList<Location>();
+    List<Location> alllocations = new ArrayList<Location>();
     for (Locationentity temp : entity) {
       System.out.println(temp);
       try {
         Location dto = Location.class.newInstance();
         dto.entitytomodel(temp);
-        allusers.add(dto);
+        alllocations.add(dto);
       } catch (InstantiationException | IllegalAccessException obj) {
         System.out.printf("Exception while DAO get for ID :" + obj);
         return null;
       }
     }
-    return allusers;
+    return alllocations;
   }
 
   @Override
   public Location get(Integer id) {
     Locationentity entity = locationrepository.findLocation(id);
     try {
-      Location dto = getDTOClass().newInstance();
+      Location dto = Location.class.newInstance();
       dto.entitytomodel(entity);
       return dto;
     } catch (InstantiationException | IllegalAccessException obj) {
@@ -70,11 +70,6 @@ public class LocationServiceimpl implements LocationService {
   @Override
   public void delete(Integer id) {
     // locationrepository.delete(id);
-  }
-
-  @Override
-  public Class<Location> getDTOClass() {
-    return Location.class;
   }
 
 }

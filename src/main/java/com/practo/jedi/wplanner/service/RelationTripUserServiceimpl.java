@@ -5,6 +5,8 @@ import com.practo.jedi.wplanner.data.dao.RelationTripUserDao;
 import com.practo.jedi.wplanner.data.dao.TripDao;
 import com.practo.jedi.wplanner.data.dao.UserDao;
 import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
+import com.practo.jedi.wplanner.data.entity.Tripentity;
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
 import com.practo.jedi.wplanner.model.RelationTripUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,19 +42,26 @@ public class RelationTripUserServiceimpl implements RelationTripUserService {
   }
 
   @Override
-  public RelationTripUser create(Integer id, RelationTripUser obj) {
+  public RelationTripUser create(Integer id, RelationTripUser obj) throws NullEntityException {
     RelationTripUserentity entity = obj.modeltoentity();
+    Tripentity tripentity = tripdao.findTrip(id);
+    if (tripentity == null && tripentity.getVacancy() == 0) {
+      return null;
+    }
     entity.setModifyOn(new Date(System.currentTimeMillis()));
     entity.setTrip(tripdao.findTrip(id));
     entity.setUser1(userdao.findUser(obj.getModifyById()));
     entity.setUser2(userdao.findUser(obj.getUserId()));
+    entity.setDeleteStatus("false");
     entity = reltripuserrepository.createRel(entity);
     obj.entitytomodel(entity);
+    tripentity.setVacancy(tripentity.getVacancy() - 1);
+    tripentity = tripdao.updateTrip(tripentity);
     return obj;
   }
 
   @Override
-  public RelationTripUser update(RelationTripUser obj) {
+  public RelationTripUser update(RelationTripUser obj) throws NullEntityException {
     RelationTripUserentity entity = obj.modeltoentity();
     entity.setModifyOn(new Date(System.currentTimeMillis()));
     entity.setTrip(tripdao.findTrip(obj.getTripId()));

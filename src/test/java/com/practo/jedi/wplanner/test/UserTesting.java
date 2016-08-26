@@ -1,51 +1,35 @@
-//package com.practo.jedi.wplanner.test;
-//
-//import org.junit.After;
-//import org.junit.Assert;
-//import org.junit.Before;
-//import org.junit.Test;
-//import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-//import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-//import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-//import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-//
-//import com.practo.jedi.wplanner.service.UserService;
-//import com.practo.jedi.wplanner.service.UserServiceimpl;
-//
-//
-//public class UserTesting {
-//
-//    private EmbeddedDatabase db;
-//    UserService userservice;
-//
-//    @Before
-//    public void setUp() {
-//        //db = new EmbeddedDatabaseBuilder().addDefaultScripts().build();
-//        db = new EmbeddedDatabaseBuilder()
-//            .setType(EmbeddedDatabaseType.H2)
-//            .addScript("db/sql/create-db.sql")
-//            .addScript("db/sql/insert-data.sql")
-//            .build();
-//    }
-//
-//    @Test
-//    public void testFindByname() {
-//        NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(db);
-//        UserServiceimpl userDao = new UserDaoImpl();
-//        userDao.setNamedParameterJdbcTemplate(template);
-//
-//        User user = userDao.findByName("mkyong");
-//
-//        Assert.assertNotNull(user);
-//        Assert.assertEquals(1, user.getId().intValue());
-//        Assert.assertEquals("mkyong", user.getName());
-//        Assert.assertEquals("mkyong@gmail.com", user.getEmail());
-//
-//    }
-//
-//    @After
-//    public void tearDown() {
-//        db.shutdown();
-//    }
-//
-//}
+package com.practo.jedi.wplanner.test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import com.practo.jedi.wplanner.model.User;
+import com.practo.jedi.wplanner.run.Test1;
+import com.practo.jedi.wplanner.service.UserServiceimpl;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = Test1.class)
+public class UserTesting {
+
+  @Autowired
+  private UserServiceimpl service;
+
+  @Test
+  public void testGetUser() {
+
+    User apiResponse = service.get(1);
+    assertNotNull(apiResponse);
+    assertEquals("poornateja@practo.com", apiResponse.getEmail());
+    assertEquals("Ankit Singh", apiResponse.getName());
+    assertEquals("1234567890", apiResponse.getMobile());
+  }
+
+}

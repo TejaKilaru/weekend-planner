@@ -1,9 +1,13 @@
 package com.practo.jedi.wplanner.data.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -21,11 +25,15 @@ public class Locationentity implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
+  @GeneratedValue(strategy = IDENTITY)
   private int id;
 
   private String name;
 
   private String type;
+
+  @Column(name = "image_url")
+  private String imageUrl;
 
   // bi-directional many-to-one association to Trip
   @OneToMany(mappedBy = "locationBean")
@@ -43,6 +51,14 @@ public class Locationentity implements Serializable {
 
   public String getName() {
     return this.name;
+  }
+
+  public String getImageUrl() {
+    return this.imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
   }
 
   public void setName(String name) {

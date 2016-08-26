@@ -23,7 +23,7 @@ public class UserController {
   @Autowired
   private UserService service;
 
-  @RequestMapping(value = {"/all", ""}, method = RequestMethod.GET)
+  @RequestMapping(value = {"/all"}, method = RequestMethod.GET)
   public Iterable<User> getall(Pageable pageable) {
     Iterable<User> dto = service.getall(pageable);
     return dto;

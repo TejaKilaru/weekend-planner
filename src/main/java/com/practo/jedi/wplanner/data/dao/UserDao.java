@@ -3,10 +3,13 @@ package com.practo.jedi.wplanner.data.dao;
 import com.practo.jedi.wplanner.data.entity.Userentity;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.io.Serializable;
 
 import javax.transaction.Transactional;
 
@@ -23,9 +26,22 @@ public class UserDao {
   }
 
   @Transactional
+  public Userentity findByKey(String key) {
+
+    Iterable<Userentity> temp = (Iterable<Userentity>) template.findByCriteria(
+        DetachedCriteria.forClass(Userentity.class).add(Restrictions.eq("userid", key)));
+    if (temp != null) {
+      for (Userentity user : temp) {
+        return user;
+      }
+    }
+    return null;
+  }
+
+  @Transactional
   public Iterable<Userentity> getAllUsers(Pageable pageable) {
-    return (Iterable<Userentity>) template.findByCriteria(DetachedCriteria.forClass(Userentity.class),
-        pageable.getOffset(), pageable.getPageSize());
+    return (Iterable<Userentity>) template.findByCriteria(
+        DetachedCriteria.forClass(Userentity.class), pageable.getOffset(), pageable.getPageSize());
   }
 
   @Transactional

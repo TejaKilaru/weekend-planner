@@ -1,9 +1,12 @@
 package com.practo.jedi.wplanner.data.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -21,6 +24,7 @@ public class Userentity implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
+  @GeneratedValue(strategy = IDENTITY)
   private int id;
 
   private String email;
@@ -28,6 +32,16 @@ public class Userentity implements Serializable {
   private String mobile;
 
   private String name;
+
+  private String userid;
+
+  public String getKey() {
+    return this.userid;
+  }
+
+  public void setKey(String key) {
+    this.userid = userid;
+  }
 
   // bi-directional many-to-one association to RelationTripUser
   @OneToMany(mappedBy = "user1")

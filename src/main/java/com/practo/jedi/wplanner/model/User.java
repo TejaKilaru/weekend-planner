@@ -31,6 +31,16 @@ public class User implements Serializable {
 
   private String name;
 
+  private String userid;
+
+  public String getKey() {
+    return this.userid;
+  }
+
+  public void setKey(String key) {
+    this.userid = userid;
+  }
+
   public User() {}
 
   public int getId() {
@@ -80,6 +90,7 @@ public class User implements Serializable {
     et.setEmail(getEmail());
     et.setName(getName());
     et.setMobile(getMobile());
+    et.setKey(getKey());
     if (new Integer(getId()) != null) {
       et.setId(getId());
     }
@@ -96,6 +107,7 @@ public class User implements Serializable {
       setName(obj.getName());
       setEmail(obj.getEmail());
       setMobile(obj.getMobile());
+      setKey(obj.getKey());
       setId(obj.getId());
     }
   }

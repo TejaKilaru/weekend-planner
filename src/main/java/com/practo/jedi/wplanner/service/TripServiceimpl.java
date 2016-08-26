@@ -5,6 +5,7 @@ import com.practo.jedi.wplanner.data.dao.TripDao;
 import com.practo.jedi.wplanner.data.dao.UserDao;
 import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
 import com.practo.jedi.wplanner.data.entity.Tripentity;
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
 import com.practo.jedi.wplanner.filter.TripFilter;
 import com.practo.jedi.wplanner.model.Trip;
 import com.practo.jedi.wplanner.model.User;
@@ -25,12 +26,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class TripServiceimpl implements TripService {
 
-  // @Autowired
-  // private CrudRepository<Tripentity, Integer> repository;
-  //
-  // public CrudRepository<Tripentity, Integer> getRepository() {
-  // return repository;
-  // }
+
   @Autowired
   private TripDao triprepository;
 
@@ -45,13 +41,10 @@ public class TripServiceimpl implements TripService {
 
   @Override
   public Iterable<Trip> filter(TripFilter obj, Pageable pageable) {
-    // BooleanExpression predicate = QTripentity.tripentity.deleteStatus.eq("false");
-    // predicate = predicate.and(QTripentity.tripentity.locationBean.eq(locationdao.findOne(id)));
-    // predicate = predicate.and(QTripentity.tripentity.avgCost.between(1000, 1500));
-    // predicate = predicate.and(QTripentity.tripentity.vacancy.goe(1));
-    if (obj.getLocationid() != 0) {
-      obj.setLocation(locationdao.findLocation(obj.getLocationid()));
-    }
+    // if (obj.getLocationid() != 0) {
+    // obj.setLocation(locationdao.getLocationByName(obj.getLocationname()));
+    // }
+    // System.out.println(obj.getLocationid());
     Iterable<Tripentity> trips = triprepository.filter(obj.generatequery(),
         new PageRequest(pageable.getPageNumber(), itemsPerPage, pageable.getSort()));
     List<Trip> filtertrips = new ArrayList<Trip>();
@@ -95,7 +88,7 @@ public class TripServiceimpl implements TripService {
   }
 
   @Override
-  public Iterable<User> gettripusers(Integer id) {
+  public Iterable<User> gettripusers(Integer id) throws NullEntityException {
     Tripentity entity = triprepository.findTrip(id);
     Iterable<RelationTripUserentity> relentity = entity.getRelationTripUsers();
     List<User> users = new ArrayList<User>();
@@ -113,7 +106,7 @@ public class TripServiceimpl implements TripService {
   }
 
   @Override
-  public Trip get(Integer id) {
+  public Trip get(Integer id) throws NullEntityException {
     Tripentity entity = triprepository.findTrip(id);
     try {
       Trip dto = Trip.class.newInstance();
@@ -130,6 +123,7 @@ public class TripServiceimpl implements TripService {
     entity.setModifyOn(new Date(System.currentTimeMillis()));
     entity.setLocationBean(locationdao.findLocation(obj.getLocationId()));
     entity.setUser(userdao.findUser(obj.getOrgId()));
+    entity.setDeleteStatus("false");
     entity = triprepository.createTrip(entity);
     obj.entitytomodel(entity);
     return obj;
@@ -147,7 +141,7 @@ public class TripServiceimpl implements TripService {
   }
 
   @Override
-  public void delete(Integer id) {
+  public void delete(Integer id) throws NullEntityException {
     Tripentity entity = triprepository.findTrip(id);
     entity.setDeleteStatus("true");
     entity = triprepository.updateTrip(entity);

@@ -3,6 +3,8 @@ package com.practo.jedi.wplanner.data.dao;
 
 import com.practo.jedi.wplanner.data.entity.Locationentity;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -37,4 +39,9 @@ public class LocationDao {
     return obj;
   }
 
+  @Transactional
+  public Locationentity getLocationByName(String name) {
+    return (Locationentity) template.findByCriteria(
+        DetachedCriteria.forClass(Locationentity.class).add(Restrictions.eq("name", name)));
+  }
 }

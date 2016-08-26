@@ -22,6 +22,5 @@ public interface LocationService {
 
   Iterable<Location> getall();
 
-  Class<Location> getDTOClass();
 
 }

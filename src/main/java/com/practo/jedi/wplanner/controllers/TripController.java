@@ -1,6 +1,7 @@
 package com.practo.jedi.wplanner.controllers;
 
 
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
 import com.practo.jedi.wplanner.filter.TripFilter;
 import com.practo.jedi.wplanner.model.Trip;
 import com.practo.jedi.wplanner.model.User;
@@ -38,13 +39,13 @@ public class TripController {
   }
 
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  public Trip get(@PathVariable("id") Integer id) {
+  public Trip get(@PathVariable("id") Integer id) throws NullEntityException {
     Trip dto = service.get(id);
     return dto;
   }
 
   @RequestMapping(value = "/{id}/users", method = RequestMethod.GET)
-  public Iterable<User> gettripusers(@PathVariable("id") Integer id) {
+  public Iterable<User> gettripusers(@PathVariable("id") Integer id) throws NullEntityException {
     Iterable<User> dto = service.gettripusers(id);
     return dto;
   }
@@ -84,7 +85,7 @@ public class TripController {
    */
   @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id,
-      HttpServletResponse response) {
+      HttpServletResponse response) throws NullEntityException {
     service.delete(id);
     ResponseEntity<Boolean> re = new ResponseEntity<Boolean>(true, HttpStatus.NO_CONTENT);
     return re;

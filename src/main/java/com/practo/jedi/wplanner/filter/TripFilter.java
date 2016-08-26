@@ -18,6 +18,18 @@ public class TripFilter {
 
   private int maxavgcost;
 
+  private String locationname;
+
+  public String getLocationname() {
+    return locationname;
+  }
+
+
+  public void setLocationname(String locationname) {
+    this.locationname = locationname;
+  }
+
+
   private int vacancy;
 
   private int days;
@@ -110,13 +122,14 @@ public class TripFilter {
    */
   public DetachedCriteria generatequery() {
     DetachedCriteria criteria = DetachedCriteria.forClass(Tripentity.class);
+    // System.out.println(this.getLocation().getName());
     if (this.locationid != 0) {
-      criteria = criteria.add(Restrictions.eq("locationBean.id", this.locationid));
+      criteria = criteria.add(Restrictions.eq("locationBean.id", this.getLocationid()));
     }
     if (this.vacancy != 0) {
-      criteria = criteria.add(Restrictions.ge("vacancy", this.getVacancy()));
+      criteria = criteria.add(Restrictions.gt("vacancy", this.getVacancy() - 1));
     } else {
-      criteria = criteria.add(Restrictions.ge("vacancy", 1));
+      criteria = criteria.add(Restrictions.gt("vacancy", 0));
     }
     if (this.getMaxavgcost() != 0) {
       if (this.getMinavgcost() <= this.getMaxavgcost()) {
@@ -128,6 +141,16 @@ public class TripFilter {
     } else {
       criteria = criteria.add(Restrictions.between("avgCost", this.getMinavgcost(), this.maxLimit));
     }
+    // if (this.getDays() != 0) {
+    // criteria = criteria.add(Restrictions.lt("endDate", "startDate" + this.getDays()));
+    // }
+    if (this.afterdate != null) {
+      criteria = criteria.add(Restrictions.gt("startDate", this.getAfterdate()));
+    }
+    if (this.beforedate != null) {
+      criteria = criteria.add(Restrictions.le("endDate", this.getBeforedate()));
+    }
+    criteria = criteria.add(Restrictions.eq("deleteStatus", "false"));
     return criteria;
   }
 
@@ -138,6 +161,7 @@ public class TripFilter {
 
 
   public void setLocation(Locationentity location) {
+    this.setLocationid(this.location.getId());
     this.location = location;
   }
 

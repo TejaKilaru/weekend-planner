@@ -106,6 +106,15 @@ public class UserServiceimpl implements UserService {
 
   @Transactional
   @Override
+  public User findByKey(String key) {
+    Userentity entity = userrepository.findByKey(key);
+    User dto = new User();
+    dto.entitytomodel(entity);
+    return dto;
+  }
+
+  @Transactional
+  @Override
   public User create(User obj) {
     Userentity entity = obj.modeltoentity();
     entity = userrepository.createUser(entity);

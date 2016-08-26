@@ -1,0 +1,33 @@
+Wonderla   -------  Amusement Park 
+
+Coorg ------  Hill Station
+
+Mysore -------- Ancient Architecture
+
+Ooty --------- Hill Station
+
+ADRENO ADVENTURES ------- Rafting
+
+Tirumala -------- Temple
+
+National Park ------- Zoo (Bannerghatta)
+
+Nandi Hills -------  Hill Station
+
+Wonderala  ------ Water Sports
+
+Thottikallu Falls   ---------  WaterFalls
+
+
+
+INSERT INTO location (name,type,image_url) VALUES ("Wonderla","Amusement Park","wonderla.jpg")
+INSERT INTO location (name,type,image_url) VALUES ("Coorg","Hill Station","coorg.jpg")
+INSERT INTO location (name,type,image_url) VALUES ("Mysore","Ancient Architecture","mysore.jpg")
+INSERT INTO location (name,type,image_url) VALUES ("Ooty","Hill Station","ooty.jpg")
+INSERT INTO location (name,type,image_url) VALUES ("ADRENO ADVENTURES","Rafting","rafting.jpg")
+INSERT INTO location (name,type,image_url) VALUES ("Tirumala","Temple","tirumala.jpg")
+INSERT INTO location (name,type,image_url) VALUES ("National Park","Zoo (Bannerghatta)","zoo.jpg")
+INSERT INTO location (name,type,image_url) VALUES ("Nandi Hills","Hill Station","nandihills.jpg")
+INSERT INTO location (name,type,image_url) VALUES ("Trekking","Trekking","trekking.png")
+INSERT INTO location (name,type,image_url) VALUES ("Thottikallu Falls","WaterFalls","waterfall.jpg")
+

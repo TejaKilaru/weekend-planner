@@ -24,6 +24,16 @@ public class Location implements Serializable {
 
   private String type;
 
+  private String imageUrl;
+
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
+
   public Location() {}
 
   public int getId() {
@@ -65,6 +75,7 @@ public class Location implements Serializable {
     Locationentity et = new Locationentity();
     et.setName(getName());
     et.setType(getType());
+    et.setImageUrl(getImageUrl());
     if (new Integer(getId()) != null) {
       et.setId(getId());
     }
@@ -80,6 +91,7 @@ public class Location implements Serializable {
     if (obj != null) {
       setName(obj.getName());
       setType(obj.getType());
+      setImageUrl(obj.getImageUrl());
       setId(obj.getId());
     }
   }

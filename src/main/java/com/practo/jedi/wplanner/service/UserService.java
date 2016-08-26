@@ -10,8 +10,11 @@ import javax.transaction.Transactional;
 
 public interface UserService {
 
-
+  @Transactional
   User get(Integer id);
+
+  @Transactional
+  User findByKey(String key);
 
   @Transactional
   User create(User obj);
