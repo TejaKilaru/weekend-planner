@@ -1,6 +1,7 @@
 package com.practo.jedi.wplanner.data.dao;
 
 import com.practo.jedi.wplanner.data.entity.Userentity;
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;

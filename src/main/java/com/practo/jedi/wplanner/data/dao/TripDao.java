@@ -31,7 +31,7 @@ public class TripDao {
     DetachedCriteria criteria = DetachedCriteria.forClass(Tripentity.class);
     criteria = criteria.add(Restrictions.eq("deleteStatus", "false"));
     criteria = criteria.add(Restrictions.eq("id", id));
-    criteria = criteria.add(Restrictions.gt("bookEndDate", new Date(System.currentTimeMillis())));
+    criteria = criteria.add(Restrictions.ge("bookEndDate", new Date(System.currentTimeMillis())));
     Iterable<Tripentity> temp = (Iterable<Tripentity>) template.findByCriteria(criteria);
     int count = 0;
     for (Tripentity trp : temp) {

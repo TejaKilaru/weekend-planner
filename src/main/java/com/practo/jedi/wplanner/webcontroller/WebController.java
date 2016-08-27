@@ -156,7 +156,6 @@ public class WebController {
    */
   @RequestMapping(value = {"createform"}, method = RequestMethod.GET)
   public String createform(Model model, HttpSession session) {
-    System.out.println(session.getAttribute("email").toString());
     if (session.getAttribute("email") == null) {
       return "redirect:" + "index";
     }
@@ -202,7 +201,6 @@ public class WebController {
   public String create(String locationid, String startdate1, String enddate1, String bookdate1,
       Trip obj, HttpSession session) {
     if (session.getAttribute("email") == null) {
-      System.out.println("came....");
       return "redirect:" + "index";
     }
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");

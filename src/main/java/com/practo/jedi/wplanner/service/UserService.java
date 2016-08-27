@@ -1,5 +1,6 @@
 package com.practo.jedi.wplanner.service;
 
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
 import com.practo.jedi.wplanner.model.Trip;
 import com.practo.jedi.wplanner.model.User;
 

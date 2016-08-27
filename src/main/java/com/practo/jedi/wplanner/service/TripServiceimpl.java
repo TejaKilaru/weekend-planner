@@ -124,6 +124,7 @@ public class TripServiceimpl implements TripService {
     // System.out.println("yolo");
     // return null;
     // }
+    System.out.println("Came");
     Tripentity entity = obj.modeltoentity();
     entity.setModifyOn(new Date(System.currentTimeMillis()));
     entity.setLocationBean(locationdao.findLocation(obj.getLocationId()));
@@ -136,9 +137,9 @@ public class TripServiceimpl implements TripService {
 
   @Override
   public Trip update(Trip obj) {
-    if (tripValidator(obj)) {
-      return null;
-    }
+    // if (tripValidator(obj)) {
+    // return null;
+    // }
     Tripentity entity = obj.modeltoentity();
     entity.setModifyOn(new Date(System.currentTimeMillis()));
     entity.setLocationBean(locationdao.findLocation(obj.getLocationId()));

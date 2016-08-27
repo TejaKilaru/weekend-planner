@@ -1,11 +1,11 @@
 package com.practo.jedi.wplanner.service;
 
-
 import com.practo.jedi.wplanner.data.dao.RelationTripUserDao;
 import com.practo.jedi.wplanner.data.dao.UserDao;
 import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
 import com.practo.jedi.wplanner.data.entity.Tripentity;
 import com.practo.jedi.wplanner.data.entity.Userentity;
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
 import com.practo.jedi.wplanner.model.Trip;
 import com.practo.jedi.wplanner.model.User;
 
@@ -133,8 +133,6 @@ public class UserServiceimpl implements UserService {
 
   @Transactional
   @Override
-  public void delete(Integer id) {
-
-  }
+  public void delete(Integer id) {}
 
 }
