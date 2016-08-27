@@ -106,8 +106,8 @@ public class UserServiceimpl implements UserService {
 
   @Transactional
   @Override
-  public User findByKey(String key) {
-    Userentity entity = userrepository.findByKey(key);
+  public User findByEmail(String key) {
+    Userentity entity = userrepository.findByEmail(key);
     User dto = new User();
     dto.entitytomodel(entity);
     return dto;

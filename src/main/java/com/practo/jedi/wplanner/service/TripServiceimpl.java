@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.transaction.Transactional;
 
@@ -119,6 +120,10 @@ public class TripServiceimpl implements TripService {
 
   @Override
   public Trip create(Trip obj) {
+    // if (tripValidator(obj)) {
+    // System.out.println("yolo");
+    // return null;
+    // }
     Tripentity entity = obj.modeltoentity();
     entity.setModifyOn(new Date(System.currentTimeMillis()));
     entity.setLocationBean(locationdao.findLocation(obj.getLocationId()));
@@ -131,6 +136,9 @@ public class TripServiceimpl implements TripService {
 
   @Override
   public Trip update(Trip obj) {
+    if (tripValidator(obj)) {
+      return null;
+    }
     Tripentity entity = obj.modeltoentity();
     entity.setModifyOn(new Date(System.currentTimeMillis()));
     entity.setLocationBean(locationdao.findLocation(obj.getLocationId()));
@@ -147,4 +155,32 @@ public class TripServiceimpl implements TripService {
     entity = triprepository.updateTrip(entity);
   }
 
+  /**
+   * Back Checks for trip.
+   * 
+   * @param obj (Trip obj)
+   * @return (valid or not)
+   * 
+   */
+  public Boolean tripValidator(Trip obj) {
+    Date now = new Date(System.currentTimeMillis());
+
+    if (obj.getStartDate().compareTo(now) < 0) {
+      return null;
+    }
+    if (obj.getStartDate().compareTo(obj.getEndDate()) > 0) {
+      return null;
+    }
+    // long diff = obj.getStartDate().getTime() - now.getTime();
+    // long diff1 = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    // if (diff1 < 0) {
+    // return false;
+    // }
+    // diff = obj.getEndDate().getTime() - obj.getStartDate().getTime();
+    // diff1 = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    // if (diff1 < 0) {
+    // return false;
+    // }
+    return true;
+  }
 }

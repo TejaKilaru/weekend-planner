@@ -26,10 +26,10 @@ public class UserDao {
   }
 
   @Transactional
-  public Userentity findByKey(String key) {
+  public Userentity findByEmail(String email) {
 
     Iterable<Userentity> temp = (Iterable<Userentity>) template.findByCriteria(
-        DetachedCriteria.forClass(Userentity.class).add(Restrictions.eq("userid", key)));
+        DetachedCriteria.forClass(Userentity.class).add(Restrictions.eq("email", email)));
     if (temp != null) {
       for (Userentity user : temp) {
         return user;

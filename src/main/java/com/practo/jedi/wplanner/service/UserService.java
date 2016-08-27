@@ -14,7 +14,7 @@ public interface UserService {
   User get(Integer id);
 
   @Transactional
-  User findByKey(String key);
+  User findByEmail(String email);
 
   @Transactional
   User create(User obj);

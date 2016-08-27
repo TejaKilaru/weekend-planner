@@ -10,12 +10,14 @@ import com.practo.jedi.wplanner.service.LocationService;
 import com.practo.jedi.wplanner.service.RelationTripUserService;
 import com.practo.jedi.wplanner.service.TripService;
 import com.practo.jedi.wplanner.service.UserService;
+import com.practo.jedi.wplanner.utility.MailService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
@@ -31,6 +33,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class WebController {
+
+  @Autowired
+  private MailService mail;
 
   public WebController() {
     // TODO Auto-generated constructor stub
@@ -52,17 +57,15 @@ public class WebController {
   @RequestMapping("/login")
   String login(Model model, String name, String email, String token, HttpSession session) {
     session.setAttribute("username", name);
-    session.setAttribute("useremail", email);
+    session.setAttribute("email", email);
     session.setAttribute("key", token);
-    User user = uservice.findByKey(token);
+    User user = uservice.findByEmail(email);
     System.out.println(user);
     if (user.getId() == 0) {
       System.out.println("came");
-      user.setKey(token);
       user.setEmail(email);
       user.setName(name);
-      System.out.println(user.getKey());
-      //user = uservice.create(user);
+      user = uservice.create(user);
     }
 
     return "index";
@@ -78,7 +81,7 @@ public class WebController {
   @RequestMapping("/index")
   String index(Model model, HttpSession session) {
     Iterable<Location> locations = lservice.getall();
-    if (session.getAttribute("key") != null) {
+    if (session.getAttribute("email") != null) {
       model.addAttribute("user", session.getAttribute("username"));
     } else {
       model.addAttribute("user", "Guest");
@@ -98,7 +101,9 @@ public class WebController {
   @RequestMapping(value = {"search"}, method = RequestMethod.GET)
   public String search(Model model, TripFilter obj, Pageable pageable, String afterdate1,
       String enddate1, String locationid, HttpSession session) {
-    if (session.getAttribute("key") == null) {
+
+    System.out.println("cameeeee./........");
+    if (session.getAttribute("email") == null) {
       model.addAttribute("user", session.getAttribute("username"));
     } else {
       model.addAttribute("user", "Guest");
@@ -151,10 +156,10 @@ public class WebController {
    */
   @RequestMapping(value = {"createform"}, method = RequestMethod.GET)
   public String createform(Model model, HttpSession session) {
-    if (session.getAttribute("key") == null) {
+    System.out.println(session.getAttribute("email").toString());
+    if (session.getAttribute("email") == null) {
       return "redirect:" + "index";
     }
-
     Iterable<Location> locations = lservice.getall();
     model.addAttribute("locations", locations);
     return "createtrip";
@@ -166,15 +171,24 @@ public class WebController {
    * @param tripid (trip id)
    * @param obj (details of user)
    * @return redirects to trips
+   * @throws MessagingException (When Message fails)
    */
   @RequestMapping(value = {"join"}, method = RequestMethod.POST)
   public String join(Integer tripid, RelationTripUser obj, HttpSession session)
-      throws NullEntityException {
-    if (session.getAttribute("key") == null) {
+      throws NullEntityException, MessagingException {
+    if (session.getAttribute("email") == null) {
       return "redirect:" + "index";
     }
-    obj.setUserId(1);
+    Trip trip = service.get(tripid);
+    User Organiser = uservice.get(trip.getOrgId());
+    User user = uservice.findByEmail(session.getAttribute("email").toString());
+    obj.setUserId(user.getId());
+    obj.setModifyById(user.getId());
     RelationTripUser tmp = relservice.create(tripid, obj);
+    // mail.send(Organiser.getEmail(), "Regd : (Trip" + trip.getId() + ")", user.getName()
+    // + "Joined Trip id :" + trip.getId() + "to" + trip.locationentityGet().getName());
+    // mail.send(user.getEmail(), "Regd : (Trip" + trip.getId() + ")",
+    // " You Signed up for Trip id :" + trip.getId() + "to" + trip.locationentityGet().getName());
     return "redirect:" + "index";
   }
 
@@ -187,7 +201,8 @@ public class WebController {
   @RequestMapping(value = {"create"}, method = RequestMethod.POST)
   public String create(String locationid, String startdate1, String enddate1, String bookdate1,
       Trip obj, HttpSession session) {
-    if (session.getAttribute("key") == null) {
+    if (session.getAttribute("email") == null) {
+      System.out.println("came....");
       return "redirect:" + "index";
     }
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -216,8 +231,10 @@ public class WebController {
       }
     }
     obj.setLocationId(Integer.parseInt(locationid));
-    obj.setOrgId(1);
+    User user = uservice.findByEmail(session.getAttribute("email").toString());
+    obj.setOrgId(user.getId());
     Trip trip = service.create(obj);
     return "redirect:" + "index";
   }
+
 }

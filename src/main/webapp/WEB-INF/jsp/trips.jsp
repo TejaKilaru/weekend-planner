@@ -1,5 +1,9 @@
 <!doctype html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="java.io.*,java.util.*, javax.servlet.*"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ page language="java" contentType="text/html"%>
 <html lang="en">
 
 
@@ -768,8 +772,8 @@
 									</ul>
 								</li> -->
 								<li class="user-action"><a data-toggle="modal"
-									href="#loginModal" class="btn btn-primary btn-inverse">Sign
-										up/in</a></li>
+									href="#loginModal" id="login"
+									class="btn btn-primary btn-inverse">Sign up/in</a></li>
 							</ul>
 						</div>
 
@@ -828,17 +832,18 @@
 
 									<h3>Search Again</h3>
 									<div class="inner">
-										<form action= "search" class="gap-10">
+										<form action="search" class="gap-10">
 											<div class="col-xs-12 col-sm-12">
 
-											    <div class="orm-group form-icon-right mb-10">
+												<div class="orm-group form-icon-right mb-10">
 
-													<label>Location</label> 
-													<select class="form-control" name="locationid" id="locationid">
+													<label>Location</label> <select class="form-control"
+														name="locationid" id="locationid">
 														<c:forEach var="loc" items="${locations}">
-                                                        	<option value="${loc.getId()}" ${loc.getId() == locationid ? 'selected' : ''}>${loc.getName()}</option>
-                                                    	</c:forEach>
-                                                    </select>
+															<option value="${loc.getId()}"
+																${loc.getId() == locationid ? 'selected' : ''}>${loc.getName()}</option>
+														</c:forEach>
+													</select>
 												</div>
 												<!-- <div class="form-group form-icon-right mb-10">
 													<label>Where do you want to go?</label> <input type="text"
@@ -848,27 +853,28 @@
 											</div>
 											<div class="col-xs-12 col-sm-12">
 												<div class="form-group form-icon-right mb-10">
-												<label for="dpd1">After</label> <input
-													name="afterdate1" class="form-control" id="dpd1"
-													placeholder="After" type="text" value=${afterdate1} readonly> <i
-													class="fa fa-calendar"></i>
-											</div>
-											</div>
-											<div class="col-xs-12 col-sm-12">
-												<div class="form-group form-icon-right mb-10">
-												<label for="dpd2">Before</label> <input
-													name="enddate1" class="form-control" id="dpd2"
-													placeholder="Before" type="text" value=${enddate1} readonly> <i
-													class="fa fa-calendar"></i>
+													<label for="dpd1">After</label> <input name="afterdate1"
+														class="form-control" id="dpd1" placeholder="After"
+														type="text" value=${afterdate1 } readonly> <i
+														class="fa fa-calendar"></i>
 												</div>
 											</div>
 											<div class="col-xs-12 col-sm-12">
-													<div class="form-group form-spin-group">
-														<label for="vacancy">Vacancy</label> <input type="number"
-															class="form-control form-spin" value="${ obj.getVacancy() == '' ? 1 : Integer.parseInt(obj.getVacancy())}" id="vacancy"
-															name="vacancy" />
-													</div>
-													<!-- <label>Vacancy</label> <select class="custom-select"
+												<div class="form-group form-icon-right mb-10">
+													<label for="dpd2">Before</label> <input name="enddate1"
+														class="form-control" id="dpd2" placeholder="Before"
+														type="text" value=${enddate1 } readonly> <i
+														class="fa fa-calendar"></i>
+												</div>
+											</div>
+											<div class="col-xs-12 col-sm-12">
+												<div class="form-group form-spin-group">
+													<label for="vacancy">Vacancy</label> <input type="number"
+														class="form-control form-spin"
+														value="${ obj.getVacancy() == '' ? 1 : Integer.parseInt(obj.getVacancy())}"
+														id="vacancy" name="vacancy" />
+												</div>
+												<!-- <label>Vacancy</label> <select class="custom-select"
 														id="change-search-room">
 														<option value="0">Room</option>
 														<option value="1">1</option>
@@ -879,12 +885,13 @@
 													</select> -->
 											</div>
 											<div class="col-xs-12 col-sm-12">
-													<div class="form-group form-spin-group">
-														<label for="maxavgcost">AvgCost</label> <input
-															type="number" class="form-control form-spin" value="${ obj.getVacancy() == '' ? 1000 : Integer.parseInt(obj.getMaxavgcost())}"
-															id="maxavgcost" name="maxavgcost" />
-													</div>
-													<!-- <label>AvgCost</label> <select class="custom-select"
+												<div class="form-group form-spin-group">
+													<label for="maxavgcost">AvgCost</label> <input
+														type="number" class="form-control form-spin"
+														value="${ obj.getVacancy() == '' ? 1000 : Integer.parseInt(obj.getMaxavgcost())}"
+														id="maxavgcost" name="maxavgcost" />
+												</div>
+												<!-- <label>AvgCost</label> <select class="custom-select"
 														id="change-search-adult">
 														<option value="0">Adult</option>
 														<option value="1">1</option>
@@ -931,6 +938,9 @@
 											<div class="clear"></div>
 
 										</form>
+										<div style="display: none">
+											<input type="number" id="page" name="page" value="${prev}">
+										</div>
 									</div>
 								</div>
 
@@ -1150,6 +1160,7 @@
 
 							<div class="result-status">
 								Results
+
 								<!-- <span class="text-primary font700">256</span> hotels with availability in <span class="text-primary font700">Paris</span>. Showing 1 - 30 -->
 								<!-- 
 								${name}
@@ -1211,6 +1222,13 @@
 										</div>
 										<div class="absolute-bottom">
 											<!-- <p class="text-primary"><i class="fa fa-check-circle"></i> Breakfast Included <span class="mh-10">|</span> <i class="fa fa-check-circle"></i> Free Wifi in Room</p> -->
+											<!-- 	<%//out.print(trip.getBookEndDate())
+				// String startDateStr = {trip.getBookEndDate()};
+				//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				//Date startDate = sdf.parse(startDateStr);
+				// Date date = ${ trip.getBookEndDate() };
+				//out.print( "<h2 align=\"center\">" +startDate.toString()+"</h2>");%>
+										${asdf} -->
 											<p>Booking Ends on : ${ trip.getBookEndDate() }</p>
 										</div>
 										<div class="absolute-right">
@@ -1236,8 +1254,8 @@
 													<span class="block">Average Cost</span><span class="number">${ trip.getAvgCost() }</span>
 													<!-- <span class="block">avg / night</span> -->
 												</p>
-												<form action="join?tripid=${trip.getId()}&modifyById=1&userId=1" method="POST">
-												<button type="submit" class="btn btn-danger btn-sm">Signup</button>
+												<form action="join?tripid=${trip.getId()}" method="POST">
+													<button type="submit" class="btn btn-danger btn-sm">Signup</button>
 												</form>
 											</div>
 										</div>
@@ -1620,16 +1638,16 @@
 
 									<div class="col-sm-6">
 										<ul class="paging">
-										<li>${Integer.parseInt(prev) > -1 ? "<a href='#'><b> &laquo;&nbsp;&nbsp; </b></a>" : "<b> &laquo;&nbsp;&nbsp; </b>"}</li>
-											
-					<!-- 					<li><a href="#">1</a></li>
+											<li>${Integer.parseInt(prev) > -1 ? "<a href='#' id='previous123' ><b> &laquo;&nbsp;&nbsp; </b></a>" : "<b> &laquo;&nbsp;&nbsp; </b>"}</li>
+
+											<!-- 					<li><a href="#">1</a></li>
 											<li class="active"><a href="#">2</a></li>
 											<li><a href="#">3</a></li>
 											<li><a href="#">4</a></li>
 											<li><a href="#">5</a></li>
 											<li><a href="#">6</a></li> -->
-										<li> Page </li>
-										<li>${Integer.parseInt(next) > 0 ? "<a href='#'><b> &nbsp;&nbsp; &raquo;</b></a>" : "<b> &nbsp;&nbsp; &raquo;</b>"}</li>
+											<li>Page</li>
+											<li>${Integer.parseInt(next) > 0 ? "<a href='#' id='next123'><b> &nbsp;&nbsp; &raquo;</b></a>" : "<b> &nbsp;&nbsp; &raquo;</b>"}</li>
 										</ul>
 									</div>
 									<div class="col-sm-4"></div>
@@ -1775,6 +1793,66 @@
 	<!-- Date Piacker -->
 	<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
 	<script type="text/javascript" src="js/customs-datepicker.js"></script>
+
+
+	<script src="https://apis.google.com/js/platform.js?onload=oauthReady"
+		async defer></script>
+	<meta name="google-signin-client_id"
+		content="797550632992-634oon8ssbhjnmqj6fcsbj4um8tgnuni.apps.googleusercontent.com">
+	<script type="text/javascript">
+		$("#previous123").click(function() {
+			$.get('search', {
+				"page" : document.getElementById("page").value,
+				"afterdate1" : document.getElementById("dpd1"),
+				"locationid" : document.getElementById("locationid"),
+				"enddate1" : document.getElementById("dpd2"),
+				"vacancy" : document.getElementById("vacancy"),
+				"maxavgcost" : document.getElementById("maxavgcost")
+			}, function() {
+			});
+		});
+		$("#next123").click(function() {
+			console.log("came to next")
+			$.get('search', {
+				"page" : document.getElementById("page").value + 2,
+				"afterdate1" : document.getElementById("dpd1"),
+				"locationid" : document.getElementById("locationid"),
+				"enddate1" : document.getElementById("dpd2"),
+				"vacancy" : document.getElementById("vacancy"),
+				"maxavgcost" : document.getElementById("maxavgcost")
+			}, function() {
+				console.log("came to next")
+			});
+		});
+		window.oauthReady = function() {
+			gapi.load('auth2', function() {
+				gapi.auth2.init();
+			});
+			function login() {
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2
+						.signIn(
+								{
+									scope : 'https://www.googleapis.com/auth/user.phonenumbers.read',
+									redirect_uri : 'localhost:8080'
+								}).then(function(a, b) {
+							console.log(a);
+						});
+			}
+			function logout() {
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2.signOut().then(function() {
+					console.log('User signed out.');
+				});
+			}
+			$('#login').on('click', login);
+			$('#logout').on('click', logout);
+		}
+	</script>
+
+
+
+
 
 
 </body>
