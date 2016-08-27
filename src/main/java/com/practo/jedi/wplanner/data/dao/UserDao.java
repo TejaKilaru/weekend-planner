@@ -57,9 +57,4 @@ public class UserDao {
     return obj;
   }
 
-  @Transactional
-  public Userentity findByName(String name) {
-    return null;
-  }
-
 }

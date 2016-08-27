@@ -55,7 +55,8 @@ public class WebController {
 
 
   @RequestMapping("/login")
-  String login(Model model, String name, String email, String token, HttpSession session) {
+  String login(Model model, String name, String email, String token, String url,
+      HttpSession session) {
     session.setAttribute("username", name);
     session.setAttribute("email", email);
     session.setAttribute("key", token);
@@ -101,9 +102,7 @@ public class WebController {
   @RequestMapping(value = {"search"}, method = RequestMethod.GET)
   public String search(Model model, TripFilter obj, Pageable pageable, String afterdate1,
       String enddate1, String locationid, HttpSession session) {
-
-    System.out.println("cameeeee./........");
-    if (session.getAttribute("email") == null) {
+    if (session.getAttribute("email") != null) {
       model.addAttribute("user", session.getAttribute("username"));
     } else {
       model.addAttribute("user", "Guest");
@@ -156,6 +155,11 @@ public class WebController {
    */
   @RequestMapping(value = {"createform"}, method = RequestMethod.GET)
   public String createform(Model model, HttpSession session) {
+    if (session.getAttribute("email") != null) {
+      model.addAttribute("user", session.getAttribute("username"));
+    } else {
+      model.addAttribute("user", "Guest");
+    }
     if (session.getAttribute("email") == null) {
       return "redirect:" + "index";
     }

@@ -67,10 +67,5 @@ public class LocationServiceimpl implements LocationService {
     return obj;
   }
 
-  @Override
-  public void delete(Integer id) {
-    // locationrepository.delete(id);
-  }
-
 }
 

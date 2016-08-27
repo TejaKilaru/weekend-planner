@@ -22,7 +22,7 @@ import com.practo.jedi.wplanner.service.TripService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Test1.class)
-public class TripServiceTesting {
+public class TripServiceTest {
 
   @Autowired
   private TripService service;
@@ -82,7 +82,7 @@ public class TripServiceTesting {
     // Get Trip Users
     ArrayList<User> users = (ArrayList<User>) service.gettripusers(1);
     assertNotNull(users);
-    assertEquals(1, users.size());
+    assertEquals(2, users.size());
     assertEquals("Blake", users.get(0).getName());
 
   }
@@ -92,6 +92,9 @@ public class TripServiceTesting {
     // Filters
     TripFilter obj = new TripFilter();
     obj.setMaxavgcost(1000);
+    obj.setLocationid(2);
+    obj.setVacancy(2);
+    obj.setAfterdate(new Date());
     ArrayList<Trip> trips = (ArrayList<Trip>) service.filter(obj, new PageRequest(0, 2));
     assertNotNull(trips);
     assertEquals(1, trips.size());

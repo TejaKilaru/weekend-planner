@@ -23,9 +23,6 @@ public interface UserService {
   @Transactional
   User update(User obj);
 
-  @Transactional
-  void delete(Integer id);
-
   Iterable<User> getall(Pageable pageable);
 
   Iterable<Trip> getusertrips(Integer id);

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Test1.class)
-public class UserServiceTesting {
+public class UserServiceTest {
 
   @Autowired
   private UserService service;
@@ -77,7 +77,7 @@ public class UserServiceTesting {
     // Get User Trips
     ArrayList<Trip> trips = (ArrayList<Trip>) service.getusertrips(2);
     assertNotNull(trips);
-    assertEquals(1, trips.size());
+    assertEquals(2, trips.size());
   }
 
   @Test
@@ -85,7 +85,7 @@ public class UserServiceTesting {
     // Get User Signed up Trips
     ArrayList<Trip> trips = (ArrayList<Trip>) service.getuserontrips(1);
     assertNotNull(trips);
-    assertEquals(1, trips.size());
+    assertEquals(2, trips.size());
   }
 
 }

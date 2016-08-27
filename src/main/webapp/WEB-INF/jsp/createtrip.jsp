@@ -759,9 +759,11 @@
 										<li><a href="#">Japanese</a></li>
 									</ul>
 								</li> -->
-								<li class="user-action"><a data-toggle="modal"
-									href="#loginModal" class="btn btn-primary btn-inverse">Sign
-										up/in</a></li>
+								<li>${user} &nbsp;</li>
+								<li class="user-action" style="${ user != 'Guest' ? 'display: none' : ''}"><a data-toggle="modal" id="login"
+									class="btn btn-primary btn-inverse">Sign up</a></li>
+								<li class="user-action" style="${ user == 'Guest' ? 'display: none' : ''}"><a data-toggle="modal" id="logout"
+									class="btn btn-primary btn-inverse">Logout</a></li>
 							</ul>
 						</div>
 
@@ -1214,6 +1216,45 @@
 			minimumResultsForSearch : Infinity
 		});
 		$(".select2-multi").select2({});
+		window.oauthReady = function() {
+			gapi.load('auth2', function() {
+				gapi.auth2.init();
+			});
+			function login() {
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2
+						.signIn(
+								{
+									scope : 'https://www.googleapis.com/auth/user.phonenumbers.read'
+								})
+						.then(
+								function(googleUser) {
+
+									var name = googleUser.getBasicProfile()
+											.getName();
+									var email = googleUser.getBasicProfile()
+											.getEmail();
+									var token = googleUser.getAuthResponse().id_token;
+									$.post('login', {
+										"name" : name,
+										"email" : email,
+										"token" : token
+									}, function() {
+										window.location.href = "";
+									});
+								});
+			}
+			function logout() {
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2.signOut().then(function() {
+					$.post('logout', function() {
+						window.location.href = "index";
+					});
+				});
+			}
+			$('#login').on('click', login);
+			$('#logout').on('click', logout);
+		}
 	</script>
 
 </body>

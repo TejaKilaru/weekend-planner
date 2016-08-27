@@ -17,9 +17,6 @@ public interface LocationService {
   @Transactional
   Location update(Location obj);
 
-  @Transactional
-  void delete(Integer id);
-
   Iterable<Location> getall();
 
 

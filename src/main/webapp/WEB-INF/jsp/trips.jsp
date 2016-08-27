@@ -768,12 +768,14 @@
 									<ul class="dropdown-menu" aria-labelledby="language-dropdown">
 										<li><a href="#">English</a></li>
 										<li><a href="#">France</a></li>
-										<li><a href="#">Japanese</a></li>
+										<li><a href="#">Japanese</a></li>display: none
 									</ul>
 								</li> -->
-								<li class="user-action"><a data-toggle="modal"
-									href="#loginModal" id="login"
-									class="btn btn-primary btn-inverse">Sign up/in</a></li>
+								<li>${user} &nbsp;</li>
+								<li class="user-action" style="${ user != 'Guest' ? 'display: none' : ''}"><a data-toggle="modal" id="login"
+									class="btn btn-primary btn-inverse">Sign up</a></li>
+								<li class="user-action" style="${ user == 'Guest' ? 'display: none' : ''}"><a data-toggle="modal" id="logout"
+									class="btn btn-primary btn-inverse">Logout</a></li>
 							</ul>
 						</div>
 
@@ -1208,7 +1210,7 @@
 								<c:forEach var="trip" items="${name}">
 									<div class="hotel-item-list">
 										<div class="image"
-											style="background-image: url('images/top-destinations/01.jpg');"></div>
+											style="background-image: url('images/locations/${trip.locationentityGet().getImageUrl()}');"></div>
 										<div class="content">
 											<div class="heading">
 												<h4>${ trip.locationentityGet().getName() }</h4>
@@ -1638,7 +1640,7 @@
 
 									<div class="col-sm-6">
 										<ul class="paging">
-											<li>${Integer.parseInt(prev) > -1 ? "<a href='#' id='previous123' ><b> &laquo;&nbsp;&nbsp; </b></a>" : "<b> &laquo;&nbsp;&nbsp; </b>"}</li>
+											<li>${Integer.parseInt(prev) > -1 ? "<b> <button id='previous123' > &laquo;&nbsp;&nbsp;Prev </button> </b>" : "<b> <button> &laquo;&nbsp;&nbsp;Prev </button></b>"}</li>
 
 											<!-- 					<li><a href="#">1</a></li>
 											<li class="active"><a href="#">2</a></li>
@@ -1646,8 +1648,8 @@
 											<li><a href="#">4</a></li>
 											<li><a href="#">5</a></li>
 											<li><a href="#">6</a></li> -->
-											<li>Page</li>
-											<li>${Integer.parseInt(next) > 0 ? "<a href='#' id='next123'><b> &nbsp;&nbsp; &raquo;</b></a>" : "<b> &nbsp;&nbsp; &raquo;</b>"}</li>
+											<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Page ${Integer.parseInt(prev) +1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+											<li>${Integer.parseInt(next) > 0 ? " <b> <button id='next123'> Next&nbsp;&nbsp;&raquo; </button> </b>" : "<b> <button> Next&nbsp;&nbsp;&raquo; </button> </b>"}</li>
 										</ul>
 									</div>
 									<div class="col-sm-4"></div>
@@ -1801,28 +1803,46 @@
 		content="797550632992-634oon8ssbhjnmqj6fcsbj4um8tgnuni.apps.googleusercontent.com">
 	<script type="text/javascript">
 		$("#previous123").click(function() {
-			$.get('search', {
-				"page" : document.getElementById("page").value,
-				"afterdate1" : document.getElementById("dpd1"),
-				"locationid" : document.getElementById("locationid"),
-				"enddate1" : document.getElementById("dpd2"),
-				"vacancy" : document.getElementById("vacancy"),
-				"maxavgcost" : document.getElementById("maxavgcost")
-			}, function() {
-			});
+			var page = (parseInt(document.getElementById("page").value)).toString();
+			var afterdate1 = document.getElementById("dpd1").value;
+			var locationid = document.getElementById("locationid").value;
+			var enddate1 = document.getElementById("dpd2").value;
+			var vacancy = (document.getElementById("vacancy").value).toString();
+			var maxavgcost = (document.getElementById("maxavgcost").value).toString();
+
+			window.location.href = "search?page=" + page + "&afterdate1=" + afterdate1 + "&locationid=" + locationid + "&enddate1=" + enddate1 + "&vacancy=" + vacancy + "&maxavgcost=" + maxavgcost
+			// $.get('search', {
+			// 	"page" : document.getElementById("page").value,
+			// 	"afterdate1" : document.getElementById("dpd1").value,
+			// 	"locationid" : document.getElementById("locationid").value,
+			// 	"enddate1" : document.getElementById("dpd2").value,
+			// 	"vacancy" : document.getElementById("vacancy").value,
+			// 	"maxavgcost" : document.getElementById("maxavgcost").value
+			// }, function() {
+			// });
 		});
 		$("#next123").click(function() {
-			console.log("came to next")
-			$.get('search', {
-				"page" : document.getElementById("page").value + 2,
-				"afterdate1" : document.getElementById("dpd1"),
-				"locationid" : document.getElementById("locationid"),
-				"enddate1" : document.getElementById("dpd2"),
-				"vacancy" : document.getElementById("vacancy"),
-				"maxavgcost" : document.getElementById("maxavgcost")
-			}, function() {
-				console.log("came to next")
-			});
+			var page = (parseInt(document.getElementById("page").value) + 2).toString();
+			var afterdate1 = document.getElementById("dpd1").value;
+			var locationid = document.getElementById("locationid").value;
+			var enddate1 = document.getElementById("dpd2").value;
+			var vacancy = (document.getElementById("vacancy").value).toString();
+			var maxavgcost = (document.getElementById("maxavgcost").value).toString();
+
+			window.location.href = "search?page=" + page + "&afterdate1=" + afterdate1 + "&locationid=" + locationid + "&enddate1=" + enddate1 + "&vacancy=" + vacancy + "&maxavgcost=" + maxavgcost
+
+			// console.log(document.getElementById("page").value);
+			// console.log();
+			// $.get('search?pa', {
+			// 	"page" : document.getElementById("page").value + 2,
+			// 	"afterdate1" : document.getElementById("dpd1").value,
+			// 	"locationid" : document.getElementById("locationid").value,
+			// 	"enddate1" : document.getElementById("dpd2").value,
+			// 	"vacancy" : document.getElementById("vacancy").value,
+			// 	"maxavgcost" : document.getElementById("maxavgcost").value
+			// }, function() {
+			// 	console.log("came to next");
+			// });
 		});
 		window.oauthReady = function() {
 			gapi.load('auth2', function() {
@@ -1833,16 +1853,31 @@
 				auth2
 						.signIn(
 								{
-									scope : 'https://www.googleapis.com/auth/user.phonenumbers.read',
-									redirect_uri : 'localhost:8080'
-								}).then(function(a, b) {
-							console.log(a);
-						});
+									scope : 'https://www.googleapis.com/auth/user.phonenumbers.read'
+								})
+						.then(
+								function(googleUser) {
+
+									var name = googleUser.getBasicProfile()
+											.getName();
+									var email = googleUser.getBasicProfile()
+											.getEmail();
+									var token = googleUser.getAuthResponse().id_token;
+									$.post('login', {
+										"name" : name,
+										"email" : email,
+										"token" : token
+									}, function() {
+										window.location.href = "";
+									});
+								});
 			}
 			function logout() {
 				var auth2 = gapi.auth2.getAuthInstance();
 				auth2.signOut().then(function() {
-					console.log('User signed out.');
+					$.post('logout', function() {
+						window.location.href = "index";
+					});
 				});
 			}
 			$('#login').on('click', login);

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Test1.class)
-public class LocationServiceTesting {
+public class LocationServiceTest {
 
   @Autowired
   private LocationService service;

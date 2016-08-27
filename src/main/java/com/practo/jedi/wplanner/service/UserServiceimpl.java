@@ -131,8 +131,4 @@ public class UserServiceimpl implements UserService {
     return obj;
   }
 
-  @Transactional
-  @Override
-  public void delete(Integer id) {}
-
 }

@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Test1.class)
-public class RelationTripUserServiceTesting {
+public class RelationTripUserServiceTest {
 
   @Autowired
   private RelationTripUserService service;
@@ -33,6 +33,7 @@ public class RelationTripUserServiceTesting {
 
   @Test
   public void test2() throws NullEntityException {
+    // Create
     RelationTripUser reltripuser = new RelationTripUser();
     reltripuser.setModifyById(2);
     reltripuser.setUserId(1);
