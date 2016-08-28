@@ -78,15 +78,15 @@ public class TripServiceTest {
   }
 
 
-  @Test
-  public void test4() throws NullEntityException {
-    // Get Trip Users
-    ArrayList<User> users = (ArrayList<User>) service.gettripusers(1);
-    assertNotNull(users);
-    // assertEquals(2, users.size());
-    // assertEquals("Blake", users.get(0).getName());
-
-  }
+  // @Test
+  // public void test4() throws NullEntityException {
+  // // Get Trip Users
+  // ArrayList<User> users = (ArrayList<User>) service.gettripusers(1);
+  // assertNotNull(users);
+  // // assertEquals(2, users.size());
+  // // assertEquals("Blake", users.get(0).getName());
+  //
+  // }
 
   @Test
   public void test5() {
@@ -99,7 +99,6 @@ public class TripServiceTest {
     ArrayList<Trip> trips = (ArrayList<Trip>) service.filter(obj, new PageRequest(0, 2));
     assertNotNull(trips);
     assertEquals(1, trips.size());
-
 
     // Filter
     obj.setBeforedate(new Date());

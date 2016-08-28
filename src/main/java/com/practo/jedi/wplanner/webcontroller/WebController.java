@@ -190,16 +190,22 @@ public class WebController {
       return "redirect:" + "index";
     }
     Trip trip = service.get(tripid);
-    User Organiser = uservice.get(trip.getOrgId());
+    User organiser = uservice.get(trip.getOrgId());
     User user = uservice.findByEmail(session.getAttribute("email").toString());
     obj.setUserId(user.getId());
     obj.setModifyById(user.getId());
     RelationTripUser tmp = relservice.create(tripid, obj);
-    // mail.send(Organiser.getEmail(), "Regd : (Trip" + trip.getId() + ")", user.getName()
-    // + "Joined Trip id :" + trip.getId() + "to" + trip.locationentityGet().getName());
-    // mail.send(user.getEmail(), "Regd : (Trip" + trip.getId() + ")",
-    // " You Signed up for Trip id :" + trip.getId() + "to" + trip.locationentityGet().getName());
-    return "redirect:" + "index";
+    if (organiser.getEmail() == user.getEmail()) {
+      mail.send(user.getEmail(), "Regd : (Trip" + trip.getId() + ")",
+          " You Signed up for Your Trip id :" + trip.getId() + "to"
+              + trip.locationentityGet().getName());
+    } else {
+      mail.send(organiser.getEmail(), "Regd : (Trip" + trip.getId() + ")", user.getName()
+          + "Joined Trip id :" + trip.getId() + "to" + trip.locationentityGet().getName());
+      mail.send(user.getEmail(), "Regd : (Trip" + trip.getId() + ")", " You Signed up for Trip id :"
+          + trip.getId() + "to" + trip.locationentityGet().getName());
+    }
+    return "redirect:" + "search";
   }
 
   /**
@@ -248,7 +254,7 @@ public class WebController {
     User user = uservice.findByEmail(session.getAttribute("email").toString());
     obj.setOrgId(user.getId());
     Trip trip = service.create(obj);
-    return "redirect:" + "index";
+    return "redirect:" + "search";
   }
 
 }

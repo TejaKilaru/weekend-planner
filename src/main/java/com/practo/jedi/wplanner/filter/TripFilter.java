@@ -4,6 +4,7 @@ import com.practo.jedi.wplanner.data.entity.Locationentity;
 import com.practo.jedi.wplanner.data.entity.Tripentity;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.Date;
@@ -150,7 +151,8 @@ public class TripFilter {
     if (this.beforedate != null) {
       criteria = criteria.add(Restrictions.le("endDate", this.getBeforedate()));
     }
-    criteria = criteria.add(Restrictions.eq("deleteStatus", "false"));
+    criteria =
+        criteria.add(Restrictions.eq("deleteStatus", "false")).addOrder(Order.asc("startDate"));
     criteria = criteria.add(Restrictions.ge("startDate", new Date()));
     return criteria;
   }
