@@ -11,7 +11,7 @@ Java 8, Maven, MySql
 ## Run
 
 * Git Clone 
-* run sql file (Download .sql from wiki)
+* run sql file (Download .sql from [link](https://drive.google.com/open?id=0B7Z_4cCGOXc9anlFSTE2T0lZMTA))
 * Make Changes in application.properties
 * mvn clean install 
 * Place the created war file in tomcat's directory
