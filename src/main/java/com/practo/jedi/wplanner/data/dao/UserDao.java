@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 
-import javax.transaction.Transactional;
 
 
 @Repository
@@ -26,9 +26,14 @@ public class UserDao {
     return template.load(Userentity.class, id);
   }
 
+  /**
+   * Fetch the user based on email.
+   * 
+   * @param email (user email)
+   * @return user entity
+   */
   @Transactional
   public Userentity findByEmail(String email) {
-
     Iterable<Userentity> temp = (Iterable<Userentity>) template.findByCriteria(
         DetachedCriteria.forClass(Userentity.class).add(Restrictions.eq("email", email)));
     if (temp != null) {

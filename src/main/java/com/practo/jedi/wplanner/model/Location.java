@@ -1,11 +1,12 @@
 package com.practo.jedi.wplanner.model;
 
+
 import com.practo.jedi.wplanner.data.entity.Locationentity;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import javax.persistence.Id;
-import javax.transaction.Transactional;
-
 
 
 /**

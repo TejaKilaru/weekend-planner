@@ -5,9 +5,11 @@ import com.practo.jedi.wplanner.data.entity.Userentity;
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.Serializable;
 
-import javax.transaction.Transactional;
+
 
 /**
  * The persistent class for the user database table.

@@ -145,12 +145,13 @@ public class TripFilter {
     // criteria = criteria.add(Restrictions.lt("endDate", "startDate" + this.getDays()));
     // }
     if (this.afterdate != null) {
-      criteria = criteria.add(Restrictions.gt("startDate", this.getAfterdate()));
+      criteria = criteria.add(Restrictions.ge("startDate", this.getAfterdate()));
     }
     if (this.beforedate != null) {
       criteria = criteria.add(Restrictions.le("endDate", this.getBeforedate()));
     }
     criteria = criteria.add(Restrictions.eq("deleteStatus", "false"));
+    criteria = criteria.add(Restrictions.ge("startDate", new Date()));
     return criteria;
   }
 

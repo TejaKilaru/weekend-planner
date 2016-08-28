@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WebController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">weekend-planner</a> &gt; <a href="index.source.html" class="el_package">com.practo.jedi.wplanner.webcontroller</a> &gt; <span class="el_source">WebController.java</span></div><h1>WebController.java</h1><pre class="source lang-java linenums">package com.practo.jedi.wplanner.webcontroller;
+
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
+import com.practo.jedi.wplanner.filter.TripFilter;
+import com.practo.jedi.wplanner.model.Location;
+import com.practo.jedi.wplanner.model.RelationTripUser;
+import com.practo.jedi.wplanner.model.Trip;
+import com.practo.jedi.wplanner.model.User;
+import com.practo.jedi.wplanner.service.LocationService;
+import com.practo.jedi.wplanner.service.RelationTripUserService;
+import com.practo.jedi.wplanner.service.TripService;
+import com.practo.jedi.wplanner.service.UserService;
+import com.practo.jedi.wplanner.utility.MailService;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+
+@Controller
+public class WebController {
+
+  @Autowired
+  private MailService mail;
+
+<span class="fc" id="L40">  public WebController() {</span>
+    // TODO Auto-generated constructor stub
+<span class="fc" id="L42">  }</span>
+
+  @Autowired
+  private UserService uservice;
+
+  @Autowired
+  private TripService service;
+
+  @Autowired
+  private LocationService lservice;
+
+  @Autowired
+  private RelationTripUserService relservice;
+
+
+  @RequestMapping(&quot;/login&quot;)
+  String login(Model model, String name, String email, String token, String url,
+      HttpSession session) {
+<span class="nc" id="L60">    session.setAttribute(&quot;username&quot;, name);</span>
+<span class="nc" id="L61">    session.setAttribute(&quot;email&quot;, email);</span>
+<span class="nc" id="L62">    session.setAttribute(&quot;key&quot;, token);</span>
+<span class="nc" id="L63">    User user = uservice.findByEmail(email);</span>
+<span class="nc" id="L64">    System.out.println(user);</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">    if (user.getId() == 0) {</span>
+<span class="nc" id="L66">      System.out.println(&quot;came&quot;);</span>
+<span class="nc" id="L67">      user.setEmail(email);</span>
+<span class="nc" id="L68">      user.setName(name);</span>
+<span class="nc" id="L69">      user = uservice.create(user);</span>
+    }
+
+<span class="nc" id="L72">    return &quot;index&quot;;</span>
+  }
+
+  @RequestMapping(&quot;/logout&quot;)
+  String logout(Model model, HttpSession session) {
+<span class="nc" id="L77">    System.out.println(&quot;Logged out&quot;);</span>
+<span class="nc" id="L78">    session.invalidate();</span>
+<span class="nc" id="L79">    return &quot;index&quot;;</span>
+  }
+
+  @RequestMapping(&quot;/index&quot;)
+  String index(Model model, HttpSession session) {
+<span class="nc" id="L84">    Iterable&lt;Location&gt; locations = lservice.getall();</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">    if (session.getAttribute(&quot;email&quot;) != null) {</span>
+<span class="nc" id="L86">      model.addAttribute(&quot;user&quot;, session.getAttribute(&quot;username&quot;));</span>
+<span class="nc" id="L87">    } else {</span>
+<span class="nc" id="L88">      model.addAttribute(&quot;user&quot;, &quot;Guest&quot;);</span>
+    }
+<span class="nc" id="L90">    model.addAttribute(&quot;locations&quot;, locations);</span>
+<span class="nc" id="L91">    return &quot;index&quot;;</span>
+  }
+
+  /**
+   * Fetch The Trips Results based on filters.
+   * 
+   * @param model ()
+   * @param obj (Filters Object)
+   * @param pageable (Pageable Object)
+   * @return (trips.jsp)
+   */
+  @RequestMapping(value = {&quot;search&quot;}, method = RequestMethod.GET)
+  public String search(Model model, TripFilter obj, Pageable pageable, String afterdate1,
+      String enddate1, String locationid, HttpSession session) {
+<span class="nc bnc" id="L105" title="All 2 branches missed.">    if (session.getAttribute(&quot;email&quot;) != null) {</span>
+<span class="nc" id="L106">      model.addAttribute(&quot;user&quot;, session.getAttribute(&quot;username&quot;));</span>
+<span class="nc" id="L107">    } else {</span>
+<span class="nc" id="L108">      model.addAttribute(&quot;user&quot;, &quot;Guest&quot;);</span>
+    }
+<span class="nc bnc" id="L110" title="All 2 branches missed.">    if (locationid != null) {</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">      if (Integer.parseInt(locationid) &gt; 0) {</span>
+<span class="nc" id="L112">        obj.setLocationid(Integer.parseInt(locationid));</span>
+      }
+    }
+<span class="nc" id="L115">    Iterable&lt;Location&gt; locations = lservice.getall();</span>
+<span class="nc" id="L116">    model.addAttribute(&quot;locations&quot;, locations);</span>
+<span class="nc" id="L117">    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;dd-MM-yyyy&quot;);</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">    if (afterdate1 != null) {</span>
+      try {
+<span class="nc" id="L120">        Date date = simpleDateFormat.parse(afterdate1);</span>
+<span class="nc" id="L121">        obj.setAfterdate(date);</span>
+<span class="nc" id="L122">      } catch (ParseException ex) {</span>
+<span class="nc" id="L123">        System.out.println(&quot;Exception &quot; + ex);</span>
+      }
+    }
+<span class="nc bnc" id="L126" title="All 2 branches missed.">    if (enddate1 != null) {</span>
+      try {
+<span class="nc" id="L128">        Date date = simpleDateFormat.parse(enddate1);</span>
+<span class="nc" id="L129">        obj.setBeforedate(date);</span>
+<span class="nc" id="L130">      } catch (ParseException ex) {</span>
+<span class="nc" id="L131">        System.out.println(&quot;Exception &quot; + ex);</span>
+      }
+    }
+<span class="nc" id="L134">    Iterable&lt;Trip&gt; dto = service.filter(obj, pageable);</span>
+<span class="nc" id="L135">    int count = 0;</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">    for (Trip item : dto) {</span>
+<span class="nc" id="L137">      count++;</span>
+    }
+<span class="nc" id="L139">    model.addAttribute(&quot;next&quot;, count);</span>
+<span class="nc" id="L140">    model.addAttribute(&quot;prev&quot;, pageable.getPageNumber() - 1);</span>
+<span class="nc" id="L141">    model.addAttribute(&quot;name&quot;, dto);</span>
+<span class="nc" id="L142">    model.addAttribute(&quot;obj&quot;, obj);</span>
+<span class="nc" id="L143">    model.addAttribute(&quot;afterdate1&quot;, afterdate1);</span>
+<span class="nc" id="L144">    model.addAttribute(&quot;enddate1&quot;, enddate1);</span>
+<span class="nc" id="L145">    model.addAttribute(&quot;locationid&quot;, locationid);</span>
+<span class="nc" id="L146">    model.addAttribute(&quot;pageable&quot;, pageable);</span>
+<span class="nc" id="L147">    return &quot;trips&quot;;</span>
+  }
+
+  /**
+   * Sets The Locations in Create form.
+   * 
+   * @param model (jsp attribute)
+   * @return (renders The template createtrip)
+   */
+  @RequestMapping(value = {&quot;createform&quot;}, method = RequestMethod.GET)
+  public String createform(Model model, HttpSession session) {
+<span class="nc bnc" id="L158" title="All 2 branches missed.">    if (session.getAttribute(&quot;email&quot;) != null) {</span>
+<span class="nc" id="L159">      model.addAttribute(&quot;user&quot;, session.getAttribute(&quot;username&quot;));</span>
+<span class="nc" id="L160">    } else {</span>
+<span class="nc" id="L161">      model.addAttribute(&quot;user&quot;, &quot;Guest&quot;);</span>
+    }
+<span class="nc bnc" id="L163" title="All 2 branches missed.">    if (session.getAttribute(&quot;email&quot;) == null) {</span>
+<span class="nc" id="L164">      return &quot;redirect:&quot; + &quot;index&quot;;</span>
+    }
+<span class="nc" id="L166">    Iterable&lt;Location&gt; locations = lservice.getall();</span>
+<span class="nc" id="L167">    model.addAttribute(&quot;locations&quot;, locations);</span>
+<span class="nc" id="L168">    return &quot;createtrip&quot;;</span>
+  }
+
+  /**
+   * Signs up User for trip.
+   * 
+   * @param tripid (trip id)
+   * @param obj (details of user)
+   * @return redirects to trips
+   * @throws MessagingException (When Message fails)
+   */
+  @RequestMapping(value = {&quot;join&quot;}, method = RequestMethod.POST)
+  public String join(Integer tripid, RelationTripUser obj, HttpSession session)
+      throws NullEntityException, MessagingException {
+<span class="nc bnc" id="L182" title="All 2 branches missed.">    if (session.getAttribute(&quot;email&quot;) == null) {</span>
+<span class="nc" id="L183">      return &quot;redirect:&quot; + &quot;index&quot;;</span>
+    }
+<span class="nc" id="L185">    Trip trip = service.get(tripid);</span>
+<span class="nc" id="L186">    User Organiser = uservice.get(trip.getOrgId());</span>
+<span class="nc" id="L187">    User user = uservice.findByEmail(session.getAttribute(&quot;email&quot;).toString());</span>
+<span class="nc" id="L188">    obj.setUserId(user.getId());</span>
+<span class="nc" id="L189">    obj.setModifyById(user.getId());</span>
+<span class="nc" id="L190">    RelationTripUser tmp = relservice.create(tripid, obj);</span>
+    // mail.send(Organiser.getEmail(), &quot;Regd : (Trip&quot; + trip.getId() + &quot;)&quot;, user.getName()
+    // + &quot;Joined Trip id :&quot; + trip.getId() + &quot;to&quot; + trip.locationentityGet().getName());
+    // mail.send(user.getEmail(), &quot;Regd : (Trip&quot; + trip.getId() + &quot;)&quot;,
+    // &quot; You Signed up for Trip id :&quot; + trip.getId() + &quot;to&quot; + trip.locationentityGet().getName());
+<span class="nc" id="L195">    return &quot;redirect:&quot; + &quot;index&quot;;</span>
+  }
+
+  /**
+   * Creates Trip.
+   * 
+   * @param obj (User model)
+   * @return (redirects to index page)
+   */
+  @RequestMapping(value = {&quot;create&quot;}, method = RequestMethod.POST)
+  public String create(String locationid, String startdate1, String enddate1, String bookdate1,
+      Trip obj, HttpSession session) {
+<span class="nc bnc" id="L207" title="All 2 branches missed.">    if (session.getAttribute(&quot;email&quot;) == null) {</span>
+<span class="nc" id="L208">      return &quot;redirect:&quot; + &quot;index&quot;;</span>
+    }
+<span class="nc" id="L210">    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;dd-MM-yyyy&quot;);</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">    if (startdate1 != null) {</span>
+      try {
+<span class="nc" id="L213">        Date date = simpleDateFormat.parse(startdate1);</span>
+<span class="nc" id="L214">        obj.setStartDate(date);</span>
+<span class="nc" id="L215">      } catch (ParseException ex) {</span>
+<span class="nc" id="L216">        System.out.println(&quot;Exception &quot; + ex);</span>
+      }
+    }
+<span class="nc bnc" id="L219" title="All 2 branches missed.">    if (enddate1 != null) {</span>
+      try {
+<span class="nc" id="L221">        Date date = simpleDateFormat.parse(enddate1);</span>
+<span class="nc" id="L222">        obj.setEndDate(date);</span>
+<span class="nc" id="L223">      } catch (ParseException ex) {</span>
+<span class="nc" id="L224">        System.out.println(&quot;Exception &quot; + ex);</span>
+      }
+    }
+<span class="nc bnc" id="L227" title="All 2 branches missed.">    if (bookdate1 != null) {</span>
+      try {
+<span class="nc" id="L229">        Date date = simpleDateFormat.parse(bookdate1);</span>
+<span class="nc" id="L230">        obj.setBookEndDate(date);</span>
+<span class="nc" id="L231">      } catch (ParseException ex) {</span>
+<span class="nc" id="L232">        System.out.println(&quot;Exception &quot; + ex);</span>
+      }
+    }
+<span class="nc" id="L235">    obj.setLocationId(Integer.parseInt(locationid));</span>
+<span class="nc" id="L236">    User user = uservice.findByEmail(session.getAttribute(&quot;email&quot;).toString());</span>
+<span class="nc" id="L237">    obj.setOrgId(user.getId());</span>
+<span class="nc" id="L238">    Trip trip = service.create(obj);</span>
+<span class="nc" id="L239">    return &quot;redirect:&quot; + &quot;index&quot;;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LocationServiceimpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">weekend-planner</a> &gt; <a href="index.source.html" class="el_package">com.practo.jedi.wplanner.service</a> &gt; <span class="el_source">LocationServiceimpl.java</span></div><h1>LocationServiceimpl.java</h1><pre class="source lang-java linenums">package com.practo.jedi.wplanner.service;
+
+import com.practo.jedi.wplanner.data.dao.LocationDao;
+import com.practo.jedi.wplanner.data.entity.Locationentity;
+import com.practo.jedi.wplanner.model.Location;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+@Transactional
+@Service
+<span class="fc" id="L17">public class LocationServiceimpl implements LocationService {</span>
+
+  @Autowired
+  private LocationDao locationrepository;
+
+
+  @Override
+  public Iterable&lt;Location&gt; getall() {
+<span class="fc" id="L25">    Iterable&lt;Locationentity&gt; entity = locationrepository.getAllLocations();</span>
+<span class="fc" id="L26">    List&lt;Location&gt; alllocations = new ArrayList&lt;Location&gt;();</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">    for (Locationentity temp : entity) {</span>
+<span class="fc" id="L28">      System.out.println(temp);</span>
+      try {
+<span class="fc" id="L30">        Location dto = Location.class.newInstance();</span>
+<span class="fc" id="L31">        dto.entitytomodel(temp);</span>
+<span class="fc" id="L32">        alllocations.add(dto);</span>
+<span class="pc" id="L33">      } catch (InstantiationException | IllegalAccessException obj) {</span>
+<span class="nc" id="L34">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + obj);</span>
+<span class="nc" id="L35">        return null;</span>
+      }
+    }
+<span class="fc" id="L38">    return alllocations;</span>
+  }
+
+  @Override
+  public Location get(Integer id) {
+<span class="fc" id="L43">    Locationentity entity = locationrepository.findLocation(id);</span>
+    try {
+<span class="fc" id="L45">      Location dto = Location.class.newInstance();</span>
+<span class="fc" id="L46">      dto.entitytomodel(entity);</span>
+<span class="fc" id="L47">      return dto;</span>
+<span class="nc" id="L48">    } catch (InstantiationException | IllegalAccessException obj) {</span>
+      // LOG.error(&quot;Exception while DAO get for ID :&quot; + id, e);
+<span class="nc" id="L50">      return null;</span>
+    }
+  }
+
+  @Override
+  public Location create(Location obj) {
+<span class="fc" id="L56">    Locationentity entity = obj.modeltoentity();</span>
+<span class="fc" id="L57">    entity = locationrepository.createLocation(entity);</span>
+<span class="fc" id="L58">    obj.entitytomodel(entity);</span>
+<span class="fc" id="L59">    return obj;</span>
+  }
+
+  @Override
+  public Location update(Location obj) {
+<span class="fc" id="L64">    Locationentity entity = obj.modeltoentity();</span>
+<span class="fc" id="L65">    entity = locationrepository.updateLocation(entity);</span>
+<span class="fc" id="L66">    obj.entitytomodel(entity);</span>
+<span class="fc" id="L67">    return obj;</span>
+  }
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

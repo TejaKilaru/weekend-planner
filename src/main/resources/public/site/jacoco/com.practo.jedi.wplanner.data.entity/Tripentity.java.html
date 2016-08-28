@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Tripentity.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">weekend-planner</a> &gt; <a href="index.source.html" class="el_package">com.practo.jedi.wplanner.data.entity</a> &gt; <span class="el_source">Tripentity.java</span></div><h1>Tripentity.java</h1><pre class="source lang-java linenums">package com.practo.jedi.wplanner.data.entity;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
+/**
+ * The persistent class for the trips database table.
+ * 
+ */
+@Entity
+@Table(name = &quot;trips&quot;)
+@NamedQuery(name = &quot;Tripentity.findAll&quot;, query = &quot;SELECT t FROM Tripentity t&quot;)
+public class Tripentity implements Serializable {
+  private static final long serialVersionUID = 1L;
+
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
+  private int id;
+
+  @Column(name = &quot;avg_cost&quot;)
+  private int avgCost;
+
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = &quot;book_end_date&quot;)
+  private Date bookEndDate;
+
+  @Column(name = &quot;delete_status&quot;)
+  private String deleteStatus;
+
+  @Lob
+  private String description;
+
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = &quot;end_date&quot;)
+  private Date endDate;
+
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = &quot;modify_on&quot;)
+  private Date modifyOn;
+
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = &quot;start_date&quot;)
+  private Date startDate;
+
+  @Column(name = &quot;total_people&quot;)
+  private int totalPeople;
+
+  @Column(name = &quot;travel_by&quot;)
+  private String travelBy;
+
+  private int vacancy;
+
+  // bi-directional many-to-one association to RelationTripUser
+  @OneToMany(mappedBy = &quot;trip&quot;)
+  private List&lt;RelationTripUserentity&gt; relationTripUsers;
+
+  // bi-directional many-to-one association to Location
+  @ManyToOne
+  @JoinColumn(name = &quot;location&quot;)
+  private Locationentity locationBean;
+
+  // bi-directional many-to-one association to User
+  @ManyToOne
+  @JoinColumn(name = &quot;posted_by&quot;)
+  private Userentity user;
+
+<span class="fc" id="L84">  public Tripentity() {}</span>
+
+  public int getId() {
+<span class="fc" id="L87">    return this.id;</span>
+  }
+
+  public void setId(int id) {
+<span class="fc" id="L91">    this.id = id;</span>
+<span class="fc" id="L92">  }</span>
+
+  public int getAvgCost() {
+<span class="fc" id="L95">    return this.avgCost;</span>
+  }
+
+  public void setAvgCost(int avgCost) {
+<span class="fc" id="L99">    this.avgCost = avgCost;</span>
+<span class="fc" id="L100">  }</span>
+
+  public Date getBookEndDate() {
+<span class="fc" id="L103">    return this.bookEndDate;</span>
+  }
+
+  public void setBookEndDate(Date bookEndDate) {
+<span class="fc" id="L107">    this.bookEndDate = bookEndDate;</span>
+<span class="fc" id="L108">  }</span>
+
+  public String getDeleteStatus() {
+<span class="fc" id="L111">    return this.deleteStatus;</span>
+  }
+
+  public void setDeleteStatus(String deleteStatus) {
+<span class="fc" id="L115">    this.deleteStatus = deleteStatus;</span>
+<span class="fc" id="L116">  }</span>
+
+  public String getDescription() {
+<span class="fc" id="L119">    return this.description;</span>
+  }
+
+  public void setDescription(String description) {
+<span class="fc" id="L123">    this.description = description;</span>
+<span class="fc" id="L124">  }</span>
+
+  public Date getEndDate() {
+<span class="fc" id="L127">    return this.endDate;</span>
+  }
+
+  public void setEndDate(Date endDate) {
+<span class="fc" id="L131">    this.endDate = endDate;</span>
+<span class="fc" id="L132">  }</span>
+
+  public Date getModifyOn() {
+<span class="fc" id="L135">    return this.modifyOn;</span>
+  }
+
+  public void setModifyOn(Date modifyOn) {
+<span class="fc" id="L139">    this.modifyOn = modifyOn;</span>
+<span class="fc" id="L140">  }</span>
+
+  public Date getStartDate() {
+<span class="fc" id="L143">    return this.startDate;</span>
+  }
+
+  public void setStartDate(Date startDate) {
+<span class="fc" id="L147">    this.startDate = startDate;</span>
+<span class="fc" id="L148">  }</span>
+
+  public int getTotalPeople() {
+<span class="fc" id="L151">    return this.totalPeople;</span>
+  }
+
+  public void setTotalPeople(int totalPeople) {
+<span class="fc" id="L155">    this.totalPeople = totalPeople;</span>
+<span class="fc" id="L156">  }</span>
+
+  public String getTravelBy() {
+<span class="fc" id="L159">    return this.travelBy;</span>
+  }
+
+  public void setTravelBy(String travelBy) {
+<span class="fc" id="L163">    this.travelBy = travelBy;</span>
+<span class="fc" id="L164">  }</span>
+
+  public int getVacancy() {
+<span class="fc" id="L167">    return this.vacancy;</span>
+  }
+
+  public void setVacancy(int vacancy) {
+<span class="fc" id="L171">    this.vacancy = vacancy;</span>
+<span class="fc" id="L172">  }</span>
+
+  public List&lt;RelationTripUserentity&gt; getRelationTripUsers() {
+<span class="fc" id="L175">    return this.relationTripUsers;</span>
+  }
+
+  public void setRelationTripUsers(List&lt;RelationTripUserentity&gt; relationTripUsers) {
+<span class="nc" id="L179">    this.relationTripUsers = relationTripUsers;</span>
+<span class="nc" id="L180">  }</span>
+
+  /**
+   * .
+   * 
+   * @param relationTripUser ()
+   * @return ()
+   */
+  public RelationTripUserentity addRelationTripUser(RelationTripUserentity relationTripUser) {
+<span class="nc" id="L189">    getRelationTripUsers().add(relationTripUser);</span>
+<span class="nc" id="L190">    relationTripUser.setTrip(this);</span>
+
+<span class="nc" id="L192">    return relationTripUser;</span>
+  }
+
+  /**
+   * .
+   * 
+   * @param relationTripUser ()
+   * @return ()
+   */
+  public RelationTripUserentity removeRelationTripUser(RelationTripUserentity relationTripUser) {
+<span class="nc" id="L202">    getRelationTripUsers().remove(relationTripUser);</span>
+<span class="nc" id="L203">    relationTripUser.setTrip(null);</span>
+
+<span class="nc" id="L205">    return relationTripUser;</span>
+  }
+
+  public Locationentity getLocationBean() {
+<span class="fc" id="L209">    return this.locationBean;</span>
+  }
+
+  public void setLocationBean(Locationentity locationBean) {
+<span class="fc" id="L213">    this.locationBean = locationBean;</span>
+<span class="fc" id="L214">  }</span>
+
+  public Userentity getUser() {
+<span class="fc" id="L217">    return this.user;</span>
+  }
+
+  public void setUser(Userentity user) {
+<span class="fc" id="L221">    this.user = user;</span>
+<span class="fc" id="L222">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

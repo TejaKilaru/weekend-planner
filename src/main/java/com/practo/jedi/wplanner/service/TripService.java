@@ -6,8 +6,8 @@ import com.practo.jedi.wplanner.model.Trip;
 import com.practo.jedi.wplanner.model.User;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 public interface TripService {
 

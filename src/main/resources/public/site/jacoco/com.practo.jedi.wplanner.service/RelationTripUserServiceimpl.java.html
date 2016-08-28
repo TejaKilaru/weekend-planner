@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RelationTripUserServiceimpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">weekend-planner</a> &gt; <a href="index.source.html" class="el_package">com.practo.jedi.wplanner.service</a> &gt; <span class="el_source">RelationTripUserServiceimpl.java</span></div><h1>RelationTripUserServiceimpl.java</h1><pre class="source lang-java linenums">package com.practo.jedi.wplanner.service;
+
+
+import com.practo.jedi.wplanner.data.dao.RelationTripUserDao;
+import com.practo.jedi.wplanner.data.dao.TripDao;
+import com.practo.jedi.wplanner.data.dao.UserDao;
+import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
+import com.practo.jedi.wplanner.data.entity.Tripentity;
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
+import com.practo.jedi.wplanner.model.RelationTripUser;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+import javax.transaction.Transactional;
+
+@Service
+@Transactional
+<span class="fc" id="L21">public class RelationTripUserServiceimpl implements RelationTripUserService {</span>
+
+  @Autowired
+  private RelationTripUserDao reltripuserrepository;
+
+  @Autowired
+  private UserDao userdao;
+
+  @Autowired
+  private TripDao tripdao;
+
+  @Override
+  public RelationTripUser get(Integer id) {
+<span class="fc" id="L34">    RelationTripUserentity entity = reltripuserrepository.findRel(id);</span>
+    try {
+<span class="fc" id="L36">      RelationTripUser dto = RelationTripUser.class.newInstance();</span>
+<span class="fc" id="L37">      dto.entitytomodel(entity);</span>
+<span class="fc" id="L38">      return dto;</span>
+<span class="nc" id="L39">    } catch (InstantiationException | IllegalAccessException obj) {</span>
+<span class="nc" id="L40">      return null;</span>
+    }
+  }
+
+  @Override
+  public RelationTripUser create(Integer id, RelationTripUser obj) throws NullEntityException {
+<span class="fc" id="L46">    RelationTripUserentity entity = obj.modeltoentity();</span>
+<span class="fc" id="L47">    Tripentity tripentity = tripdao.findTrip(id);</span>
+<span class="pc bpc" id="L48" title="3 of 4 branches missed.">    if (tripentity == null &amp;&amp; tripentity.getVacancy() == 0) {</span>
+<span class="nc" id="L49">      return null;</span>
+    }
+<span class="fc" id="L51">    entity.setModifyOn(new Date(System.currentTimeMillis()));</span>
+<span class="fc" id="L52">    entity.setTrip(tripdao.findTrip(id));</span>
+<span class="fc" id="L53">    entity.setUser1(userdao.findUser(obj.getModifyById()));</span>
+<span class="fc" id="L54">    entity.setUser2(userdao.findUser(obj.getUserId()));</span>
+<span class="fc" id="L55">    entity.setDeleteStatus(&quot;false&quot;);</span>
+<span class="fc" id="L56">    entity = reltripuserrepository.createRel(entity);</span>
+<span class="fc" id="L57">    obj.entitytomodel(entity);</span>
+<span class="fc" id="L58">    tripentity.setVacancy(tripentity.getVacancy() - 1);</span>
+<span class="fc" id="L59">    tripentity = tripdao.updateTrip(tripentity);</span>
+<span class="fc" id="L60">    return obj;</span>
+  }
+
+  @Override
+  public RelationTripUser update(RelationTripUser obj) throws NullEntityException {
+<span class="nc" id="L65">    RelationTripUserentity entity = obj.modeltoentity();</span>
+<span class="nc" id="L66">    entity.setModifyOn(new Date(System.currentTimeMillis()));</span>
+<span class="nc" id="L67">    entity.setTrip(tripdao.findTrip(obj.getTripId()));</span>
+<span class="nc" id="L68">    entity.setUser1(userdao.findUser(obj.getModifyById()));</span>
+<span class="nc" id="L69">    entity.setUser2(userdao.findUser(obj.getUserId()));</span>
+<span class="nc" id="L70">    entity = reltripuserrepository.updateRel(entity);</span>
+<span class="nc" id="L71">    obj.entitytomodel(entity);</span>
+<span class="nc" id="L72">    return obj;</span>
+  }
+
+  @Override
+  public void delete(Integer id) {
+<span class="fc" id="L77">    RelationTripUserentity entity = reltripuserrepository.findRel(id);</span>
+<span class="fc" id="L78">    entity.setModifyOn(new Date(System.currentTimeMillis()));</span>
+<span class="fc" id="L79">    entity.setDeleteStatus(&quot;true&quot;);</span>
+<span class="fc" id="L80">    entity = reltripuserrepository.updateRel(entity);</span>
+<span class="fc" id="L81">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

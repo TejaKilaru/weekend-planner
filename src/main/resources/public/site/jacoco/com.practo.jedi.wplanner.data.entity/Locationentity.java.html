@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Locationentity.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">weekend-planner</a> &gt; <a href="index.source.html" class="el_package">com.practo.jedi.wplanner.data.entity</a> &gt; <span class="el_source">Locationentity.java</span></div><h1>Locationentity.java</h1><pre class="source lang-java linenums">package com.practo.jedi.wplanner.data.entity;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+/**
+ * The persistent class for the location database table.
+ * 
+ */
+@Entity
+@Table(name = &quot;location&quot;)
+@NamedQuery(name = &quot;Locationentity.findAll&quot;, query = &quot;SELECT l FROM Locationentity l&quot;)
+public class Locationentity implements Serializable {
+  private static final long serialVersionUID = 1L;
+
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
+  private int id;
+
+  private String name;
+
+  private String type;
+
+  @Column(name = &quot;image_url&quot;)
+  private String imageUrl;
+
+  // bi-directional many-to-one association to Trip
+  @OneToMany(mappedBy = &quot;locationBean&quot;)
+  private List&lt;Tripentity&gt; trips;
+
+<span class="fc" id="L42">  public Locationentity() {}</span>
+
+  public int getId() {
+<span class="fc" id="L45">    return this.id;</span>
+  }
+
+  public void setId(int id) {
+<span class="fc" id="L49">    this.id = id;</span>
+<span class="fc" id="L50">  }</span>
+
+  public String getName() {
+<span class="fc" id="L53">    return this.name;</span>
+  }
+
+  public String getImageUrl() {
+<span class="fc" id="L57">    return this.imageUrl;</span>
+  }
+
+  public void setImageUrl(String imageUrl) {
+<span class="fc" id="L61">    this.imageUrl = imageUrl;</span>
+<span class="fc" id="L62">  }</span>
+
+  public void setName(String name) {
+<span class="fc" id="L65">    this.name = name;</span>
+<span class="fc" id="L66">  }</span>
+
+  public String getType() {
+<span class="fc" id="L69">    return this.type;</span>
+  }
+
+  public void setType(String type) {
+<span class="fc" id="L73">    this.type = type;</span>
+<span class="fc" id="L74">  }</span>
+
+  public List&lt;Tripentity&gt; getTrips() {
+<span class="nc" id="L77">    return this.trips;</span>
+  }
+
+  public void setTrips(List&lt;Tripentity&gt; trips) {
+<span class="nc" id="L81">    this.trips = trips;</span>
+<span class="nc" id="L82">  }</span>
+
+  /**
+   * .
+   * 
+   * @param trip ()
+   * @return ()
+   */
+  public Tripentity addTrip(Tripentity trip) {
+<span class="nc" id="L91">    getTrips().add(trip);</span>
+<span class="nc" id="L92">    trip.setLocationBean(this);</span>
+
+<span class="nc" id="L94">    return trip;</span>
+  }
+
+  /**
+   * .
+   * 
+   * @param trip ()
+   * @return ()
+   */
+  public Tripentity removeTrip(Tripentity trip) {
+<span class="nc" id="L104">    getTrips().remove(trip);</span>
+<span class="nc" id="L105">    trip.setLocationBean(null);</span>
+
+<span class="nc" id="L107">    return trip;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

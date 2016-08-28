@@ -776,7 +776,7 @@
 										<li><a href="#">France</a></li>
 										<li><a href="#">Japanese</a></li>
 									</ul></li> -->
-								<li>${user}</li>
+								<li>${user} &nbsp;</li>
 								<li class="user-action" style="${ user != 'Guest' ? 'display: none' : ''}"><a data-toggle="modal" id="login"
 									class="btn btn-primary btn-inverse">Sign up</a></li>
 								<li class="user-action" style="${ user == 'Guest' ? 'display: none' : ''}"><a data-toggle="modal" id="logout"
@@ -842,12 +842,12 @@
 												type="search" autocomplete="off" class="form-control"
 												placeholder="Try to type: new">
 										</div> -->
-										<i class="fa fa-map-marker"></i>
+										<!-- <i class="fa fa-map-marker"></i> -->
 									</div>
 
 								</div>
 
-								<div class="col-xss-12 col-xs-12 col-sm-5">
+								<div class="col-xss-12 col-xs-12 col-sm-6">
 
 									<div class="row gap-20">
 
@@ -870,10 +870,10 @@
 									</div>
 								</div>
 
-								<div class="col-xss-12 col-xs-12 col-sm-7">
+								<div class="col-xss-12 col-xs-12 col-sm-6">
 
 									<div class="row gap-20">
-										<div class="col-xss-12 col-xs-4 col-sm-4">
+										<div class="col-xss-12 col-xs-6 col-sm-6">
 
 											<div class="form-group form-spin-group">
 												<label for="vacancy">Vacancy</label> <input type="text"
@@ -883,7 +883,7 @@
 
 										</div>
 
-										<div class="col-xss-12 col-xs-4 col-sm-4">
+										<div class="col-xss-12 col-xs-6 col-sm-6">
 
 											<div class="form-group form-spin-group">
 												<label for="maxavgcost">Average Cost</label> <input
@@ -892,7 +892,7 @@
 											</div>
 
 										</div>
-
+<!-- 
 										<div class="col-xss-12 col-xs-4 col-sm-4">
 
 											<div class="form-group form-spin-group">
@@ -901,7 +901,7 @@
 													name="days" />
 											</div>
 
-										</div>
+										</div> -->
 									</div>
 
 								</div>

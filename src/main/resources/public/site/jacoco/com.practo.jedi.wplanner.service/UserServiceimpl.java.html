@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>UserServiceimpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">weekend-planner</a> &gt; <a href="index.source.html" class="el_package">com.practo.jedi.wplanner.service</a> &gt; <span class="el_source">UserServiceimpl.java</span></div><h1>UserServiceimpl.java</h1><pre class="source lang-java linenums">package com.practo.jedi.wplanner.service;
+
+import com.practo.jedi.wplanner.data.dao.RelationTripUserDao;
+import com.practo.jedi.wplanner.data.dao.UserDao;
+import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
+import com.practo.jedi.wplanner.data.entity.Tripentity;
+import com.practo.jedi.wplanner.data.entity.Userentity;
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
+import com.practo.jedi.wplanner.model.Trip;
+import com.practo.jedi.wplanner.model.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+
+
+@Service
+<span class="fc" id="L25">public class UserServiceimpl implements UserService {</span>
+
+  @Autowired
+  private UserDao userrepository;
+
+  @Autowired
+  private RelationTripUserDao rtripuser;
+
+<span class="fc" id="L33">  final int itemsPerPage = 2;</span>
+
+  @Transactional
+  @Override
+  public Iterable&lt;User&gt; getall(Pageable pageable) {
+<span class="fc" id="L38">    Iterable&lt;Userentity&gt; entity = userrepository</span>
+<span class="fc" id="L39">        .getAllUsers(new PageRequest(pageable.getPageNumber(), itemsPerPage, pageable.getSort()));</span>
+<span class="fc" id="L40">    List&lt;User&gt; allusers = new ArrayList&lt;User&gt;();</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">    for (Userentity temp : entity) {</span>
+<span class="fc" id="L42">      System.out.println(temp);</span>
+      try {
+<span class="fc" id="L44">        User dto = User.class.newInstance();</span>
+<span class="fc" id="L45">        dto.entitytomodel(temp);</span>
+<span class="fc" id="L46">        allusers.add(dto);</span>
+<span class="pc" id="L47">      } catch (InstantiationException | IllegalAccessException err) {</span>
+<span class="nc" id="L48">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + err);</span>
+<span class="nc" id="L49">        return null;</span>
+      }
+    }
+<span class="fc" id="L52">    return allusers;</span>
+  }
+
+  @Transactional
+  @Override
+  public Iterable&lt;Trip&gt; getusertrips(Integer id) {
+<span class="fc" id="L58">    Userentity entity = userrepository.findUser(id);</span>
+<span class="fc" id="L59">    Iterable&lt;Tripentity&gt; tripentity = entity.getTrips();</span>
+<span class="fc" id="L60">    List&lt;Trip&gt; usertrips = new ArrayList&lt;Trip&gt;();</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">    for (Tripentity temp : tripentity) {</span>
+<span class="fc" id="L62">      System.out.println(temp);</span>
+      try {
+<span class="fc" id="L64">        Trip trip = Trip.class.newInstance();</span>
+<span class="fc" id="L65">        trip.entitytomodel(temp);</span>
+<span class="fc" id="L66">        usertrips.add(trip);</span>
+<span class="pc" id="L67">      } catch (InstantiationException | IllegalAccessException err) {</span>
+<span class="nc" id="L68">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + err);</span>
+<span class="nc" id="L69">        return null;</span>
+      }
+    }
+<span class="fc" id="L72">    return usertrips;</span>
+  }
+
+  @Transactional
+  @Override
+  public Iterable&lt;Trip&gt; getuserontrips(Integer id) {
+<span class="fc" id="L78">    Iterable&lt;RelationTripUserentity&gt; entity = rtripuser.findByUser2Id(id);</span>
+<span class="fc" id="L79">    Iterable&lt;Tripentity&gt; tripentity = new ArrayList&lt;Tripentity&gt;();</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">    for (RelationTripUserentity temp : entity) {</span>
+<span class="fc" id="L81">      ((List&lt;Tripentity&gt;) tripentity).add(temp.getTrip());</span>
+    }
+<span class="fc" id="L83">    List&lt;Trip&gt; userontrips = new ArrayList&lt;Trip&gt;();</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">    for (Tripentity temp : tripentity) {</span>
+<span class="fc" id="L85">      System.out.println(temp);</span>
+      try {
+<span class="fc" id="L87">        Trip trip = Trip.class.newInstance();</span>
+<span class="fc" id="L88">        trip.entitytomodel(temp);</span>
+<span class="fc" id="L89">        userontrips.add(trip);</span>
+<span class="pc" id="L90">      } catch (InstantiationException | IllegalAccessException err) {</span>
+<span class="nc" id="L91">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + err);</span>
+<span class="nc" id="L92">        return null;</span>
+      }
+    }
+<span class="fc" id="L95">    return userontrips;</span>
+  }
+
+  @Transactional
+  @Override
+  public User get(Integer id) {
+<span class="fc" id="L101">    Userentity entity = userrepository.findUser(id);</span>
+<span class="fc" id="L102">    User dto = new User();</span>
+<span class="fc" id="L103">    dto.entitytomodel(entity);</span>
+<span class="fc" id="L104">    return dto;</span>
+  }
+
+  @Transactional
+  @Override
+  public User findByEmail(String key) {
+<span class="fc" id="L110">    Userentity entity = userrepository.findByEmail(key);</span>
+<span class="fc" id="L111">    User dto = new User();</span>
+<span class="fc" id="L112">    dto.entitytomodel(entity);</span>
+<span class="fc" id="L113">    return dto;</span>
+  }
+
+  @Transactional
+  @Override
+  public User create(User obj) {
+<span class="fc" id="L119">    Userentity entity = obj.modeltoentity();</span>
+<span class="fc" id="L120">    entity = userrepository.createUser(entity);</span>
+<span class="fc" id="L121">    obj.entitytomodel(entity);</span>
+<span class="fc" id="L122">    return obj;</span>
+  }
+
+  @Transactional
+  @Override
+  public User update(User obj) {
+<span class="fc" id="L128">    Userentity entity = obj.modeltoentity();</span>
+<span class="fc" id="L129">    entity = userrepository.updateUser(entity);</span>
+<span class="fc" id="L130">    obj.entitytomodel(entity);</span>
+<span class="fc" id="L131">    return obj;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

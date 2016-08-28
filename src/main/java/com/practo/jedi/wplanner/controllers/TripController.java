@@ -81,7 +81,8 @@ public class TripController {
    * 
    * @param id (Trip id)
    * @param response ()
-   * @return ()
+   * @return (boolean)
+   * @throws NullEntityException ()
    */
   @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id,

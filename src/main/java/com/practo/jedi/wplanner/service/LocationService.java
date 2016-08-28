@@ -2,7 +2,7 @@ package com.practo.jedi.wplanner.service;
 
 import com.practo.jedi.wplanner.model.Location;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 
 

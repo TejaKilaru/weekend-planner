@@ -5,6 +5,8 @@ import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
 import com.practo.jedi.wplanner.data.entity.Tripentity;
 import com.practo.jedi.wplanner.data.entity.Userentity;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,7 +14,6 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.transaction.Transactional;
 
 
 

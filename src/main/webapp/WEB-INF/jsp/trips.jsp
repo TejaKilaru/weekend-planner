@@ -1158,10 +1158,8 @@
 
 						<div class="content-wrapper">
 
-							<div class="mb-10"></div>
-
 							<div class="result-status">
-								Results
+								<h4>Trip Results<h4>
 
 								<!-- <span class="text-primary font700">256</span> hotels with availability in <span class="text-primary font700">Paris</span>. Showing 1 - 30 -->
 								<!-- 

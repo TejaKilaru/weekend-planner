@@ -1,9 +1,10 @@
 package com.practo.jedi.wplanner.service;
 
+
 import com.practo.jedi.wplanner.exceptions.NullEntityException;
 import com.practo.jedi.wplanner.model.RelationTripUser;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 
 public interface RelationTripUserService {

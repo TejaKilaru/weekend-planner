@@ -12,6 +12,14 @@ import com.practo.jedi.wplanner.service.TripService;
 import com.practo.jedi.wplanner.service.UserService;
 import com.practo.jedi.wplanner.utility.MailService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -20,14 +28,6 @@ import java.util.Date;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
@@ -76,7 +76,7 @@ public class WebController {
   String logout(Model model, HttpSession session) {
     System.out.println("Logged out");
     session.invalidate();
-    return "index";
+    return "redirect:" + "index";
   }
 
   @RequestMapping("/index")
@@ -97,6 +97,10 @@ public class WebController {
    * @param model ()
    * @param obj (Filters Object)
    * @param pageable (Pageable Object)
+   * @param afterdate1 ()
+   * @param enddate1 ()
+   * @param locationid ()
+   * @param session (contains user details)
    * @return (trips.jsp)
    */
   @RequestMapping(value = {"search"}, method = RequestMethod.GET)
@@ -151,6 +155,7 @@ public class WebController {
    * Sets The Locations in Create form.
    * 
    * @param model (jsp attribute)
+   * @param session (contains the user details)
    * @return (renders The template createtrip)
    */
   @RequestMapping(value = {"createform"}, method = RequestMethod.GET)
@@ -173,7 +178,9 @@ public class WebController {
    * 
    * @param tripid (trip id)
    * @param obj (details of user)
+   * @param session (contains user details)
    * @return redirects to trips
+   * @throws NullEntityException ()
    * @throws MessagingException (When Message fails)
    */
   @RequestMapping(value = {"join"}, method = RequestMethod.POST)
@@ -198,6 +205,11 @@ public class WebController {
   /**
    * Creates Trip.
    * 
+   * @param locationid ()
+   * @param startdate1 ()
+   * @param enddate1 ()
+   * @param bookdate1 ()
+   * @param session ()
    * @param obj (User model)
    * @return (redirects to index page)
    */

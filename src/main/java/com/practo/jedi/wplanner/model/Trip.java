@@ -5,6 +5,8 @@ import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
 import com.practo.jedi.wplanner.data.entity.Tripentity;
 import com.practo.jedi.wplanner.data.entity.Userentity;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.beans.Transient;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.transaction.Transactional;
 
 
 
