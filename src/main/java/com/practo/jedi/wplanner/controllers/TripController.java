@@ -69,8 +69,9 @@ public class TripController {
    * @param obj (Trip class)
    * @return (Trip class)
    */
-  @RequestMapping(method = RequestMethod.PUT)
-  public ResponseEntity<Trip> update(@RequestBody Trip obj) {
+  @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+  public ResponseEntity<Trip> update(@RequestBody Trip obj, @PathVariable("id") Integer id) {
+    obj.setId(id);
     Trip dto = service.update(obj);
     ResponseEntity<Trip> re = new ResponseEntity<Trip>(dto, HttpStatus.OK);
     return re;

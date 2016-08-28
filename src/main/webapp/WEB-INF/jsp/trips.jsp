@@ -1,5 +1,6 @@
 <!doctype html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="java.io.*,java.util.*, javax.servlet.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -102,464 +103,11 @@
 						class="collapse navbar-collapse navbar-arrow pull-left">
 
 						<ul class="nav navbar-nav" id="responsive-menu">
-							<li><a href="index">Home</a> <!-- <ul>
-									<li>
-										<a href="index-2.html">Home Page - 1</a>
-									</li>
-									<li>
-										<a href="index-3.html">Home Page - 2 (select form for no. of people)</a>
-									</li>
-									<li>
-										<a href="index-4.html">Home Page - 3 (tripadvisor)</a>
-									</li>
-									<li>
-										<a href="index-5.html">Home Page - 4 (banner slider search 1)</a>
-									</li>
-									<li>
-										<a href="index-6.html">Home Page - 5 (banner slider search 2}</a>
-									</li>
-									<li>
-										<a href="index-7.html">Home Page - 6 (last minute deals)</a>
-									</li>
-									<li>
-										<a href="#">Second Level</a>
-										 <ul>
-											<li><a href="#">Third Level - 1</a></li>
-											<li><a href="#">Third Level - 2</a></li>
-											<li><a href="#">Third Level - 3</a></li>
-										</ul>
-									</li>
-								</ul> --></li>
-							<li><a href="search">Trips</a> <!-- <ul>
-									<li><a href="result-page-list.html">Result - List</a></li>
-									<li><a href="result-page-list-right-sidebar.html">Result - List (right sidebar)</a></li> 
-									<li><a href="result-page-grid.html">Result - Grid</a></li>
-									<li><a href="result-page-grid-right-sidebar.html">Result - Grid (right sidebar)</a></li>
-									<li><a href="result-map.html">Result - Map</a></li>
-									<li><a href="detail-page.html">Detail Page</a></li>
-									<li><a href="detail-page-2.html">Detail Page - 2 (tripadvisor)</a></li>
-									<li><a href="detail-page.html">Detail Page - Tab</a></li>
-									<li><a href="payment.html">Payment</a></li>
-									<li><a href="payment-2.html">Payment - 2 (alt. booking summary)</a></li>
-									<li><a href="confirmation.html">Confirmation</a></li>
-									<li><a href="list-property.html">List Your Property</a></li>
-								</ul> --></li>
-							<li class="mega-menu hidden-sm hidden-xs"><a
-								href="createform">Create Trip</a> <!-- <ul>
-									<li class="clearfix">
-										<div class="container">
-										
-											<div class="vertical-tab-style-01-wrapper">
-											
-												<div class="row">
-
-													<div class="col-xs-12 col-sm-3 col-md-3">
-													
-														<ul class="tab-nav">
-															<li class="active"><a href="#destination-tab-01" data-toggle="tab">Asia</a></li>
-															<li><a href="#destination-tab-02" data-toggle="tab">Europe</a></li>
-															<li><a href="#destination-tab-03" data-toggle="tab">America</a></li>
-															<li><a href="#destination-tab-04" data-toggle="tab">Latin America</a></li>
-															<li><a href="#destination-tab-05" data-toggle="tab">Africa</a></li>
-															<li><a href="#destination-tab-06" data-toggle="tab">Oceana</a></li>
-														</ul>
-														
-													</div>
-													
-													<div class="col-xs-12 col-sm-9 col-md-9">
-													
-														<div class="tab-content" >
-															
-															<div class="tab-pane fade in active" id="destination-tab-01">
-															
-																<div class="tab-inner">
-
-																	<div class="destination-list-wrapper">
-																	
-																		<ul class="destination-list clearfix">
-																		
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Indonesia</a></li>
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">India</a></li>
-																			<li><a href="destination-page.html">Cambodia</a></li>
-																			<li><a href="destination-page.html">Bangladesh</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Indonesia</a></li>
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Indonesia</a></li>
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">India</a></li>
-																			<li><a href="destination-page.html">Cambodia</a></li>
-																			<li><a href="destination-page.html">Bangladesh</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li class="more-link"><a href="destinations-page.html">More destinations <i class="fa fa-arrow-circle-right"></i></a></li>
-																			
-																		</ul>
-																		
-																	</div>
-
-																</div>
-																
-															</div>
-															
-															<div class="tab-pane fade" id="destination-tab-02">
-																
-																<div class="tab-inner">
-
-																	<div class="destination-list-wrapper">
-																	
-																		<ul class="destination-list clearfix">
-																		
-																			<li><a href="destination-page.html">Albania</a></li>
-																			<li><a href="destination-page.html">Austria</a></li>
-																			<li><a href="destination-page.html">Belgium</a></li>
-																			<li><a href="destination-page.html">Croatia</a></li>
-																			<li><a href="destination-page.html">Cyprus</a></li>
-																			<li><a href="destination-page.html">Czech Republic</a></li>
-																			<li><a href="destination-page.html">Denmark</a></li>
-																			<li><a href="destination-page.html">Finland</a></li>
-																			<li><a href="destination-page.html">France</a></li>
-																			<li><a href="destination-page.html">Georgia</a></li>
-																			<li><a href="destination-page.html">Germany</a></li>
-																			<li><a href="destination-page.html">Greece</a></li>
-																			<li><a href="destination-page.html">Hungary</a></li>
-																			<li><a href="destination-page.html">Iceland</a></li>
-																			<li><a href="destination-page.html">Ireland</a></li>
-																			<li><a href="destination-page.html">Italy</a></li>
-																			<li><a href="destination-page.html">Netherlands</a></li>
-																			<li><a href="destination-page.html">Norway</a></li>
-																			<li><a href="destination-page.html">Albania</a></li>
-																			<li><a href="destination-page.html">Austria</a></li>
-																			<li><a href="destination-page.html">Belgium</a></li>
-																			<li><a href="destination-page.html">Croatia</a></li>
-																			<li><a href="destination-page.html">Cyprus</a></li>
-																			<li><a href="destination-page.html">Czech Republic</a></li>
-																			<li><a href="destination-page.html">Denmark</a></li>
-																			<li><a href="destination-page.html">Finland</a></li>
-																			<li><a href="destination-page.html">France</a></li>
-																			<li><a href="destination-page.html">Georgia</a></li>
-																			<li><a href="destination-page.html">Germany</a></li>
-																			<li><a href="destination-page.html">Greece</a></li>
-																			<li><a href="destination-page.html">Hungary</a></li>
-																			<li><a href="destination-page.html">Iceland</a></li>
-																			<li><a href="destination-page.html">Ireland</a></li>
-																			<li><a href="destination-page.html">Italy</a></li>
-																			<li><a href="destination-page.html">Netherlands</a></li>
-																			<li><a href="destination-page.html">Norway</a></li>
-																			<li class="more-link"><a href="destinations-page.html">More destinations <i class="fa fa-arrow-circle-right"></i></a></li>
-																			
-																		</ul>
-																		
-																	</div>
-
-																</div>
-															</div>
-															
-															<div class="tab-pane fade" id="destination-tab-03">
-
-																<div class="tab-inner">
-																	
-																	<div class="destination-list-wrapper">
-																	
-																		<ul class="destination-list clearfix">
-																		
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">India</a></li>
-																			<li><a href="destination-page.html">Cambodia</a></li>
-																			<li><a href="destination-page.html">Bangladesh</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Indonesia</a></li>
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Indonesia</a></li>
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">India</a></li>
-																			<li><a href="destination-page.html">Cambodia</a></li>
-																			<li><a href="destination-page.html">Bangladesh</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li class="more-link"><a href="destinations-page.html">More destinations <i class="fa fa-arrow-circle-right"></i></a></li>
-																			
-																		</ul>
-																		
-																	</div>
-
-																</div>
-															</div>
-
-															<div class="tab-pane fade" id="destination-tab-04">
-
-																<div class="tab-inner">
-																	
-																	<div class="destination-list-wrapper">
-																	
-																		<ul class="destination-list clearfix">
-																			<li><a href="destination-page.html">France</a></li>
-																			<li><a href="destination-page.html">Georgia</a></li>
-																			<li><a href="destination-page.html">Germany</a></li>
-																			<li><a href="destination-page.html">Greece</a></li>
-																			<li><a href="destination-page.html">Hungary</a></li>
-																			<li><a href="destination-page.html">Iceland</a></li>
-																			<li><a href="destination-page.html">Ireland</a></li>
-																			<li><a href="destination-page.html">Italy</a></li>
-																			<li><a href="destination-page.html">Netherlands</a></li>
-																			<li><a href="destination-page.html">Norway</a></li>
-																			<li><a href="destination-page.html">Albania</a></li>
-																			<li><a href="destination-page.html">Austria</a></li>
-																			<li><a href="destination-page.html">Belgium</a></li>
-																			<li><a href="destination-page.html">Croatia</a></li>
-																			<li><a href="destination-page.html">Cyprus</a></li>
-																			<li><a href="destination-page.html">Czech Republic</a></li>
-																			<li><a href="destination-page.html">Denmark</a></li>
-																			<li><a href="destination-page.html">Finland</a></li>
-																			<li><a href="destination-page.html">France</a></li>
-																			<li><a href="destination-page.html">Georgia</a></li>
-																			<li><a href="destination-page.html">Germany</a></li>
-																			<li><a href="destination-page.html">Greece</a></li>
-																			<li><a href="destination-page.html">Hungary</a></li>
-																			<li><a href="destination-page.html">Iceland</a></li>
-																			<li><a href="destination-page.html">Ireland</a></li>
-																			<li><a href="destination-page.html">Italy</a></li>
-																			<li><a href="destination-page.html">Netherlands</a></li>
-																			<li><a href="destination-page.html">Norway</a></li>
-																			<li><a href="destination-page.html">Albania</a></li>
-																			<li><a href="destination-page.html">Austria</a></li>
-																			<li><a href="destination-page.html">Belgium</a></li>
-																			<li><a href="destination-page.html">Croatia</a></li>
-																			<li><a href="destination-page.html">Cyprus</a></li>
-																			<li><a href="destination-page.html">Czech Republic</a></li>
-																			<li><a href="destination-page.html">Denmark</a></li>
-																			<li><a href="destination-page.html">Finland</a></li>
-																			<li class="more-link"><a href="destinations-page.html">More destinations <i class="fa fa-arrow-circle-right"></i></a></li>
-																			
-																		</ul>
-																		
-																	</div>
-
-																</div>
-															</div>
-
-															<div class="tab-pane fade" id="destination-tab-05">
-
-																<div class="tab-inner">
-																	
-																	<div class="destination-list-wrapper">
-																	
-																		<ul class="destination-list clearfix">
-																		
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Indonesia</a></li>
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">India</a></li>
-																			<li><a href="destination-page.html">Cambodia</a></li>
-																			<li><a href="destination-page.html">Bangladesh</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Indonesia</a></li>
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Indonesia</a></li>
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">India</a></li>
-																			<li><a href="destination-page.html">Cambodia</a></li>
-																			<li><a href="destination-page.html">Bangladesh</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li class="more-link"><a href="destinations-page.html">More destinations <i class="fa fa-arrow-circle-right"></i></a></li>
-																			
-																		</ul>
-																		
-																	</div>
-
-																</div>
-															</div>
-
-															<div class="tab-pane fade" id="destination-tab-06">
-
-																<div class="tab-inner">
-																	
-																	<div class="destination-list-wrapper">
-																	
-																		<ul class="destination-list clearfix">
-																		
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Indonesia</a></li>
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">India</a></li>
-																			<li><a href="destination-page.html">Cambodia</a></li>
-																			<li><a href="destination-page.html">Bangladesh</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li><a href="destination-page.html">Singapore</a></li>
-																			<li><a href="destination-page.html">Indonesia</a></li>
-																			<li><a href="destination-page.html">Maldives</a></li>
-																			<li><a href="destination-page.html">China</a></li>
-																			<li><a href="destination-page.html">Pakistan</a></li>
-																			<li><a href="destination-page.html">Mongolia</a></li>
-																			<li><a href="destination-page.html">Lebanon</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">India</a></li>
-																			<li><a href="destination-page.html">Cambodia</a></li>
-																			<li><a href="destination-page.html">Bangladesh</a></li>
-																			<li><a href="destination-page.html">Brunei</a></li>
-																			<li><a href="destination-page.html">South Korea</a></li>
-																			<li><a href="destination-page.html">Philippines</a></li>
-																			<li><a href="destination-page.html">Sri Lanka</a></li>
-																			<li><a href="destination-page.html">Malaysia</a></li>
-																			<li><a href="destination-page.html">Thailand</a></li>
-																			<li class="more-link"><a href="destinations-page.html">More destinations <i class="fa fa-arrow-circle-right"></i></a></li>
-																			
-																		</ul>
-																		
-																	</div>
-
-																</div>
-															</div>
-
-														</div>
-														
-													</div>
-
-												</div>
-												
-											</div>
-
-										</div>
-									</li>
-								</ul> --></li>
-							<li><a href="result-page-list.html">Pages</a> <!-- <ul>
-									<li>
-										<a href="#">Dashboard</a>
-										 <ul>
-											<li><a href="dashboard-my-booking.html">My Bookings</a></li>
-											<li><a href="dashboard-message-list.html">Message List</a></li>
-											<li><a href="dashboard-message-list-detail.html">Message List Detail</a></li>
-											<li><a href="dashboard-message-list-toggle.html">Message List Toggle Style</a></li>
-											<li><a href="dashboard-profile.html">Profile</a></li>
-											<li><a href="dashboard-billing.html">Billing</a></li>
-											<li><a href="dashboard-user-pass.html">User &amp; Password</a></li>
-										</ul>
-									</li>
-									<li><a href="about-us.html">About Us</a></li>
-									<li><a href="blog.html">Blog</a></li>
-									<li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-									<li><a href="blog-single.html">Blog Single</a></li>
-									<li><a href="blog-single-left-sidebar.html">Blog Single Left Sidebar</a></li>
-									<li><a href="contact.html">Contact</a></li>
-									<li><a href="faq.html">Faq</a></li>
-									<li><a href="faq-2.html">Faq - 2</a></li>
-									<li><a href="static-page.html">Static Page</a></li>
-									<li><a href="404.html">404 - Error Page</a></li>
-									<li><a href="typography.html">Typography</a></li>
-								</ul> --></li>
+							<li><a href="index">Home</a>  </li>
+							<li><a href="search">Trips</a> </li>
+							${ user != '' ?
+							'<li class="create"><a
+								href="createform">Create Trip</a> </li>' : '' }
 						</ul>
 
 					</div>
@@ -569,32 +117,11 @@
 
 						<div class="navbar-mini">
 							<ul class="clearfix">
-								<!-- <li class="dropdown bt-dropdown-click">
-									<a id="currency-dropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-										<i class="ion-social-usd hidden-xss"></i> Dollar
-										<span class="caret"></span>
-									</a>
-									<ul class="dropdown-menu" aria-labelledby="currency-dropdown">
-										<li><a href="#"><i class="ion-social-usd"></i> Dollar</a></li>
-										<li><a href="#"><i class="ion-social-euro"></i> Europe</a></li>
-										<li><a href="#"><i class="ion-social-yen"></i> Yen</a></li>
-									</ul>
-								</li>
-								<li class="dropdown bt-dropdown-click">
-									<a id="language-dropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-										<i class="ion-android-globe hidden-xss"></i> English
-										<span class="caret"></span>
-									</a>
-									<ul class="dropdown-menu" aria-labelledby="language-dropdown">
-										<li><a href="#">English</a></li>
-										<li><a href="#">France</a></li>
-										<li><a href="#">Japanese</a></li>display: none
-									</ul>
-								</li> -->
+
 								<li>${user} &nbsp;</li>
-								<li class="user-action" style="${ user != 'Guest' ? 'display: none' : ''}"><a data-toggle="modal" id="login"
-									class="btn btn-primary btn-inverse">Sign up</a></li>
-								<li class="user-action" style="${ user == 'Guest' ? 'display: none' : ''}"><a data-toggle="modal" id="logout"
+								<li class="user-action" style="${ user != '' ? 'display: none' : ''}"><a data-toggle="modal" id="login"
+									class="btn btn-primary btn-inverse">Sign In/up</a></li>
+								<li class="user-action" style="${ user == '' ? 'display: none' : ''}"><a data-toggle="modal" id="logout"
 									class="btn btn-primary btn-inverse">Logout</a></li>
 							</ul>
 						</div>
@@ -614,30 +141,6 @@
 
 		<!-- start Main Wrapper -->
 		<div class="main-wrapper">
-
-			<!-- <div class="breadcrumb-wrapper">
-			
-				<div class="container">
-
-					<div class="row">
-					
-						<div class="col-xs-12 col-sm-8">
-							<ol class="breadcrumb">
-								<li><a href="#">Home</a></li>
-								<li><a href="#">Page</a></li>
-								<li class="active">Feature Items</li>
-							</ol>
-						</div>
-						
-						<div class="col-xs-12 col-sm-4 hidden-xs">
-							<p class="hot-line"> <i class="fa fa-phone"></i> Hot Line: 1-222-33658</p>
-						</div>
-						
-					</div>
-
-				</div>
-
-			</div> -->
 
 			<div class="two-tone-layout left-sidebar">
 
@@ -661,23 +164,19 @@
 
 													<label>Location</label> <select class="form-control"
 														name="locationid" id="locationid">
+															<option value="0"> Choose Destination </option>
 														<c:forEach var="loc" items="${locations}">
 															<option value="${loc.getId()}"
 																${loc.getId() == locationid ? 'selected' : ''}>${loc.getName()}</option>
 														</c:forEach>
 													</select>
 												</div>
-												<!-- <div class="form-group form-icon-right mb-10">
-													<label>Where do you want to go?</label> <input type="text"
-														class="form-control mb-0" placeholder="City or Airport">
-													<i class="fa fa-map-marker"></i>
-												</div> -->
 											</div>
 											<div class="col-xs-12 col-sm-12">
 												<div class="form-group form-icon-right mb-10">
 													<label for="dpd1">After</label> <input name="afterdate1"
 														class="form-control" id="dpd1" placeholder="After"
-														type="text" value=${afterdate1 } readonly> <i
+														type="text" value="${afterdate1 }" readonly> <i
 														class="fa fa-calendar"></i>
 												</div>
 											</div>
@@ -685,7 +184,7 @@
 												<div class="form-group form-icon-right mb-10">
 													<label for="dpd2">Before</label> <input name="enddate1"
 														class="form-control" id="dpd2" placeholder="Before"
-														type="text" value=${enddate1 } readonly> <i
+														type="text" value="${enddate1 }" readonly> <i
 														class="fa fa-calendar"></i>
 												</div>
 											</div>
@@ -696,15 +195,6 @@
 														value="${ obj.getVacancy() == '' ? 1 : Integer.parseInt(obj.getVacancy())}"
 														id="vacancy" name="vacancy" />
 												</div>
-												<!-- <label>Vacancy</label> <select class="custom-select"
-														id="change-search-room">
-														<option value="0">Room</option>
-														<option value="1">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4‎</option>
-														<option value="5">5</option>
-													</select> -->
 											</div>
 											<div class="col-xs-12 col-sm-12">
 												<div class="form-group form-spin-group">
@@ -713,49 +203,12 @@
 														value="${ obj.getVacancy() == '' ? 1000 : Integer.parseInt(obj.getMaxavgcost())}"
 														id="maxavgcost" name="maxavgcost" />
 												</div>
-												<!-- <label>AvgCost</label> <select class="custom-select"
-														id="change-search-adult">
-														<option value="0">Adult</option>
-														<option value="1">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4‎</option>
-														<option value="5">5</option>
-													</select> -->
 											</div>
-											<!-- <div class="col-xs-12 col-sm-6">
-													<div class="form-group form-spin-group">
-														<label for="days">Days</label> <input type="number"
-															class="form-control form-spin" value="1" id="days"
-															name="days" />
-													</div>
-													<label>Days</label> <select class="custom-select"
-														id="change-search-child">
-														<option value="0">Child</option>
-														<option value="1">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4‎</option>
-														<option value="5">5</option>
-													</select>
-											</div> -->
-
 											<div class="col-sm-12">
 												<button class="btn btn-block btn-primary btn-icon mt-5">
 													Search <span class="icon"><i class="fa fa-search"></i></span>
 												</button>
 											</div>
-
-											<!-- <div class="clear mb-10"></div>
-
-											<div class="tooltip-light">
-												<p class="price-guarantee text-center hoover-help mb-0"
-													data-toggle="tooltip" data-placement="top"
-													title="Had denoting properly jointure you occasion directly raillery. In said to of poor full be post face snug.">
-													<i class="fa fa-check-square-o text-success"></i> EXTRETION
-													price guarantee
-												</p>
-											</div> -->
 
 											<div class="clear"></div>
 
@@ -766,211 +219,6 @@
 									</div>
 								</div>
 
-								<!-- <div class="result-filter-wrapper clearfix">
-								
-									<h3><span class="icon"><i class="fa fa-sliders"></i></span> Filter</h3>
-									
-									<div class="another-toggle filter-toggle">
-										<h4 class="active">Price</h4>
-										<div class="another-toggle-content">
-											<div class="another-toggle-inner">
-												<div class="range-slider-wrapper">
-													<input id="price_range" />
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="another-toggle filter-toggle">
-										<h4 class="active">Star Rating</h4>
-										<div class="another-toggle-content">
-											<div class="another-toggle-inner">
-												<div class="range-slider-wrapper">
-													<input id="star_rating_range" />
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="another-toggle filter-toggle">
-										<h4 class="active">Amenities</h4>
-										<div class="another-toggle-content">
-											<div class="another-toggle-inner">
-												<div class="checkbox-block font-icon-checkbox">
-													<input id="filter_amenities-1" name="filter_amenities" type="checkbox" class="checkbox" checked="checked" />
-													<label class="" for="filter_amenities-1">Any</label>
-												</div>
-												<div class="checkbox-block font-icon-checkbox">
-													<input id="filter_amenities-2" name="filter_amenities" type="checkbox" class="checkbox"/>
-													<label class="" for="filter_amenities-2">Shared outdoor pool</label>
-												</div>
-												<div class="checkbox-block font-icon-checkbox">
-													<input id="filter_amenities-3" name="filter_amenities" type="checkbox" class="checkbox"/>
-													<label class="" for="filter_amenities-3">Hot tub/Jacuzzi</label>
-												</div>
-												<div class="checkbox-block font-icon-checkbox">
-													<input id="filter_amenities-4" name="filter_amenities" type="checkbox" class="checkbox"/>
-													<label class="" for="filter_amenities-4">Satellite or cable TV</label>
-												</div>
-												<div class="checkbox-block font-icon-checkbox">
-													<input id="filter_amenities-5" name="filter_amenities" type="checkbox" class="checkbox"/>
-													<label class="" for="filter_amenities-5">Parking</label>
-												</div>
-												<div id="amenities-more-less" class="collapse"> 
-													<div class="inner">
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_amenities-6" name="filter_amenities" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_amenities-6">A/C or climate control</label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_amenities-7" name="filter_amenities" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_amenities-7">Smoking allowed</label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_amenities-8" name="filter_amenities" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_amenities-8">Microwave</label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_amenities-9" name="filter_amenities" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_amenities-9">Dishwasher</label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_amenities-10" name="filter_amenities" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_amenities-10">Refrigerator</label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_amenities-11" name="filter_amenities" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_amenities-11">Grill</label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_amenities-12" name="filter_amenities" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_amenities-12">Patio / Balcony</label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_amenities-13" name="filter_amenities" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_amenities-13">Fitness Room</label>
-														</div>
-													</div>
-												</div>
-												<button class="btn btn-more-less" data-toggle="collapse" data-target="#amenities-more-less">Show more</button>
-											</div>
-										</div>
-									</div>
-									
-									<div class="another-toggle filter-toggle">
-										<h4 class="active">Room Facility</h4>
-										<div class="another-toggle-content">
-											<div class="another-toggle-inner">
-												<div class="checkbox-block font-icon-checkbox">
-													<input id="filter_facility-1" name="filter_facility" type="checkbox" class="checkbox" checked="checked" />
-													<label class="" for="filter_facility-1">Any</label>
-												</div>
-												<div class="checkbox-block font-icon-checkbox">
-													<input id="filter_facility-2" name="filter_facility" type="checkbox" class="checkbox"/>
-													<label class="" for="filter_facility-2">Bathtub</label>
-												</div>
-												<div class="checkbox-block font-icon-checkbox">
-													<input id="filter_facility-3" name="filter_facility" type="checkbox" class="checkbox"/>
-													<label class="" for="filter_facility-3">Flat-screen TV</label>
-												</div>
-												<div class="checkbox-block font-icon-checkbox">
-													<input id="filter_facility-4" name="filter_facility" type="checkbox" class="checkbox"/>
-													<label class="" for="filter_facility-4">Kitchen/kitchenette</label>
-												</div>
-												<div class="checkbox-block font-icon-checkbox">
-													<input id="filter_facility-5" name="filter_facility" type="checkbox" class="checkbox"/>
-													<label class="" for="filter_facility-5">Patio</label>
-												</div>
-												<div id="facility-more-less" class="collapse"> 
-													<div class="inner">
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_facility-6" name="filter_facility" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_facility-6">Private pool</label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_facility-7" name="filter_facility" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_facility-7">Soundproof</label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_facility-8" name="filter_facility" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_facility-8">Spa tub</label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_facility-9" name="filter_facility" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_facility-9">Terrace </label>
-														</div>
-														<div class="checkbox-block font-icon-checkbox">
-															<input id="filter_facility-10" name="filter_facility" type="checkbox" class="checkbox"/>
-															<label class="" for="filter_facility-10">Washing machine</label>
-														</div>
-													</div>
-												</div>
-												<button class="btn btn-more-less" data-toggle="collapse" data-target="#facility-more-less">Show more</button>
-											</div>
-										</div>
-									</div>
-									
-									<div class="another-toggle filter-toggle">
-										<h4 class="active">Radio Filter Widget</h4>
-										<div class="another-toggle-content">
-											<div class="another-toggle-inner">
-												<div class="radio-block font-icon-radio">
-													<input id="radio_block_1" name="radio_block" type="radio" class="radio" value="First Choice" checked="checked" />
-													<label class="" for="radio_block_1">Apart-hotel‎</label>
-												</div>
-												
-												<div class="radio-block font-icon-radio">
-													<input id="radio_block_2" name="radio_block" type="radio" class="radio" value="Second Choice" />
-													<label class="" for="radio_block_2">Apartment‎</label>
-												</div>
-												<div class="radio-block font-icon-radio">
-													<input id="radio_block_3" name="radio_block" type="radio" class="radio" value="Third Choice" />
-													<label class="" for="radio_block_3">Bed and Breakfast‎</label>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="another-toggle filter-toggle">
-										<h4 class="active">Select Filter Widget</h4>
-										<div class="another-toggle-content">
-											<div class="another-toggle-inner">
-												<div class="form-group mb-0">
-													<select class="custom-select" id="gender">
-														<option value="0">Please Select</option>
-														<option value="1">Family-friendly‎</option>
-														<option value="2">Romantic‎</option>
-														<option value="3">Shopping‎</option>
-														<option value="4">Spa Hotel‎</option>
-														<option value="5">Luxury‎</option>
-													</select>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="another-toggle filter-toggle">
-										<h4 class="">Inactive Toggle</h4>
-										<div class="another-toggle-content">
-											<div class="another-toggle-inner">
-												<p>Affronting imprudence do he he everything. Sex lasted dinner wanted indeed wished out law. Far advanced settling say finished raillery. Offered chiefly farther of my no colonel shyness. Such on help ye some door if in. Laughter proposal laughing any son law consider. Needed except up piqued an.</p>
-											</div>
-										</div>
-									</div>
-									
-									<div class="another-toggle filter-toggle">
-										<h4 class="">Inactive Toggle 2</h4>
-										<div class="another-toggle-content">
-											<div class="another-toggle-inner">
-												<p>Affronting imprudence do he he everything. Sex lasted dinner wanted indeed wished out law. Far advanced settling say finished raillery. Offered chiefly farther of my no colonel shyness. Such on help ye some door if in. Laughter proposal laughing any son law consider. Needed except up piqued an.</p>
-											</div>
-										</div>
-									</div>
-
-									
-								</div>
- -->
-
 								<div class="mb-20"></div>
 
 							</aside>
@@ -980,48 +228,6 @@
 
 							<div class="result-status">
 								<h4>Trip Results<h4>
-
-								<!-- <span class="text-primary font700">256</span> hotels with availability in <span class="text-primary font700">Paris</span>. Showing 1 - 30 -->
-								<!-- 
-								${name}
-
-								<c:forEach var="trip" items="${name}">
-
-									<p>${trip.getId()}</p>
-								</c:forEach> -->
-								<!-- <a href="result-map.html" class="show-on-map" style="background-image:url('images/show-on-map.gif');">
-									<span>
-										<img src="images/show-map-marker.png" alt="images" class="block"/>
-										<span class="bg-primary absolute">Show on map</span>
-									</span>
-								</a> -->
-							</div>
-
-							<div class="sort-wrapper">
-
-								<ul class="clearfix">
-
-									<li class="text">Sort by:</li>
-									<li class="active"><a href="#">Price <i
-											class="fa fa-long-arrow-up"></i></a></li>
-									<li><a href="#">Name</a></li>
-									<li><a href="#">Rating</a></li>
-									<li class="dropdown"><a id="area-dropdown"
-										class="dropdown-toggle" data-toggle="dropdown" role="button"
-										aria-haspopup="true" aria-expanded="false"> Area <i
-											class="fa fa-caret-down"></i>
-									</a>
-										<ul class="dropdown-menu" aria-labelledby="area-dropdown">
-											<li><a href="#">Downtown</a></li>
-											<li><a href="#">City Center</a></li>
-											<li><a href="#">China Town</a></li>
-										</ul></li>
-									<!-- <li class="list-grid"><a href="result-page-list.html"><i
-											class="fa fa-align-justify"></i></a></li>
-									<li class="list-grid active"><a
-										href="result-page-grid.html"><i class="fa fa-th-large"></i></a></li> -->
-								</ul>
-
 							</div>
 
 							<div class="hotel-item-list-wrapper mb-40">
@@ -1032,24 +238,27 @@
 										<div class="content">
 											<div class="heading">
 												<h4>${ trip.locationentityGet().getName() }</h4>
-												<!-- <p><span class="star-rate rated-40 mr-10"></span> <i class="fa fa-map-marker text-primary"></i> Tokyo, Japan</p> -->
 											</div>
+											<fmt:parseDate pattern="yyyy-MM-dd HH:mm:ss"
+                                                        value="${ trip.getStartDate() }" var="thedate0" />
+                                        	<fmt:formatDate value="${thedate0}" pattern="dd MMM yyyy"
+                                                        var="string0" />
+                                            <fmt:parseDate pattern="yyyy-MM-dd HH:mm:ss"
+                                                        value="${ trip.getEndDate() }" var="thedate1" />
+                                        	<fmt:formatDate value="${thedate1}" pattern="dd MMM yyyy"
+                                                        var="string1" />
 											<div class="short-info">${ trip.getDescription() }
 												<br /> Posted by : ${ trip.userentityGet().getName() }<br />
-												Trip Starts on : ${ trip.getStartDate() }<br /> Trip Ends
-												on : ${ trip.getEndDate() }
+												Trip Starts on : ${ string0 }<br /> Trip Ends
+												on : ${ string1 }
 											</div>
 										</div>
 										<div class="absolute-bottom">
-											<!-- <p class="text-primary"><i class="fa fa-check-circle"></i> Breakfast Included <span class="mh-10">|</span> <i class="fa fa-check-circle"></i> Free Wifi in Room</p> -->
-											<!-- 	<%//out.print(trip.getBookEndDate())
-				// String startDateStr = {trip.getBookEndDate()};
-				//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-				//Date startDate = sdf.parse(startDateStr);
-				// Date date = ${ trip.getBookEndDate() };
-				//out.print( "<h2 align=\"center\">" +startDate.toString()+"</h2>");%>
-										${asdf} -->
-											<p>Booking Ends on : ${ trip.getBookEndDate() }</p>
+										<fmt:parseDate pattern="yyyy-MM-dd HH:mm:ss"
+                                                        value="${ trip.getBookEndDate() }" var="thedate" />
+                                        <fmt:formatDate value="${thedate}" pattern="dd MMM yyyy"
+                                                        var="string2" />
+											<p>Booking Ends on : ${string2}</p>
 										</div>
 										<div class="absolute-right">
 											<div class="meta-option">
@@ -1059,393 +268,23 @@
 														<h4>${ trip.getVacancy() }</h4>
 													</center>
 												</div>
-												<!-- <a href="#" class="tripadvisor-module">
-													<div class="raty-wrapper">
-														<div class="tripadvisor-head">
-															<span class="tripadvisor-by-attr block"
-																data-rating-score="4"></span>
-														</div>
-													</div>
-													<div class="hover-underline">324 reviews</div>
-												</a> -->
-											</div>
+										 	</div>
 											<div class="price-wrapper">
 												<p class="price">
 													<span class="block">Average Cost</span><span class="number">${ trip.getAvgCost() }</span>
 													<!-- <span class="block">avg / night</span> -->
 												</p>
+												
 												<form action="join?tripid=${trip.getId()}" method="POST">
-													<button type="submit" class="btn btn-danger btn-sm">Signup</button>
+												${ user == '' ? "<p></p>" :
+												"<button type='submit' class='btn btn-danger btn-sm'>Signup</button>"
+												}
 												</form>
+												
 											</div>
 										</div>
 									</div>
 								</c:forEach>
-								<!-- <div class="hotel-item-list">
-									<div class="image"
-										style="background-image: url('images/top-destinations/02.jpg');"></div>
-									<div class="content">
-										<div class="heading">
-											<h4>Phulay Bay Resort</h4>
-											<p>
-												<span class="star-rate rated-40 mr-10"></span> <i
-													class="fa fa-map-marker text-primary"></i> Phuket, Thailand
-											</p>
-										</div>
-										<div class="short-info">Use securing confined his
-											shutters. Delightful as he it acceptance an solicitude
-											discretion reasonably. Carriage we husbands advanced an
-											perceive greatest expense on demesne ye he.</div>
-									</div>
-									<div class="absolute-bottom">
-										<p class="text-primary">
-											<i class="fa fa-check-circle"></i> Breakfast Included <span
-												class="mh-10">|</span> <i class="fa fa-check-circle"></i>
-											Free Wifi in Room
-										</p>
-									</div>
-									<div class="absolute-right">
-										<div class="meta-option">
-											<a href="#" class="tripadvisor-module">
-												<div class="raty-wrapper">
-													<div class="tripadvisor-head">
-														<span class="tripadvisor-by-attr block"
-															data-rating-score="4"></span>
-													</div>
-												</div>
-												<div class="hover-underline">324 reviews</div>
-											</a>
-										</div>
-										<div class="price-wrapper">
-											<p class="price">
-												<span class="block">start from</span><span class="number">$187</span>
-												<span class="block">avg / night</span>
-											</p>
-											<a href="#" class="btn btn-danger btn-sm">Details</a>
-										</div>
-									</div>
-								</div>
-
-								<div class="hotel-item-list">
-									<div class="image"
-										style="background-image: url('images/top-destinations/03.jpg');"></div>
-									<div class="content">
-										<div class="heading">
-											<h4>Hotel Metropolitan Tokyo</h4>
-											<p>
-												<span class="star-rate rated-40 mr-10"></span> <i
-													class="fa fa-map-marker text-primary"></i> Tokyo, Japan
-											</p>
-										</div>
-										<div class="short-info">Use securing confined his
-											shutters. Delightful as he it acceptance an solicitude
-											discretion reasonably. Carriage we husbands advanced an
-											perceive greatest expense on demesne ye he.</div>
-									</div>
-									<div class="absolute-bottom">
-										<p class="text-primary">
-											<i class="fa fa-check-circle"></i> Breakfast Included <span
-												class="mh-10">|</span> <i class="fa fa-check-circle"></i>
-											Free Wifi in Room
-										</p>
-									</div>
-									<div class="absolute-right">
-										<div class="meta-option">
-											<a href="#" class="tripadvisor-module">
-												<div class="raty-wrapper">
-													<div class="tripadvisor-head">
-														<span class="tripadvisor-by-attr block"
-															data-rating-score="4"></span>
-													</div>
-												</div>
-												<div class="hover-underline">324 reviews</div>
-											</a>
-										</div>
-										<div class="price-wrapper">
-											<p class="price">
-												<span class="block">start from</span><span class="number">$187</span>
-												<span class="block">avg / night</span>
-											</p>
-											<a href="#" class="btn btn-danger btn-sm">Details</a>
-										</div>
-									</div>
-								</div>
-
-								<div class="hotel-item-list">
-									<div class="image"
-										style="background-image: url('images/top-destinations/04.jpg');"></div>
-									<div class="content">
-										<div class="heading">
-											<h4>Hotel Metropolitan Tokyo</h4>
-											<p>
-												<span class="star-rate rated-40 mr-10"></span> <i
-													class="fa fa-map-marker text-primary"></i> Tokyo, Japan
-											</p>
-										</div>
-										<div class="short-info">Use securing confined his
-											shutters. Delightful as he it acceptance an solicitude
-											discretion reasonably. Carriage we husbands advanced an
-											perceive greatest expense on demesne ye he.</div>
-									</div>
-									<div class="absolute-bottom">
-										<p class="text-primary">
-											<i class="fa fa-check-circle"></i> Breakfast Included <span
-												class="mh-10">|</span> <i class="fa fa-check-circle"></i>
-											Free Wifi in Room
-										</p>
-									</div>
-									<div class="absolute-right">
-										<div class="meta-option">
-											<a href="#" class="tripadvisor-module">
-												<div class="raty-wrapper">
-													<div class="tripadvisor-head">
-														<span class="tripadvisor-by-attr block"
-															data-rating-score="4"></span>
-													</div>
-												</div>
-												<div class="hover-underline">324 reviews</div>
-											</a>
-										</div>
-										<div class="price-wrapper">
-											<p class="text-danger font700 mb-5">Last 2 rooms</p>
-											<p class="price">
-												<span class="block">start from</span><span class="number">$187</span>
-												<span class="block">avg / night</span>
-											</p>
-											<a href="#" class="btn btn-danger btn-sm">Details</a>
-										</div>
-									</div>
-								</div>
-
-								<div class="hotel-item-list">
-									<div class="image"
-										style="background-image: url('images/top-destinations/05.jpg');"></div>
-									<div class="content">
-										<div class="heading">
-											<h4>Hotel Metropolitan Tokyo</h4>
-											<p>
-												<span class="star-rate rated-40 mr-10"></span> <i
-													class="fa fa-map-marker text-primary"></i> Tokyo, Japan
-											</p>
-										</div>
-										<div class="short-info">Use securing confined his
-											shutters. Delightful as he it acceptance an solicitude
-											discretion reasonably. Carriage we husbands advanced an
-											perceive greatest expense on demesne ye he.</div>
-									</div>
-									<div class="absolute-bottom">
-										<p class="text-primary">
-											<i class="fa fa-check-circle"></i> Breakfast Included <span
-												class="mh-10">|</span> <i class="fa fa-check-circle"></i>
-											Free Wifi in Room
-										</p>
-									</div>
-									<div class="absolute-right">
-										<div class="meta-option">
-											<a href="#" class="tripadvisor-module">
-												<div class="raty-wrapper">
-													<div class="tripadvisor-head">
-														<span class="tripadvisor-by-attr block"
-															data-rating-score="4"></span>
-													</div>
-												</div>
-												<div class="hover-underline">324 reviews</div>
-											</a>
-										</div>
-										<div class="price-wrapper">
-											<p class="price">
-												<span class="block">start from</span><span class="number">$187</span>
-												<span class="block">avg / night</span>
-											</p>
-											<a href="#" class="btn btn-danger btn-sm">Details</a>
-										</div>
-									</div>
-								</div>
-
-								<div class="hotel-item-list">
-									<div class="image"
-										style="background-image: url('images/top-destinations/06.jpg');"></div>
-									<div class="content">
-										<div class="heading">
-											<h4>Hotel Metropolitan Tokyo</h4>
-											<p>
-												<span class="star-rate rated-40 mr-10"></span> <i
-													class="fa fa-map-marker text-primary"></i> Tokyo, Japan
-											</p>
-										</div>
-										<div class="short-info">Use securing confined his
-											shutters. Delightful as he it acceptance an solicitude
-											discretion reasonably. Carriage we husbands advanced an
-											perceive greatest expense on demesne ye he.</div>
-									</div>
-									<div class="absolute-bottom">
-										<p class="text-primary">
-											<i class="fa fa-check-circle"></i> Breakfast Included <span
-												class="mh-10">|</span> <i class="fa fa-check-circle"></i>
-											Free Wifi in Room
-										</p>
-									</div>
-									<div class="absolute-right">
-										<div class="meta-option">
-											<a href="#" class="tripadvisor-module">
-												<div class="raty-wrapper">
-													<div class="tripadvisor-head">
-														<span class="tripadvisor-by-attr block"
-															data-rating-score="4"></span>
-													</div>
-												</div>
-												<div class="hover-underline">324 reviews</div>
-											</a>
-										</div>
-										<div class="price-wrapper">
-											<p class="text-danger font700 mb-5">Last 2 rooms</p>
-											<p class="price">
-												<span class="block">start from</span><span class="number">$187</span>
-												<span class="block">avg / night</span>
-											</p>
-											<a href="#" class="btn btn-danger btn-sm">Details</a>
-										</div>
-									</div>
-								</div>
-
-								<div class="hotel-item-list">
-									<div class="image"
-										style="background-image: url('images/top-destinations/07.jpg');"></div>
-									<div class="content">
-										<div class="heading">
-											<h4>Hotel Metropolitan Tokyo</h4>
-											<p>
-												<span class="star-rate rated-40 mr-10"></span> <i
-													class="fa fa-map-marker text-primary"></i> Tokyo, Japan
-											</p>
-										</div>
-										<div class="short-info">Use securing confined his
-											shutters. Delightful as he it acceptance an solicitude
-											discretion reasonably. Carriage we husbands advanced an
-											perceive greatest expense on demesne ye he.</div>
-									</div>
-									<div class="absolute-bottom">
-										<p class="text-primary">
-											<i class="fa fa-check-circle"></i> Breakfast Included <span
-												class="mh-10">|</span> <i class="fa fa-check-circle"></i>
-											Free Wifi in Room
-										</p>
-									</div>
-									<div class="absolute-right">
-										<div class="meta-option">
-											<a href="#" class="tripadvisor-module">
-												<div class="raty-wrapper">
-													<div class="tripadvisor-head">
-														<span class="tripadvisor-by-attr block"
-															data-rating-score="4"></span>
-													</div>
-												</div>
-												<div class="hover-underline">324 reviews</div>
-											</a>
-										</div>
-										<div class="price-wrapper">
-											<p class="text-danger font700 mb-5">Last 2 rooms</p>
-											<p class="price">
-												<span class="block">start from</span><span class="number">$187</span>
-												<span class="block">avg / night</span>
-											</p>
-											<a href="#" class="btn btn-danger btn-sm">Details</a>
-										</div>
-									</div>
-								</div>
-
-								<div class="hotel-item-list">
-									<div class="image"
-										style="background-image: url('images/top-destinations/08.jpg');"></div>
-									<div class="content">
-										<div class="heading">
-											<h4>Hotel Metropolitan Tokyo</h4>
-											<p>
-												<span class="star-rate rated-40 mr-10"></span> <i
-													class="fa fa-map-marker text-primary"></i> Tokyo, Japan
-											</p>
-										</div>
-										<div class="short-info">Use securing confined his
-											shutters. Delightful as he it acceptance an solicitude
-											discretion reasonably. Carriage we husbands advanced an
-											perceive greatest expense on demesne ye he.</div>
-									</div>
-									<div class="absolute-bottom">
-										<p class="text-primary">
-											<i class="fa fa-check-circle"></i> Breakfast Included <span
-												class="mh-10">|</span> <i class="fa fa-check-circle"></i>
-											Free Wifi in Room
-										</p>
-									</div>
-									<div class="absolute-right">
-										<div class="meta-option">
-											<a href="#" class="tripadvisor-module">
-												<div class="raty-wrapper">
-													<div class="tripadvisor-head">
-														<span class="tripadvisor-by-attr block"
-															data-rating-score="4"></span>
-													</div>
-												</div>
-												<div class="hover-underline">324 reviews</div>
-											</a>
-										</div>
-										<div class="price-wrapper">
-											<p class="text-danger font700 mb-5">Last 2 rooms</p>
-											<p class="price">
-												<span class="block">start from</span><span class="number">$187</span>
-												<span class="block">avg / night</span>
-											</p>
-											<a href="#" class="btn btn-danger btn-sm">Details</a>
-										</div>
-									</div>
-								</div>
-
-								<div class="hotel-item-list">
-									<div class="image"
-										style="background-image: url('images/top-destinations/09.jpg');"></div>
-									<div class="content">
-										<div class="heading">
-											<h4>Hotel Metropolitan Tokyo</h4>
-											<p>
-												<span class="star-rate rated-40 mr-10"></span> <i
-													class="fa fa-map-marker text-primary"></i> Tokyo, Japan
-											</p>
-										</div>
-										<div class="short-info">Use securing confined his
-											shutters. Delightful as he it acceptance an solicitude
-											discretion reasonably. Carriage we husbands advanced an
-											perceive greatest expense on demesne ye he.</div>
-									</div>
-									<div class="absolute-bottom">
-										<p class="text-primary">
-											<i class="fa fa-check-circle"></i> Breakfast Included <span
-												class="mh-10">|</span> <i class="fa fa-check-circle"></i>
-											Free Wifi in Room
-										</p>
-									</div>
-									<div class="absolute-right">
-										<div class="meta-option">
-											<a href="#" class="tripadvisor-module">
-												<div class="raty-wrapper">
-													<div class="tripadvisor-head">
-														<span class="tripadvisor-by-attr block"
-															data-rating-score="4"></span>
-													</div>
-												</div>
-												<div class="hover-underline">324 reviews</div>
-											</a>
-										</div>
-										<div class="price-wrapper">
-											<p class="price">
-												<span class="block">start from</span><span class="number">$187</span>
-												<span class="block">avg / night</span>
-											</p>
-											<a href="#" class="btn btn-danger btn-sm">Details</a>
-										</div>
-									</div>
-								</div>
-
- -->
 							</div>
 
 							<div class="result-paging-wrapper">
@@ -1458,16 +297,10 @@
 
 									<div class="col-sm-6">
 										<ul class="paging">
-											<li>${Integer.parseInt(prev) > -1 ? "<b> <button id='previous123' > &laquo;&nbsp;&nbsp;Prev </button> </b>" : "<b> <button> &laquo;&nbsp;&nbsp;Prev </button></b>"}</li>
+											<li>${Integer.parseInt(prev) > -1 ? "<b> <button id='previous123' > &laquo;&nbsp;&nbsp;Prev </button> </b>" : "<b> </b>"}</li>
 
-											<!-- 					<li><a href="#">1</a></li>
-											<li class="active"><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#">6</a></li> -->
 											<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Page ${Integer.parseInt(prev) +1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-											<li>${Integer.parseInt(next) > 0 ? " <b> <button id='next123'> Next&nbsp;&nbsp;&raquo; </button> </b>" : "<b> <button> Next&nbsp;&nbsp;&raquo; </button> </b>"}</li>
+											<li>${Integer.parseInt(next) > 0 ? " <b> <button id='next123'> Next&nbsp;&nbsp;&raquo; </button> </b>" : "<b></b>"}</li>
 										</ul>
 									</div>
 									<div class="col-sm-4"></div>

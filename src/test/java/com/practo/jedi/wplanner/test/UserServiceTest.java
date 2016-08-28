@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import com.practo.jedi.wplanner.exceptions.NullEntityException;
 import com.practo.jedi.wplanner.model.Trip;
 import com.practo.jedi.wplanner.model.User;
-import com.practo.jedi.wplanner.run.Test1;
+import com.practo.jedi.wplanner.run.ApplicationRun;
 import com.practo.jedi.wplanner.service.UserService;
 
 import org.junit.Test;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Test1.class)
+@SpringBootTest(classes = ApplicationRun.class)
 public class UserServiceTest {
 
   @Autowired
@@ -30,7 +30,7 @@ public class UserServiceTest {
   public void test1() throws NullEntityException {
     // Get All
     ArrayList<User> users = (ArrayList<User>) service.getall(new PageRequest(0, 2));
-    assertEquals(users.size(), 2);
+    assertEquals(users.size(), 4);
     assertEquals("Blake", users.get(0).getName());
 
     // Get One
@@ -58,7 +58,7 @@ public class UserServiceTest {
     user.setName("Hunter");
     user.setMobile("9988776633");
     user = service.create(user);
-    assertEquals(user.getId(), 3);
+    assertEquals(user.getId(), 5);
   }
 
   @Test
@@ -77,15 +77,15 @@ public class UserServiceTest {
     // Get User Trips
     ArrayList<Trip> trips = (ArrayList<Trip>) service.getusertrips(2);
     assertNotNull(trips);
-    //assertEquals(2, trips.size());
+    // assertEquals(2, trips.size());
   }
 
   @Test
   public void test6() {
     // Get User Signed up Trips
-    ArrayList<Trip> trips = (ArrayList<Trip>) service.getuserontrips(1);
+    ArrayList<Trip> trips = (ArrayList<Trip>) service.getuserontrips(4);
     assertNotNull(trips);
-    //assertEquals(2, trips.size());
+    // assertEquals(2, trips.size());
   }
 
 }

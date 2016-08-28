@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 
-import javax.transaction.Transactional;
 
 
 @Repository
@@ -26,35 +26,40 @@ import javax.transaction.Transactional;
 <span class="fc" id="L26">    return template.load(Userentity.class, id);</span>
   }
 
+  /**
+   * Fetch the user based on email.
+   * 
+   * @param email (user email)
+   * @return user entity
+   */
   @Transactional
   public Userentity findByEmail(String email) {
-
-<span class="fc" id="L32">    Iterable&lt;Userentity&gt; temp = (Iterable&lt;Userentity&gt;) template.findByCriteria(</span>
-<span class="fc" id="L33">        DetachedCriteria.forClass(Userentity.class).add(Restrictions.eq(&quot;email&quot;, email)));</span>
-<span class="pc bpc" id="L34" title="1 of 2 branches missed.">    if (temp != null) {</span>
-<span class="pc bpc" id="L35" title="1 of 2 branches missed.">      for (Userentity user : temp) {</span>
-<span class="fc" id="L36">        return user;</span>
+<span class="fc" id="L37">    Iterable&lt;Userentity&gt; temp = (Iterable&lt;Userentity&gt;) template.findByCriteria(</span>
+<span class="fc" id="L38">        DetachedCriteria.forClass(Userentity.class).add(Restrictions.eq(&quot;email&quot;, email)));</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">    if (temp != null) {</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">      for (Userentity user : temp) {</span>
+<span class="fc" id="L41">        return user;</span>
       }
     }
-<span class="nc" id="L39">    return null;</span>
+<span class="nc" id="L44">    return null;</span>
   }
 
   @Transactional
   public Iterable&lt;Userentity&gt; getAllUsers(Pageable pageable) {
-<span class="fc" id="L44">    return (Iterable&lt;Userentity&gt;) template.findByCriteria(</span>
-<span class="fc" id="L45">        DetachedCriteria.forClass(Userentity.class), pageable.getOffset(), pageable.getPageSize());</span>
+<span class="fc" id="L49">    return (Iterable&lt;Userentity&gt;) template.findByCriteria(</span>
+<span class="fc" id="L50">        DetachedCriteria.forClass(Userentity.class), pageable.getOffset(), pageable.getPageSize());</span>
   }
 
   @Transactional
   public Userentity createUser(Userentity obj) {
-<span class="fc" id="L50">    template.save(obj);</span>
-<span class="fc" id="L51">    return obj;</span>
+<span class="fc" id="L55">    template.save(obj);</span>
+<span class="fc" id="L56">    return obj;</span>
   }
 
   @Transactional
   public Userentity updateUser(Userentity obj) {
-<span class="fc" id="L56">    template.update(obj);</span>
-<span class="fc" id="L57">    return obj;</span>
+<span class="fc" id="L61">    template.update(obj);</span>
+<span class="fc" id="L62">    return obj;</span>
   }
 
 }

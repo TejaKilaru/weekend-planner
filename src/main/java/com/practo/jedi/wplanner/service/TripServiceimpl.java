@@ -37,7 +37,7 @@ public class TripServiceimpl implements TripService {
   @Autowired
   private UserDao userdao;
 
-  final int itemsPerPage = 2;
+  final int itemsPerPage = 5;
 
 
   @Override
@@ -64,13 +64,6 @@ public class TripServiceimpl implements TripService {
 
   @Override
   public Iterable<Trip> getall(Pageable pageable) {
-    // DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    // Date date = new Date(System.currentTimeMillis());
-    // System.out.println(date);
-    // System.out.println(System.currentTimeMillis());
-    // dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-    // Date temp = dateFormat.format(date);
-    // System.out.println("UTC Time: " );
     Iterable<Tripentity> entity = triprepository
         .getAllTrips(new PageRequest(pageable.getPageNumber(), itemsPerPage, pageable.getSort()));
     List<Trip> alltrips = new ArrayList<Trip>();
@@ -120,10 +113,6 @@ public class TripServiceimpl implements TripService {
 
   @Override
   public Trip create(Trip obj) {
-    // if (tripValidator(obj)) {
-    // System.out.println("yolo");
-    // return null;
-    // }
     System.out.println("Came");
     Tripentity entity = obj.modeltoentity();
     entity.setModifyOn(new Date(System.currentTimeMillis()));
@@ -137,9 +126,6 @@ public class TripServiceimpl implements TripService {
 
   @Override
   public Trip update(Trip obj) {
-    // if (tripValidator(obj)) {
-    // return null;
-    // }
     Tripentity entity = obj.modeltoentity();
     entity.setModifyOn(new Date(System.currentTimeMillis()));
     entity.setLocationBean(locationdao.findLocation(obj.getLocationId()));
@@ -156,32 +142,4 @@ public class TripServiceimpl implements TripService {
     entity = triprepository.updateTrip(entity);
   }
 
-  /**
-   * Back Checks for trip.
-   * 
-   * @param obj (Trip obj)
-   * @return (valid or not)
-   * 
-   */
-  public Boolean tripValidator(Trip obj) {
-    Date now = new Date(System.currentTimeMillis());
-
-    if (obj.getStartDate().compareTo(now) < 0) {
-      return null;
-    }
-    if (obj.getStartDate().compareTo(obj.getEndDate()) > 0) {
-      return null;
-    }
-    // long diff = obj.getStartDate().getTime() - now.getTime();
-    // long diff1 = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-    // if (diff1 < 0) {
-    // return false;
-    // }
-    // diff = obj.getEndDate().getTime() - obj.getStartDate().getTime();
-    // diff1 = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-    // if (diff1 < 0) {
-    // return false;
-    // }
-    return true;
-  }
 }

@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
-import javax.transaction.Transactional;
+
 
 @Repository
-<span class="fc" id="L18">public class TripDao {</span>
+<span class="fc" id="L19">public class TripDao {</span>
 
   @Autowired
   private HibernateTemplate template;
@@ -25,22 +26,23 @@ import javax.transaction.Transactional;
    * 
    * @param id (Trip id)
    * @return (Trip)
+   * @throws NullEntityException ()
    */
   @Transactional
   public Tripentity findTrip(int id) throws NullEntityException {
-<span class="fc" id="L31">    DetachedCriteria criteria = DetachedCriteria.forClass(Tripentity.class);</span>
-<span class="fc" id="L32">    criteria = criteria.add(Restrictions.eq(&quot;deleteStatus&quot;, &quot;false&quot;));</span>
-<span class="fc" id="L33">    criteria = criteria.add(Restrictions.eq(&quot;id&quot;, id));</span>
-<span class="fc" id="L34">    criteria = criteria.add(Restrictions.ge(&quot;bookEndDate&quot;, new Date(System.currentTimeMillis())));</span>
-<span class="fc" id="L35">    Iterable&lt;Tripentity&gt; temp = (Iterable&lt;Tripentity&gt;) template.findByCriteria(criteria);</span>
-<span class="fc" id="L36">    int count = 0;</span>
-<span class="fc bfc" id="L37" title="All 2 branches covered.">    for (Tripentity trp : temp) {</span>
-<span class="fc" id="L38">      count++;</span>
-    }
-<span class="pc bpc" id="L40" title="1 of 2 branches missed.">    if (count != 0) {</span>
-<span class="fc" id="L41">      return temp.iterator().next();</span>
+<span class="fc" id="L33">    DetachedCriteria criteria = DetachedCriteria.forClass(Tripentity.class);</span>
+<span class="fc" id="L34">    criteria = criteria.add(Restrictions.eq(&quot;deleteStatus&quot;, &quot;false&quot;));</span>
+<span class="fc" id="L35">    criteria = criteria.add(Restrictions.eq(&quot;id&quot;, id));</span>
+<span class="fc" id="L36">    criteria = criteria.add(Restrictions.ge(&quot;bookEndDate&quot;, new Date(System.currentTimeMillis())));</span>
+<span class="fc" id="L37">    Iterable&lt;Tripentity&gt; temp = (Iterable&lt;Tripentity&gt;) template.findByCriteria(criteria);</span>
+<span class="fc" id="L38">    int count = 0;</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">    for (Tripentity trp : temp) {</span>
+<span class="fc" id="L40">      count++;</span>
+<span class="fc" id="L41">    }</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">    if (count != 0) {</span>
+<span class="fc" id="L43">      return temp.iterator().next();</span>
     } else {
-<span class="nc" id="L43">      throw new NullEntityException(&quot;Trip is Deleted or Signup Time Ended&quot;);</span>
+<span class="nc" id="L45">      throw new NullEntityException(&quot;Trip is Deleted or Signup Time Ended&quot;);</span>
     }
   }
 
@@ -52,29 +54,29 @@ import javax.transaction.Transactional;
    */
   @Transactional
   public Iterable&lt;Tripentity&gt; getAllTrips(Pageable pageable) {
-<span class="fc" id="L55">    DetachedCriteria criteria = DetachedCriteria.forClass(Tripentity.class);</span>
-<span class="fc" id="L56">    criteria = criteria.add(Restrictions.eq(&quot;deleteStatus&quot;, &quot;false&quot;));</span>
-<span class="fc" id="L57">    criteria = criteria.add(Restrictions.gt(&quot;bookEndDate&quot;, new Date(System.currentTimeMillis())));</span>
-<span class="fc" id="L58">    return (Iterable&lt;Tripentity&gt;) template.findByCriteria(criteria, pageable.getOffset(),</span>
-<span class="fc" id="L59">        pageable.getPageSize());</span>
+<span class="fc" id="L57">    DetachedCriteria criteria = DetachedCriteria.forClass(Tripentity.class);</span>
+<span class="fc" id="L58">    criteria = criteria.add(Restrictions.eq(&quot;deleteStatus&quot;, &quot;false&quot;));</span>
+<span class="fc" id="L59">    criteria = criteria.add(Restrictions.gt(&quot;bookEndDate&quot;, new Date(System.currentTimeMillis())));</span>
+<span class="fc" id="L60">    return (Iterable&lt;Tripentity&gt;) template.findByCriteria(criteria, pageable.getOffset(),</span>
+<span class="fc" id="L61">        pageable.getPageSize());</span>
   }
 
   @Transactional
   public Tripentity createTrip(Tripentity obj) {
-<span class="fc" id="L64">    template.save(obj);</span>
-<span class="fc" id="L65">    return obj;</span>
+<span class="fc" id="L66">    template.save(obj);</span>
+<span class="fc" id="L67">    return obj;</span>
   }
 
   @Transactional
   public Tripentity updateTrip(Tripentity obj) {
-<span class="fc" id="L70">    template.update(obj);</span>
-<span class="fc" id="L71">    return obj;</span>
+<span class="fc" id="L72">    template.update(obj);</span>
+<span class="fc" id="L73">    return obj;</span>
   }
 
   @Transactional
   public Iterable&lt;Tripentity&gt; filter(DetachedCriteria criteria, Pageable pageable) {
-<span class="fc" id="L76">    return (Iterable&lt;Tripentity&gt;) template.findByCriteria(criteria, pageable.getOffset(),</span>
-<span class="fc" id="L77">        pageable.getPageSize());</span>
+<span class="fc" id="L78">    return (Iterable&lt;Tripentity&gt;) template.findByCriteria(criteria, pageable.getOffset(),</span>
+<span class="fc" id="L79">        pageable.getPageSize());</span>
   }
 
 }

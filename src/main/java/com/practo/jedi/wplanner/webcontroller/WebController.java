@@ -30,12 +30,13 @@ import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 
-
 @Controller
 public class WebController {
 
   @Autowired
   private MailService mail;
+
+  final int itemsPerPage = 5;
 
   public WebController() {
     // TODO Auto-generated constructor stub
@@ -79,13 +80,13 @@ public class WebController {
     return "redirect:" + "index";
   }
 
-  @RequestMapping("/index")
+  @RequestMapping(value = {"/index", "/"})
   String index(Model model, HttpSession session) {
     Iterable<Location> locations = lservice.getall();
     if (session.getAttribute("email") != null) {
       model.addAttribute("user", session.getAttribute("username"));
     } else {
-      model.addAttribute("user", "Guest");
+      model.addAttribute("user", "");
     }
     model.addAttribute("locations", locations);
     return "index";
@@ -109,7 +110,7 @@ public class WebController {
     if (session.getAttribute("email") != null) {
       model.addAttribute("user", session.getAttribute("username"));
     } else {
-      model.addAttribute("user", "Guest");
+      model.addAttribute("user", "");
     }
     if (locationid != null) {
       if (Integer.parseInt(locationid) > 0) {
@@ -140,6 +141,9 @@ public class WebController {
     for (Trip item : dto) {
       count++;
     }
+    if (count != 5) {
+      count = 0;
+    }
     model.addAttribute("next", count);
     model.addAttribute("prev", pageable.getPageNumber() - 1);
     model.addAttribute("name", dto);
@@ -163,7 +167,7 @@ public class WebController {
     if (session.getAttribute("email") != null) {
       model.addAttribute("user", session.getAttribute("username"));
     } else {
-      model.addAttribute("user", "Guest");
+      model.addAttribute("user", "");
     }
     if (session.getAttribute("email") == null) {
       return "redirect:" + "index";
@@ -184,11 +188,12 @@ public class WebController {
    * @throws MessagingException (When Message fails)
    */
   @RequestMapping(value = {"join"}, method = RequestMethod.POST)
-  public String join(Integer tripid, RelationTripUser obj, HttpSession session)
+  public String join(Model model, Integer tripid, RelationTripUser obj, HttpSession session)
       throws NullEntityException, MessagingException {
     if (session.getAttribute("email") == null) {
       return "redirect:" + "index";
     }
+    model.addAttribute("user", session.getAttribute("username"));
     Trip trip = service.get(tripid);
     User organiser = uservice.get(trip.getOrgId());
     User user = uservice.findByEmail(session.getAttribute("email").toString());
@@ -205,7 +210,8 @@ public class WebController {
       mail.send(user.getEmail(), "Regd : (Trip" + trip.getId() + ")", " You Signed up for Trip id :"
           + trip.getId() + "to" + trip.locationentityGet().getName());
     }
-    return "redirect:" + "search";
+    model.addAttribute("trip", trip);
+    return "conformation1";
   }
 
   /**
@@ -220,8 +226,13 @@ public class WebController {
    * @return (redirects to index page)
    */
   @RequestMapping(value = {"create"}, method = RequestMethod.POST)
-  public String create(String locationid, String startdate1, String enddate1, String bookdate1,
-      Trip obj, HttpSession session) {
+  public String create(Model model, String locationid, String startdate1, String enddate1,
+      String bookdate1, Trip obj, HttpSession session) {
+    if (session.getAttribute("email") != null) {
+      model.addAttribute("user", session.getAttribute("username"));
+    } else {
+      model.addAttribute("user", "");
+    }
     if (session.getAttribute("email") == null) {
       return "redirect:" + "index";
     }
@@ -254,7 +265,8 @@ public class WebController {
     User user = uservice.findByEmail(session.getAttribute("email").toString());
     obj.setOrgId(user.getId());
     Trip trip = service.create(obj);
-    return "redirect:" + "search";
+    model.addAttribute("trip", trip);
+    return "conformation";
   }
 
 }

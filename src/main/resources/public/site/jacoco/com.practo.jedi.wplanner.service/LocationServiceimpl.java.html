@@ -6,15 +6,16 @@ import com.practo.jedi.wplanner.model.Location;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
+
 
 @Transactional
 @Service
-<span class="fc" id="L17">public class LocationServiceimpl implements LocationService {</span>
+<span class="fc" id="L18">public class LocationServiceimpl implements LocationService {</span>
 
   @Autowired
   private LocationDao locationrepository;
@@ -22,49 +23,49 @@ import javax.transaction.Transactional;
 
   @Override
   public Iterable&lt;Location&gt; getall() {
-<span class="fc" id="L25">    Iterable&lt;Locationentity&gt; entity = locationrepository.getAllLocations();</span>
-<span class="fc" id="L26">    List&lt;Location&gt; alllocations = new ArrayList&lt;Location&gt;();</span>
-<span class="fc bfc" id="L27" title="All 2 branches covered.">    for (Locationentity temp : entity) {</span>
-<span class="fc" id="L28">      System.out.println(temp);</span>
+<span class="fc" id="L26">    Iterable&lt;Locationentity&gt; entity = locationrepository.getAllLocations();</span>
+<span class="fc" id="L27">    List&lt;Location&gt; alllocations = new ArrayList&lt;Location&gt;();</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">    for (Locationentity temp : entity) {</span>
+<span class="fc" id="L29">      System.out.println(temp);</span>
       try {
-<span class="fc" id="L30">        Location dto = Location.class.newInstance();</span>
-<span class="fc" id="L31">        dto.entitytomodel(temp);</span>
-<span class="fc" id="L32">        alllocations.add(dto);</span>
-<span class="pc" id="L33">      } catch (InstantiationException | IllegalAccessException obj) {</span>
-<span class="nc" id="L34">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + obj);</span>
-<span class="nc" id="L35">        return null;</span>
+<span class="fc" id="L31">        Location dto = Location.class.newInstance();</span>
+<span class="fc" id="L32">        dto.entitytomodel(temp);</span>
+<span class="fc" id="L33">        alllocations.add(dto);</span>
+<span class="pc" id="L34">      } catch (InstantiationException | IllegalAccessException obj) {</span>
+<span class="nc" id="L35">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + obj);</span>
+<span class="nc" id="L36">        return null;</span>
       }
     }
-<span class="fc" id="L38">    return alllocations;</span>
+<span class="fc" id="L39">    return alllocations;</span>
   }
 
   @Override
   public Location get(Integer id) {
-<span class="fc" id="L43">    Locationentity entity = locationrepository.findLocation(id);</span>
+<span class="fc" id="L44">    Locationentity entity = locationrepository.findLocation(id);</span>
     try {
-<span class="fc" id="L45">      Location dto = Location.class.newInstance();</span>
-<span class="fc" id="L46">      dto.entitytomodel(entity);</span>
-<span class="fc" id="L47">      return dto;</span>
-<span class="nc" id="L48">    } catch (InstantiationException | IllegalAccessException obj) {</span>
+<span class="fc" id="L46">      Location dto = Location.class.newInstance();</span>
+<span class="fc" id="L47">      dto.entitytomodel(entity);</span>
+<span class="fc" id="L48">      return dto;</span>
+<span class="nc" id="L49">    } catch (InstantiationException | IllegalAccessException obj) {</span>
       // LOG.error(&quot;Exception while DAO get for ID :&quot; + id, e);
-<span class="nc" id="L50">      return null;</span>
+<span class="nc" id="L51">      return null;</span>
     }
   }
 
   @Override
   public Location create(Location obj) {
-<span class="fc" id="L56">    Locationentity entity = obj.modeltoentity();</span>
-<span class="fc" id="L57">    entity = locationrepository.createLocation(entity);</span>
-<span class="fc" id="L58">    obj.entitytomodel(entity);</span>
-<span class="fc" id="L59">    return obj;</span>
+<span class="fc" id="L57">    Locationentity entity = obj.modeltoentity();</span>
+<span class="fc" id="L58">    entity = locationrepository.createLocation(entity);</span>
+<span class="fc" id="L59">    obj.entitytomodel(entity);</span>
+<span class="fc" id="L60">    return obj;</span>
   }
 
   @Override
   public Location update(Location obj) {
-<span class="fc" id="L64">    Locationentity entity = obj.modeltoentity();</span>
-<span class="fc" id="L65">    entity = locationrepository.updateLocation(entity);</span>
-<span class="fc" id="L66">    obj.entitytomodel(entity);</span>
-<span class="fc" id="L67">    return obj;</span>
+<span class="fc" id="L65">    Locationentity entity = obj.modeltoentity();</span>
+<span class="fc" id="L66">    entity = locationrepository.updateLocation(entity);</span>
+<span class="fc" id="L67">    obj.entitytomodel(entity);</span>
+<span class="fc" id="L68">    return obj;</span>
   }
 
 }

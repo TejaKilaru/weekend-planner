@@ -29,7 +29,7 @@ public class UserServiceimpl implements UserService {
   @Autowired
   private RelationTripUserDao rtripuser;
 
-  final int itemsPerPage = 2;
+  final int itemsPerPage = 5;
 
   @Transactional
   @Override

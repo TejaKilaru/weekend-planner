@@ -1,5 +1,7 @@
 <!doctype html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html lang="en">
 
 
@@ -274,6 +276,7 @@
 							<li><a href="search">Trips</a> </li>
 							<li class="mega-menu hidden-sm hidden-xs"><a
 								href="createform">Create Trip</a> </li>
+							<li><a href="result-page-list.html">Pages</a> </li>
 						</ul>
 
 					</div>
@@ -310,7 +313,6 @@
 			<div class="breadcrumb-wrapper">
 
 				<div class="container">
-
 				</div>
 
 			</div>
@@ -323,12 +325,11 @@
 
 					<div class="GridLex-grid-noGutter-equalHeight">
 
-						<div class="GridLex-col-3_sm-4_xs-12_xss-12">
+						<div class="GridLex-col-1_sm-4_xs-12_xss-12">
 
-						
 						</div>
 
-						<div class="GridLex-col-9_sm-8_xs-12_xss-12">
+						<div class="GridLex-col-11_sm-8_xs-12_xss-12">
 
 							<div class="content-wrapper">
 
@@ -339,106 +340,83 @@
 										<div class="col-xs-12 col-sm-10 col-md-9">
 
 											<div class="dashboard-heading">
-												<h3>Create Trip</h3>
+												<h3>Successfully Posted Trip</h3>
+												<br />
+												<br />
+												<b>Details</b>
 											</div>
 
 										</div>
 
 									</div>
 
-									<form action="create" enctype='application/json' method='post'>
+									<form action="search" method='get'>
 
 										<div class="row">
 
-											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-5">
+											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-6">
 												<div class="form-group">
-
-													<label>Average Cost</label> <input type="number" name="avgCost" id="avgCost"
-														class="form-control" placeholder="Average Cost" required />
+													<b>Average Cost : </b> ${trip.getAvgCost()}
 												</div>
 
 											</div>
 
-											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-5">
+											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-6">
 
 												<div class="form-group">
-
-													<label>Location</label> 
-													<select class="form-control" name="locationid" id="locationid">
-														<c:forEach var="loc" items="${locations}">
-                                                        	<option value="${loc.getId()}">${loc.getName()}</option>
-                                                    	</c:forEach>
-                                                    </select>
+													<b>Location : </b> ${trip.locationentityGet().getName()}
 												</div>
 
 											</div>
 
 											<div class="clear"></div>
 
-											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-5">
+											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-6">
+												<c:set var="sdate" value="${fn:substring(trip.getStartDate(), 0, 10)}" />
+												<b>Trip Starts on : </b> ${sdate}
+											</div>
+
+											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-6">
 
 												<div class="form-group form-icon-right">
-												<label for="dpd1">Trip Starts on</label> <input
-													name="startdate1" class="form-control" id="dpd1"
-													placeholder="Start" type="text" readonly> <i
-													class="fa fa-calendar"></i>
+												<c:set var="edate" value="${fn:substring(trip.getEndDate(), 0, 10)}" />
+												<b>Trip Ends on : </b> ${edate}
+												</div>
+											</div>
+
+											<div class="clear"></div>
+
+											<div class="clear"></div>
+
+											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-6">
+												<div class="form-group">
+												<b>Expected People : </b> ${trip.getTotalPeople()}
 												</div>
 
 											</div>
 
-											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-5">
+											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-6">
+												<div class="form-group">
+												<b>Vacancies Left : </b>${trip.getVacancy()}
+												</div>
+											</div>
 
+											<div class="clear"></div>
+
+											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-6">
 												<div class="form-group form-icon-right">
-												<label for="dpd2">Trip Ends on</label> <input
-													name="enddate1" class="form-control" id="dpd2"
-													placeholder="end" type="text" readonly> <i
-													class="fa fa-calendar"></i>
+
+												<c:set var="bdate" value="${fn:substring(trip.getBookEndDate(), 0, 10)}" />
+												<b>Booking Allowed Untill : </b>${bdate}
 												</div>
+
 											</div>
 
-											<div class="clear"></div>
-
-											<div class="clear"></div>
-
-											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-5">
+											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-6">
 
 												<div class="form-group">
 
-													<label>Expected People</label> <input type="number" name="totalPeople" id="totalPeople"
-														class="form-control" required />
-												</div>
-
-											</div>
-
-											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-5">
-
-												<div class="form-group">
-
-													<label>Vacancies Left</label> <input type="number" name="vacancy" id="vacancy"
-														class="form-control" required />
-												</div>
-
-											</div>
-
-											<div class="clear"></div>
-
-											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-5">
-
-												<div class="form-group form-icon-right">
-												<label for="dpdFlight1">Booking Allowed Untill</label> <input
-													name="bookdate1" class="form-control" id="dpdFlight1"
-													placeholder="Booking end" type="text" readonly> <i
-													class="fa fa-calendar"></i>
-												</div>
-
-											</div>
-
-											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-5">
-
-												<div class="form-group">
-
-													<label>Travel by</label> <input type="text" name="travelBy" id="travelBy"
-														class="form-control" placeholder="Ex : Car" required />
+													<b>Travel by : </b>${trip.getTravelBy()}
 													
 												</div>
 
@@ -446,22 +424,17 @@
 
 											<div class="clear"></div>
 
-											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-5">
-
+											<div class="col-xss-12 col-xs-6 col-sm-6 col-md-6">
 												<div class="form-group">
-
-													<label>Description</label>
-													<textarea type="text" class="form-control" name="description" id="description"
-														placeholder="Description about Trip ...."></textarea>
+													<b>Description : </b>${trip.getDescription()}
 												</div>
-
 											</div>
 
 											<div class="clear"></div>
 
-											<div class="col-xs-12 col-sm-6 col-md-5">
+											<div class="col-xs-12 col-sm-6 col-md-6">
 
-												<button class="btn btn-danger">Post</button>
+												<button class="btn btn-primary">Back to Trips</button>
 
 											</div>
 
@@ -485,7 +458,7 @@
 
 			<footer class="main-footer">
 
-				
+			
 
 			</footer>
 

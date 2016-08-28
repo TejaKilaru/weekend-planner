@@ -18,11 +18,12 @@ import com.practo.jedi.wplanner.exceptions.NullEntityException;
 import com.practo.jedi.wplanner.filter.TripFilter;
 import com.practo.jedi.wplanner.model.Trip;
 import com.practo.jedi.wplanner.model.User;
-import com.practo.jedi.wplanner.run.Test1;
+import com.practo.jedi.wplanner.run.ApplicationRun;
 import com.practo.jedi.wplanner.service.TripService;
 
+
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Test1.class)
+@SpringBootTest(classes = ApplicationRun.class)
 public class TripServiceTest {
 
   @Autowired
@@ -32,7 +33,7 @@ public class TripServiceTest {
   public void test1() throws NullEntityException {
     // Get Trips
     ArrayList<Trip> trips = (ArrayList<Trip>) service.getall(new PageRequest(0, 2));
-    assertEquals(trips.size(), 1);
+    assertEquals(trips.size(), 2);
     assertEquals(800, trips.get(0).getAvgCost());
 
     // Get Trip
@@ -62,7 +63,7 @@ public class TripServiceTest {
     trip.setOrgId(2);
     trip.setTravelBy("Innova");
     trip = service.create(trip);
-    trip = service.get(2);
+    trip = service.get(3);
     assertEquals(5, trip.getVacancy());
 
   }
@@ -78,15 +79,13 @@ public class TripServiceTest {
   }
 
 
-  // @Test
-  // public void test4() throws NullEntityException {
-  // // Get Trip Users
-  // ArrayList<User> users = (ArrayList<User>) service.gettripusers(1);
-  // assertNotNull(users);
-  // // assertEquals(2, users.size());
-  // // assertEquals("Blake", users.get(0).getName());
-  //
-  // }
+  @Test
+  public void test4() throws NullEntityException {
+    // Get Trip Users
+    ArrayList<User> users = (ArrayList<User>) service.gettripusers(1);
+    assertNotNull(users);
+    assertEquals(1, users.size());
+  }
 
   @Test
   public void test5() {
@@ -98,11 +97,12 @@ public class TripServiceTest {
     obj.setAfterdate(new Date());
     ArrayList<Trip> trips = (ArrayList<Trip>) service.filter(obj, new PageRequest(0, 2));
     assertNotNull(trips);
-    assertEquals(1, trips.size());
+    assertEquals(2, trips.size());
 
-    // Filter
-    obj.setBeforedate(new Date());
-    trips = (ArrayList<Trip>) service.filter(obj, new PageRequest(0, 2));
+    //
+    TripFilter obj1 = new TripFilter();
+    obj1.setBeforedate(new Date());
+    trips = (ArrayList<Trip>) service.filter(obj1, new PageRequest(0, 2));
     assertEquals(0, trips.size());
 
   }
@@ -112,7 +112,7 @@ public class TripServiceTest {
     // Delete
     service.delete(1);
     ArrayList<Trip> trips = (ArrayList<Trip>) service.getall(new PageRequest(0, 2));
-    assertEquals(1, trips.size());
+    assertEquals(2, trips.size());
   }
 
 }

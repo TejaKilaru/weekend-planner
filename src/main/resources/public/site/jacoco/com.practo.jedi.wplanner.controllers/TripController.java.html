@@ -69,11 +69,12 @@ import javax.servlet.http.HttpServletResponse;
    * @param obj (Trip class)
    * @return (Trip class)
    */
-  @RequestMapping(method = RequestMethod.PUT)
-  public ResponseEntity&lt;Trip&gt; update(@RequestBody Trip obj) {
-<span class="nc" id="L74">    Trip dto = service.update(obj);</span>
-<span class="nc" id="L75">    ResponseEntity&lt;Trip&gt; re = new ResponseEntity&lt;Trip&gt;(dto, HttpStatus.OK);</span>
-<span class="nc" id="L76">    return re;</span>
+  @RequestMapping(value = &quot;/{id}&quot;, method = RequestMethod.PUT)
+  public ResponseEntity&lt;Trip&gt; update(@RequestBody Trip obj, @PathVariable(&quot;id&quot;) Integer id) {
+<span class="nc" id="L74">    obj.setId(id);</span>
+<span class="nc" id="L75">    Trip dto = service.update(obj);</span>
+<span class="nc" id="L76">    ResponseEntity&lt;Trip&gt; re = new ResponseEntity&lt;Trip&gt;(dto, HttpStatus.OK);</span>
+<span class="nc" id="L77">    return re;</span>
   }
 
   /**
@@ -81,14 +82,15 @@ import javax.servlet.http.HttpServletResponse;
    * 
    * @param id (Trip id)
    * @param response ()
-   * @return ()
+   * @return (boolean)
+   * @throws NullEntityException ()
    */
   @RequestMapping(value = &quot;/{id}&quot;, method = RequestMethod.DELETE)
   public ResponseEntity&lt;Boolean&gt; delete(@PathVariable(&quot;id&quot;) Integer id,
       HttpServletResponse response) throws NullEntityException {
-<span class="nc" id="L89">    service.delete(id);</span>
-<span class="nc" id="L90">    ResponseEntity&lt;Boolean&gt; re = new ResponseEntity&lt;Boolean&gt;(true, HttpStatus.NO_CONTENT);</span>
-<span class="nc" id="L91">    return re;</span>
+<span class="nc" id="L91">    service.delete(id);</span>
+<span class="nc" id="L92">    ResponseEntity&lt;Boolean&gt; re = new ResponseEntity&lt;Boolean&gt;(true, HttpStatus.NO_CONTENT);</span>
+<span class="nc" id="L93">    return re;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

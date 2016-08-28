@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.practo.jedi.wplanner.model.Location;
-import com.practo.jedi.wplanner.run.Test1;
+import com.practo.jedi.wplanner.run.ApplicationRun;
 import com.practo.jedi.wplanner.service.LocationService;
 
 import org.junit.Test;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Test1.class)
+@SpringBootTest(classes = ApplicationRun.class)
 public class LocationServiceTest {
 
   @Autowired
@@ -27,13 +27,14 @@ public class LocationServiceTest {
   public void test1() {
     // Get All
     ArrayList<Location> locations = (ArrayList<Location>) service.getall();
-    assertEquals(locations.size(), 2);
+    assertEquals(locations.size(), 4);
     assertEquals("Nandi Hills", locations.get(1).getName());
 
     // Get One
     Location location = service.get(1);
     assertNotNull(location);
     assertEquals("Wonderla", location.getName());
+
   }
 
 
@@ -44,7 +45,7 @@ public class LocationServiceTest {
     location.setType("Test");
     location.setImageUrl("URl");
     location = service.create(location);
-    location = service.get(3);
+    location = service.get(5);
     assertEquals("Test", location.getType());
   }
 
@@ -55,7 +56,6 @@ public class LocationServiceTest {
     location = service.update(location);
     location = service.get(2);
     assertEquals("Testing2", location.getName());
-
   }
 
 

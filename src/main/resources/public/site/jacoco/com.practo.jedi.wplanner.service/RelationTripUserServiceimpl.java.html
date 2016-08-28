@@ -11,10 +11,10 @@ import com.practo.jedi.wplanner.model.RelationTripUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
-import javax.transaction.Transactional;
 
 @Service
 @Transactional
@@ -62,14 +62,14 @@ import javax.transaction.Transactional;
 
   @Override
   public RelationTripUser update(RelationTripUser obj) throws NullEntityException {
-<span class="nc" id="L65">    RelationTripUserentity entity = obj.modeltoentity();</span>
-<span class="nc" id="L66">    entity.setModifyOn(new Date(System.currentTimeMillis()));</span>
-<span class="nc" id="L67">    entity.setTrip(tripdao.findTrip(obj.getTripId()));</span>
-<span class="nc" id="L68">    entity.setUser1(userdao.findUser(obj.getModifyById()));</span>
-<span class="nc" id="L69">    entity.setUser2(userdao.findUser(obj.getUserId()));</span>
-<span class="nc" id="L70">    entity = reltripuserrepository.updateRel(entity);</span>
-<span class="nc" id="L71">    obj.entitytomodel(entity);</span>
-<span class="nc" id="L72">    return obj;</span>
+<span class="fc" id="L65">    RelationTripUserentity entity = obj.modeltoentity();</span>
+<span class="fc" id="L66">    entity.setModifyOn(new Date(System.currentTimeMillis()));</span>
+<span class="fc" id="L67">    entity.setTrip(tripdao.findTrip(obj.getTripId()));</span>
+<span class="fc" id="L68">    entity.setUser1(userdao.findUser(obj.getModifyById()));</span>
+<span class="fc" id="L69">    entity.setUser2(userdao.findUser(obj.getUserId()));</span>
+<span class="fc" id="L70">    entity = reltripuserrepository.updateRel(entity);</span>
+<span class="fc" id="L71">    obj.entitytomodel(entity);</span>
+<span class="fc" id="L72">    return obj;</span>
   }
 
   @Override

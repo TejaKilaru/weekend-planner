@@ -154,6 +154,7 @@ public class TripFilter {
     criteria =
         criteria.add(Restrictions.eq("deleteStatus", "false")).addOrder(Order.asc("startDate"));
     criteria = criteria.add(Restrictions.ge("startDate", new Date()));
+    criteria = criteria.add(Restrictions.gt("bookEndDate", new Date()));
     return criteria;
   }
 

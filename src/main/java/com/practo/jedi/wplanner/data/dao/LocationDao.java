@@ -39,9 +39,4 @@ public class LocationDao {
     return obj;
   }
 
-  @Transactional
-  public Locationentity getLocationByName(String name) {
-    return (Locationentity) template.findByCriteria(
-        DetachedCriteria.forClass(Locationentity.class).add(Restrictions.eq("name", name)));
-  }
 }

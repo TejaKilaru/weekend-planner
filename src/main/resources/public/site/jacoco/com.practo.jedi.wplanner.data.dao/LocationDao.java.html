@@ -8,8 +8,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 @Repository
 <span class="fc" id="L15">public class LocationDao {</span>
@@ -39,10 +39,5 @@ import javax.transaction.Transactional;
 <span class="fc" id="L39">    return obj;</span>
   }
 
-  @Transactional
-  public Locationentity getLocationByName(String name) {
-<span class="nc" id="L44">    return (Locationentity) template.findByCriteria(</span>
-<span class="nc" id="L45">        DetachedCriteria.forClass(Locationentity.class).add(Restrictions.eq(&quot;name&quot;, name)));</span>
-  }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

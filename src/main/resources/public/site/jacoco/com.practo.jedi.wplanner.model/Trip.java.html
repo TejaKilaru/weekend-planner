@@ -5,6 +5,8 @@ import com.practo.jedi.wplanner.data.entity.RelationTripUserentity;
 import com.practo.jedi.wplanner.data.entity.Tripentity;
 import com.practo.jedi.wplanner.data.entity.Userentity;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.beans.Transient;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.transaction.Transactional;
 
 
 
@@ -74,95 +75,95 @@ public class Trip implements Serializable {
 
   private List&lt;RelationTripUserentity&gt; relationtripusers;
 
-<span class="fc" id="L77">  public Trip() {}</span>
+<span class="fc" id="L78">  public Trip() {}</span>
 
   public int getId() {
-<span class="fc" id="L80">    return this.id;</span>
+<span class="fc" id="L81">    return this.id;</span>
   }
 
   public void setId(int id) {
-<span class="fc" id="L84">    this.id = id;</span>
-<span class="fc" id="L85">  }</span>
+<span class="fc" id="L85">    this.id = id;</span>
+<span class="fc" id="L86">  }</span>
 
   public int getAvgCost() {
-<span class="fc" id="L88">    return this.avgCost;</span>
+<span class="fc" id="L89">    return this.avgCost;</span>
   }
 
   public void setAvgCost(int avgCost) {
-<span class="fc" id="L92">    this.avgCost = avgCost;</span>
-<span class="fc" id="L93">  }</span>
+<span class="fc" id="L93">    this.avgCost = avgCost;</span>
+<span class="fc" id="L94">  }</span>
 
   public Date getBookEndDate() {
-<span class="fc" id="L96">    return this.bookEndDate;</span>
+<span class="fc" id="L97">    return this.bookEndDate;</span>
   }
 
   public void setBookEndDate(Date bookEndDate) {
-<span class="fc" id="L100">    this.bookEndDate = bookEndDate;</span>
-<span class="fc" id="L101">  }</span>
+<span class="fc" id="L101">    this.bookEndDate = bookEndDate;</span>
+<span class="fc" id="L102">  }</span>
 
   public String getDeleteStatus() {
-<span class="fc" id="L104">    return this.deleteStatus;</span>
+<span class="fc" id="L105">    return this.deleteStatus;</span>
   }
 
   public void setDeleteStatus(String deleteStatus) {
-<span class="fc" id="L108">    this.deleteStatus = deleteStatus;</span>
-<span class="fc" id="L109">  }</span>
+<span class="fc" id="L109">    this.deleteStatus = deleteStatus;</span>
+<span class="fc" id="L110">  }</span>
 
   public String getDescription() {
-<span class="fc" id="L112">    return this.description;</span>
+<span class="fc" id="L113">    return this.description;</span>
   }
 
   public void setDescription(String description) {
-<span class="fc" id="L116">    this.description = description;</span>
-<span class="fc" id="L117">  }</span>
+<span class="fc" id="L117">    this.description = description;</span>
+<span class="fc" id="L118">  }</span>
 
   public Date getEndDate() {
-<span class="fc" id="L120">    return this.endDate;</span>
+<span class="fc" id="L121">    return this.endDate;</span>
   }
 
   public void setEndDate(Date endDate) {
-<span class="fc" id="L124">    this.endDate = endDate;</span>
-<span class="fc" id="L125">  }</span>
+<span class="fc" id="L125">    this.endDate = endDate;</span>
+<span class="fc" id="L126">  }</span>
 
   public Date getModifyOn() {
-<span class="fc" id="L128">    return this.modifyOn;</span>
+<span class="fc" id="L129">    return this.modifyOn;</span>
   }
 
   public void setModifyOn(Date modifyOn) {
-<span class="fc" id="L132">    this.modifyOn = modifyOn;</span>
-<span class="fc" id="L133">  }</span>
+<span class="fc" id="L133">    this.modifyOn = modifyOn;</span>
+<span class="fc" id="L134">  }</span>
 
   public Date getStartDate() {
-<span class="fc" id="L136">    return this.startDate;</span>
+<span class="fc" id="L137">    return this.startDate;</span>
   }
 
   public void setStartDate(Date startDate) {
-<span class="fc" id="L140">    this.startDate = startDate;</span>
-<span class="fc" id="L141">  }</span>
+<span class="fc" id="L141">    this.startDate = startDate;</span>
+<span class="fc" id="L142">  }</span>
 
   public int getTotalPeople() {
-<span class="fc" id="L144">    return this.totalPeople;</span>
+<span class="fc" id="L145">    return this.totalPeople;</span>
   }
 
   public void setTotalPeople(int totalPeople) {
-<span class="fc" id="L148">    this.totalPeople = totalPeople;</span>
-<span class="fc" id="L149">  }</span>
+<span class="fc" id="L149">    this.totalPeople = totalPeople;</span>
+<span class="fc" id="L150">  }</span>
 
   public String getTravelBy() {
-<span class="fc" id="L152">    return this.travelBy;</span>
+<span class="fc" id="L153">    return this.travelBy;</span>
   }
 
   public void setTravelBy(String travelBy) {
-<span class="fc" id="L156">    this.travelBy = travelBy;</span>
-<span class="fc" id="L157">  }</span>
+<span class="fc" id="L157">    this.travelBy = travelBy;</span>
+<span class="fc" id="L158">  }</span>
 
   public int getVacancy() {
-<span class="fc" id="L160">    return this.vacancy;</span>
+<span class="fc" id="L161">    return this.vacancy;</span>
   }
 
   public void setVacancy(int vacancy) {
-<span class="fc" id="L164">    this.vacancy = vacancy;</span>
-<span class="fc" id="L165">  }</span>
+<span class="fc" id="L165">    this.vacancy = vacancy;</span>
+<span class="fc" id="L166">  }</span>
 
   /**
    * .
@@ -170,28 +171,28 @@ public class Trip implements Serializable {
    * @return ()
    */
   public int getOrgId() {
-<span class="fc bfc" id="L173" title="All 2 branches covered.">    if (this.user != null) {</span>
-<span class="fc" id="L174">      return this.user.getId();</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">    if (this.user != null) {</span>
+<span class="fc" id="L175">      return this.user.getId();</span>
     }
-<span class="fc" id="L176">    return this.orgid;</span>
+<span class="fc" id="L177">    return this.orgid;</span>
   }
 
   public void setOrgId(Integer id) {
-<span class="fc" id="L180">    this.orgid = id;</span>
-<span class="fc" id="L181">  }</span>
+<span class="fc" id="L181">    this.orgid = id;</span>
+<span class="fc" id="L182">  }</span>
 
   public Userentity userentityGet() {
-<span class="fc" id="L184">    return this.user;</span>
+<span class="fc" id="L185">    return this.user;</span>
   }
 
   public void setUserentity(Userentity obj) {
-<span class="fc" id="L188">    this.user = obj;</span>
-<span class="fc" id="L189">    setOrgId(this.user.getId());</span>
-<span class="fc" id="L190">  }</span>
+<span class="fc" id="L189">    this.user = obj;</span>
+<span class="fc" id="L190">    setOrgId(this.user.getId());</span>
+<span class="fc" id="L191">  }</span>
 
   public void setLocationId(Integer locationid) {
-<span class="fc" id="L193">    this.locationid = locationid;</span>
-<span class="fc" id="L194">  }</span>
+<span class="fc" id="L194">    this.locationid = locationid;</span>
+<span class="fc" id="L195">  }</span>
 
   /**
    * .
@@ -199,20 +200,20 @@ public class Trip implements Serializable {
    * @return ()
    */
   public int getLocationId() {
-<span class="fc bfc" id="L202" title="All 2 branches covered.">    if (this.location != null) {</span>
-<span class="fc" id="L203">      return this.location.getId();</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">    if (this.location != null) {</span>
+<span class="fc" id="L204">      return this.location.getId();</span>
     }
-<span class="fc" id="L205">    return this.locationid;</span>
+<span class="fc" id="L206">    return this.locationid;</span>
   }
 
   public Locationentity locationentityGet() {
-<span class="fc" id="L209">    return this.location;</span>
+<span class="fc" id="L210">    return this.location;</span>
   }
 
   public void setLocationentity(Locationentity obj) {
-<span class="fc" id="L213">    this.location = obj;</span>
-<span class="fc" id="L214">    setLocationId(this.location.getId());</span>
-<span class="fc" id="L215">  }</span>
+<span class="fc" id="L214">    this.location = obj;</span>
+<span class="fc" id="L215">    setLocationId(this.location.getId());</span>
+<span class="fc" id="L216">  }</span>
 
   /**
    * Trip Members.
@@ -221,29 +222,29 @@ public class Trip implements Serializable {
    */
   @Transient
   public Iterable&lt;Integer&gt; getTripUserIds() {
-<span class="nc" id="L224">    List&lt;Integer&gt; trip = new ArrayList&lt;Integer&gt;();</span>
-<span class="nc bnc" id="L225" title="All 2 branches missed.">    if (this.relationtripusers == null) {</span>
-<span class="nc" id="L226">      return null;</span>
+<span class="nc" id="L225">    List&lt;Integer&gt; trip = new ArrayList&lt;Integer&gt;();</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">    if (this.relationtripusers == null) {</span>
+<span class="nc" id="L227">      return null;</span>
     }
-<span class="nc bnc" id="L228" title="All 2 branches missed.">    for (RelationTripUserentity temp : this.relationtripusers) {</span>
-<span class="nc" id="L229">      trip.add(temp.getUser2().getId());</span>
-    }
-<span class="nc" id="L231">    return trip;</span>
+<span class="nc bnc" id="L229" title="All 2 branches missed.">    for (RelationTripUserentity temp : this.relationtripusers) {</span>
+<span class="nc" id="L230">      trip.add(temp.getUser2().getId());</span>
+<span class="nc" id="L231">    }</span>
+<span class="nc" id="L232">    return trip;</span>
   }
 
   public void setRelationTripUsers(List&lt;RelationTripUserentity&gt; obj) {
-<span class="fc" id="L235">    this.relationtripusers = obj;</span>
-<span class="fc" id="L236">  }</span>
+<span class="fc" id="L236">    this.relationtripusers = obj;</span>
+<span class="fc" id="L237">  }</span>
 
   @Transient
   public Iterable&lt;RelationTripUserentity&gt; getRelationTripUsers() {
-<span class="nc" id="L240">    return this.relationtripusers;</span>
+<span class="nc" id="L241">    return this.relationtripusers;</span>
   }
 
 
   @Override
   public String toString() {
-<span class="nc" id="L246">    return &quot;User [average cost=&quot; + avgCost + &quot;]&quot;;</span>
+<span class="nc" id="L247">    return &quot;User [average cost=&quot; + avgCost + &quot;]&quot;;</span>
   }
 
 
@@ -253,23 +254,23 @@ public class Trip implements Serializable {
    * @return (entity)
    */
   public Tripentity modeltoentity() {
-<span class="fc" id="L256">    Tripentity et = new Tripentity();</span>
-<span class="fc" id="L257">    et.setModifyOn(getModifyOn());</span>
-<span class="fc" id="L258">    et.setStartDate(getStartDate());</span>
-<span class="fc" id="L259">    et.setEndDate(getEndDate());</span>
-<span class="fc" id="L260">    et.setBookEndDate(getBookEndDate());</span>
-<span class="fc" id="L261">    et.setAvgCost(getAvgCost());</span>
-<span class="fc" id="L262">    et.setDescription(getDescription());</span>
-<span class="fc" id="L263">    et.setVacancy(getVacancy());</span>
-<span class="fc" id="L264">    et.setTotalPeople(getTotalPeople());</span>
-<span class="fc" id="L265">    et.setTravelBy(getTravelBy());</span>
-<span class="fc" id="L266">    et.setDeleteStatus(getDeleteStatus());</span>
-<span class="fc" id="L267">    et.setLocationBean(locationentityGet());</span>
-<span class="fc" id="L268">    et.setUser(userentityGet());</span>
-<span class="pc bpc" id="L269" title="1 of 2 branches missed.">    if (new Integer(getId()) != null) {</span>
-<span class="fc" id="L270">      et.setId(getId());</span>
+<span class="fc" id="L257">    Tripentity et = new Tripentity();</span>
+<span class="fc" id="L258">    et.setModifyOn(getModifyOn());</span>
+<span class="fc" id="L259">    et.setStartDate(getStartDate());</span>
+<span class="fc" id="L260">    et.setEndDate(getEndDate());</span>
+<span class="fc" id="L261">    et.setBookEndDate(getBookEndDate());</span>
+<span class="fc" id="L262">    et.setAvgCost(getAvgCost());</span>
+<span class="fc" id="L263">    et.setDescription(getDescription());</span>
+<span class="fc" id="L264">    et.setVacancy(getVacancy());</span>
+<span class="fc" id="L265">    et.setTotalPeople(getTotalPeople());</span>
+<span class="fc" id="L266">    et.setTravelBy(getTravelBy());</span>
+<span class="fc" id="L267">    et.setDeleteStatus(getDeleteStatus());</span>
+<span class="fc" id="L268">    et.setLocationBean(locationentityGet());</span>
+<span class="fc" id="L269">    et.setUser(userentityGet());</span>
+<span class="pc bpc" id="L270" title="1 of 2 branches missed.">    if (new Integer(getId()) != null) {</span>
+<span class="fc" id="L271">      et.setId(getId());</span>
     }
-<span class="fc" id="L272">    return et;</span>
+<span class="fc" id="L273">    return et;</span>
   }
 
   /**
@@ -278,22 +279,22 @@ public class Trip implements Serializable {
    * @param obj (entity)
    */
   public void entitytomodel(Tripentity obj) {
-<span class="pc bpc" id="L281" title="1 of 2 branches missed.">    if (obj != null) {</span>
-<span class="fc" id="L282">      setModifyOn(obj.getModifyOn());</span>
-<span class="fc" id="L283">      setStartDate(obj.getStartDate());</span>
-<span class="fc" id="L284">      setEndDate(obj.getEndDate());</span>
-<span class="fc" id="L285">      setBookEndDate(obj.getBookEndDate());</span>
-<span class="fc" id="L286">      setAvgCost(obj.getAvgCost());</span>
-<span class="fc" id="L287">      setDescription(obj.getDescription());</span>
-<span class="fc" id="L288">      setVacancy(obj.getVacancy());</span>
-<span class="fc" id="L289">      setTotalPeople(obj.getTotalPeople());</span>
-<span class="fc" id="L290">      setTravelBy(obj.getTravelBy());</span>
-<span class="fc" id="L291">      setDeleteStatus(obj.getDeleteStatus());</span>
-<span class="fc" id="L292">      setId(obj.getId());</span>
-<span class="fc" id="L293">      setUserentity(obj.getUser());</span>
-<span class="fc" id="L294">      setLocationentity(obj.getLocationBean());</span>
-<span class="fc" id="L295">      setRelationTripUsers(obj.getRelationTripUsers());</span>
+<span class="pc bpc" id="L282" title="1 of 2 branches missed.">    if (obj != null) {</span>
+<span class="fc" id="L283">      setModifyOn(obj.getModifyOn());</span>
+<span class="fc" id="L284">      setStartDate(obj.getStartDate());</span>
+<span class="fc" id="L285">      setEndDate(obj.getEndDate());</span>
+<span class="fc" id="L286">      setBookEndDate(obj.getBookEndDate());</span>
+<span class="fc" id="L287">      setAvgCost(obj.getAvgCost());</span>
+<span class="fc" id="L288">      setDescription(obj.getDescription());</span>
+<span class="fc" id="L289">      setVacancy(obj.getVacancy());</span>
+<span class="fc" id="L290">      setTotalPeople(obj.getTotalPeople());</span>
+<span class="fc" id="L291">      setTravelBy(obj.getTravelBy());</span>
+<span class="fc" id="L292">      setDeleteStatus(obj.getDeleteStatus());</span>
+<span class="fc" id="L293">      setId(obj.getId());</span>
+<span class="fc" id="L294">      setUserentity(obj.getUser());</span>
+<span class="fc" id="L295">      setLocationentity(obj.getLocationBean());</span>
+<span class="fc" id="L296">      setRelationTripUsers(obj.getRelationTripUsers());</span>
     }
-<span class="fc" id="L297">  }</span>
+<span class="fc" id="L298">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

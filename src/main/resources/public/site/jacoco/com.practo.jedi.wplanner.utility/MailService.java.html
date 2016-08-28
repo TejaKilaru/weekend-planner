@@ -36,7 +36,7 @@ import javax.mail.internet.MimeMessage;
 <span class="nc" id="L36">    helper = new MimeMessageHelper(message, true);</span>
 <span class="nc" id="L37">    helper.setSubject(subject);</span>
 <span class="nc" id="L38">    helper.setTo(to);</span>
-<span class="nc" id="L39">    helper.setText(body);</span>
+<span class="nc" id="L39">    helper.setText(body, true);</span>
 
 <span class="nc" id="L41">    javaMailSender.send(message);</span>
 

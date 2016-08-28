@@ -13,16 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 
 
 @Service
-<span class="fc" id="L25">public class UserServiceimpl implements UserService {</span>
+<span class="fc" id="L24">public class UserServiceimpl implements UserService {</span>
 
   @Autowired
   private UserDao userrepository;
@@ -30,105 +29,105 @@ import javax.transaction.Transactional;
   @Autowired
   private RelationTripUserDao rtripuser;
 
-<span class="fc" id="L33">  final int itemsPerPage = 2;</span>
+<span class="fc" id="L32">  final int itemsPerPage = 5;</span>
 
   @Transactional
   @Override
   public Iterable&lt;User&gt; getall(Pageable pageable) {
-<span class="fc" id="L38">    Iterable&lt;Userentity&gt; entity = userrepository</span>
-<span class="fc" id="L39">        .getAllUsers(new PageRequest(pageable.getPageNumber(), itemsPerPage, pageable.getSort()));</span>
-<span class="fc" id="L40">    List&lt;User&gt; allusers = new ArrayList&lt;User&gt;();</span>
-<span class="fc bfc" id="L41" title="All 2 branches covered.">    for (Userentity temp : entity) {</span>
-<span class="fc" id="L42">      System.out.println(temp);</span>
+<span class="fc" id="L37">    Iterable&lt;Userentity&gt; entity = userrepository</span>
+<span class="fc" id="L38">        .getAllUsers(new PageRequest(pageable.getPageNumber(), itemsPerPage, pageable.getSort()));</span>
+<span class="fc" id="L39">    List&lt;User&gt; allusers = new ArrayList&lt;User&gt;();</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">    for (Userentity temp : entity) {</span>
+<span class="fc" id="L41">      System.out.println(temp);</span>
       try {
-<span class="fc" id="L44">        User dto = User.class.newInstance();</span>
-<span class="fc" id="L45">        dto.entitytomodel(temp);</span>
-<span class="fc" id="L46">        allusers.add(dto);</span>
-<span class="pc" id="L47">      } catch (InstantiationException | IllegalAccessException err) {</span>
-<span class="nc" id="L48">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + err);</span>
-<span class="nc" id="L49">        return null;</span>
-      }
-    }
-<span class="fc" id="L52">    return allusers;</span>
+<span class="fc" id="L43">        User dto = User.class.newInstance();</span>
+<span class="fc" id="L44">        dto.entitytomodel(temp);</span>
+<span class="fc" id="L45">        allusers.add(dto);</span>
+<span class="nc" id="L46">      } catch (InstantiationException | IllegalAccessException err) {</span>
+<span class="nc" id="L47">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + err);</span>
+<span class="nc" id="L48">        return null;</span>
+<span class="fc" id="L49">      }</span>
+<span class="fc" id="L50">    }</span>
+<span class="fc" id="L51">    return allusers;</span>
   }
 
   @Transactional
   @Override
   public Iterable&lt;Trip&gt; getusertrips(Integer id) {
-<span class="fc" id="L58">    Userentity entity = userrepository.findUser(id);</span>
-<span class="fc" id="L59">    Iterable&lt;Tripentity&gt; tripentity = entity.getTrips();</span>
-<span class="fc" id="L60">    List&lt;Trip&gt; usertrips = new ArrayList&lt;Trip&gt;();</span>
-<span class="fc bfc" id="L61" title="All 2 branches covered.">    for (Tripentity temp : tripentity) {</span>
-<span class="fc" id="L62">      System.out.println(temp);</span>
+<span class="fc" id="L57">    Userentity entity = userrepository.findUser(id);</span>
+<span class="fc" id="L58">    Iterable&lt;Tripentity&gt; tripentity = entity.getTrips();</span>
+<span class="fc" id="L59">    List&lt;Trip&gt; usertrips = new ArrayList&lt;Trip&gt;();</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">    for (Tripentity temp : tripentity) {</span>
+<span class="fc" id="L61">      System.out.println(temp);</span>
       try {
-<span class="fc" id="L64">        Trip trip = Trip.class.newInstance();</span>
-<span class="fc" id="L65">        trip.entitytomodel(temp);</span>
-<span class="fc" id="L66">        usertrips.add(trip);</span>
-<span class="pc" id="L67">      } catch (InstantiationException | IllegalAccessException err) {</span>
-<span class="nc" id="L68">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + err);</span>
-<span class="nc" id="L69">        return null;</span>
-      }
-    }
-<span class="fc" id="L72">    return usertrips;</span>
+<span class="fc" id="L63">        Trip trip = Trip.class.newInstance();</span>
+<span class="fc" id="L64">        trip.entitytomodel(temp);</span>
+<span class="fc" id="L65">        usertrips.add(trip);</span>
+<span class="nc" id="L66">      } catch (InstantiationException | IllegalAccessException err) {</span>
+<span class="nc" id="L67">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + err);</span>
+<span class="nc" id="L68">        return null;</span>
+<span class="fc" id="L69">      }</span>
+<span class="fc" id="L70">    }</span>
+<span class="fc" id="L71">    return usertrips;</span>
   }
 
   @Transactional
   @Override
   public Iterable&lt;Trip&gt; getuserontrips(Integer id) {
-<span class="fc" id="L78">    Iterable&lt;RelationTripUserentity&gt; entity = rtripuser.findByUser2Id(id);</span>
-<span class="fc" id="L79">    Iterable&lt;Tripentity&gt; tripentity = new ArrayList&lt;Tripentity&gt;();</span>
-<span class="fc bfc" id="L80" title="All 2 branches covered.">    for (RelationTripUserentity temp : entity) {</span>
-<span class="fc" id="L81">      ((List&lt;Tripentity&gt;) tripentity).add(temp.getTrip());</span>
-    }
-<span class="fc" id="L83">    List&lt;Trip&gt; userontrips = new ArrayList&lt;Trip&gt;();</span>
-<span class="fc bfc" id="L84" title="All 2 branches covered.">    for (Tripentity temp : tripentity) {</span>
-<span class="fc" id="L85">      System.out.println(temp);</span>
+<span class="fc" id="L77">    Iterable&lt;RelationTripUserentity&gt; entity = rtripuser.findByUser2Id(id);</span>
+<span class="fc" id="L78">    Iterable&lt;Tripentity&gt; tripentity = new ArrayList&lt;Tripentity&gt;();</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">    for (RelationTripUserentity temp : entity) {</span>
+<span class="fc" id="L80">      ((List&lt;Tripentity&gt;) tripentity).add(temp.getTrip());</span>
+<span class="fc" id="L81">    }</span>
+<span class="fc" id="L82">    List&lt;Trip&gt; userontrips = new ArrayList&lt;Trip&gt;();</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">    for (Tripentity temp : tripentity) {</span>
+<span class="fc" id="L84">      System.out.println(temp);</span>
       try {
-<span class="fc" id="L87">        Trip trip = Trip.class.newInstance();</span>
-<span class="fc" id="L88">        trip.entitytomodel(temp);</span>
-<span class="fc" id="L89">        userontrips.add(trip);</span>
-<span class="pc" id="L90">      } catch (InstantiationException | IllegalAccessException err) {</span>
-<span class="nc" id="L91">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + err);</span>
-<span class="nc" id="L92">        return null;</span>
-      }
-    }
-<span class="fc" id="L95">    return userontrips;</span>
+<span class="fc" id="L86">        Trip trip = Trip.class.newInstance();</span>
+<span class="fc" id="L87">        trip.entitytomodel(temp);</span>
+<span class="fc" id="L88">        userontrips.add(trip);</span>
+<span class="nc" id="L89">      } catch (InstantiationException | IllegalAccessException err) {</span>
+<span class="nc" id="L90">        System.out.printf(&quot;Exception while DAO get for ID :&quot; + err);</span>
+<span class="nc" id="L91">        return null;</span>
+<span class="fc" id="L92">      }</span>
+<span class="fc" id="L93">    }</span>
+<span class="fc" id="L94">    return userontrips;</span>
   }
 
   @Transactional
   @Override
   public User get(Integer id) {
-<span class="fc" id="L101">    Userentity entity = userrepository.findUser(id);</span>
-<span class="fc" id="L102">    User dto = new User();</span>
-<span class="fc" id="L103">    dto.entitytomodel(entity);</span>
-<span class="fc" id="L104">    return dto;</span>
+<span class="fc" id="L100">    Userentity entity = userrepository.findUser(id);</span>
+<span class="fc" id="L101">    User dto = new User();</span>
+<span class="fc" id="L102">    dto.entitytomodel(entity);</span>
+<span class="fc" id="L103">    return dto;</span>
   }
 
   @Transactional
   @Override
   public User findByEmail(String key) {
-<span class="fc" id="L110">    Userentity entity = userrepository.findByEmail(key);</span>
-<span class="fc" id="L111">    User dto = new User();</span>
-<span class="fc" id="L112">    dto.entitytomodel(entity);</span>
-<span class="fc" id="L113">    return dto;</span>
+<span class="fc" id="L109">    Userentity entity = userrepository.findByEmail(key);</span>
+<span class="fc" id="L110">    User dto = new User();</span>
+<span class="fc" id="L111">    dto.entitytomodel(entity);</span>
+<span class="fc" id="L112">    return dto;</span>
   }
 
   @Transactional
   @Override
   public User create(User obj) {
-<span class="fc" id="L119">    Userentity entity = obj.modeltoentity();</span>
-<span class="fc" id="L120">    entity = userrepository.createUser(entity);</span>
-<span class="fc" id="L121">    obj.entitytomodel(entity);</span>
-<span class="fc" id="L122">    return obj;</span>
+<span class="fc" id="L118">    Userentity entity = obj.modeltoentity();</span>
+<span class="fc" id="L119">    entity = userrepository.createUser(entity);</span>
+<span class="fc" id="L120">    obj.entitytomodel(entity);</span>
+<span class="fc" id="L121">    return obj;</span>
   }
 
   @Transactional
   @Override
   public User update(User obj) {
-<span class="fc" id="L128">    Userentity entity = obj.modeltoentity();</span>
-<span class="fc" id="L129">    entity = userrepository.updateUser(entity);</span>
-<span class="fc" id="L130">    obj.entitytomodel(entity);</span>
-<span class="fc" id="L131">    return obj;</span>
+<span class="fc" id="L127">    Userentity entity = obj.modeltoentity();</span>
+<span class="fc" id="L128">    entity = userrepository.updateUser(entity);</span>
+<span class="fc" id="L129">    obj.entitytomodel(entity);</span>
+<span class="fc" id="L130">    return obj;</span>
   }
 
 }
