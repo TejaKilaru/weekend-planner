@@ -1,3 +1,6 @@
+
+[![Travis-ci Build Status](https://travis-ci.org/TejaKilaru/weekend-planner.svg?branch=master)](https://travis-ci.org/TejaKilaru/weekend-planner)
+
 # weekend-planner
 
 A WebApp to post trips and signup for trips.
@@ -16,5 +19,5 @@ Java 8, Maven, MySql
 
 ## [Apiary Documentation](http://docs.weekendplanner1.apiary.io/#)
 
-Travis Mvn Build Status:
-[![Travis-ci Build Status](https://travis-ci.org/TejaKilaru/weekend-planner.svg?branch=master)](https://travis-ci.org/TejaKilaru/weekend-planner)
+## [Er Diagram](https://drive.google.com/open?id=0B7Z_4cCGOXc9TFVvbDRxRGRadk0)
+
