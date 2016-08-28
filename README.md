@@ -37,3 +37,8 @@ Java 8, Maven, MySql
 
 ### Er Diagram [link](https://drive.google.com/open?id=0B7Z_4cCGOXc9TFVvbDRxRGRadk0)
 
+### Java Doc [link](http://ec2-52-43-12-70.us-west-2.compute.amazonaws.com/weekend-planner/doc/index.html)
+
+### Codecoverage [link](http://ec2-52-43-12-70.us-west-2.compute.amazonaws.com/weekend-planner/site/jacoco/index.html)
+
+### Newrelic [link](https://rpm.newrelic.com/accounts/1410170/applications/21607548) user=poorna.t@practo.com pass=testing123
