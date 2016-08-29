@@ -3,7 +3,7 @@
 
 # weekend-planner
 
-Weekend Planner helps Practeon to post vacancies in their trip plan to get more people and to join the trips along with others.
+Weekend Planner helps Practeon to post vacancies in their trip plan to get more people and to join the trips along with others. It aslo provides other functionalities to update trip details, delete trip, unsign trip etc..;
 
 ### App Hosted Link
 [Amazon Ec2 Link](http://ec2-52-43-12-70.us-west-2.compute.amazonaws.com/weekend-planner/index)
