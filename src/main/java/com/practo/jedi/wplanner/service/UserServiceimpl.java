@@ -38,7 +38,6 @@ public class UserServiceimpl implements UserService {
         .getAllUsers(new PageRequest(pageable.getPageNumber(), itemsPerPage, pageable.getSort()));
     List<User> allusers = new ArrayList<User>();
     for (Userentity temp : entity) {
-      System.out.println(temp);
       try {
         User dto = User.class.newInstance();
         dto.entitytomodel(temp);
@@ -81,7 +80,6 @@ public class UserServiceimpl implements UserService {
     }
     List<Trip> userontrips = new ArrayList<Trip>();
     for (Tripentity temp : tripentity) {
-      System.out.println(temp);
       try {
         Trip trip = Trip.class.newInstance();
         trip.entitytomodel(temp);

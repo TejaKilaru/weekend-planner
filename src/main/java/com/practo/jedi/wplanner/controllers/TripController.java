@@ -19,6 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * TripController handles the requests related to trips like create, update, delete, get, getall and
+ * filter.
+ * 
+ * @author teja
+ *
+ */
 @RestController
 @RequestMapping("/trips")
 public class TripController {

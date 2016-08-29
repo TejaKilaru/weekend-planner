@@ -16,6 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 
+/**
+ * UserController handles the requests based on users create, update, get ,get posted user trips and
+ * get user signed up trips.
+ * 
+ * @author teja
+ *
+ */
 @RestController
 @RequestMapping("/users")
 public class UserController {

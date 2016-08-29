@@ -42,10 +42,9 @@ public class TripServiceimpl implements TripService {
 
   @Override
   public Iterable<Trip> filter(TripFilter obj, Pageable pageable) {
-    // if (obj.getLocationid() != 0) {
-    // obj.setLocation(locationdao.getLocationByName(obj.getLocationname()));
-    // }
-    // System.out.println(obj.getLocationid());
+    if (obj.getVacancy() < 0) {
+      obj.setVacancy(0);
+    }
     Iterable<Tripentity> trips = triprepository.filter(obj.generatequery(),
         new PageRequest(pageable.getPageNumber(), itemsPerPage, pageable.getSort()));
     List<Trip> filtertrips = new ArrayList<Trip>();
@@ -60,6 +59,7 @@ public class TripServiceimpl implements TripService {
       }
     }
     return filtertrips;
+
   }
 
   @Override
@@ -68,7 +68,6 @@ public class TripServiceimpl implements TripService {
         .getAllTrips(new PageRequest(pageable.getPageNumber(), itemsPerPage, pageable.getSort()));
     List<Trip> alltrips = new ArrayList<Trip>();
     for (Tripentity temp : entity) {
-      System.out.println(temp);
       try {
         Trip dto = Trip.class.newInstance();
         dto.entitytomodel(temp);
@@ -113,7 +112,6 @@ public class TripServiceimpl implements TripService {
 
   @Override
   public Trip create(Trip obj) {
-    System.out.println("Came");
     Tripentity entity = obj.modeltoentity();
     entity.setModifyOn(new Date(System.currentTimeMillis()));
     entity.setLocationBean(locationdao.findLocation(obj.getLocationId()));

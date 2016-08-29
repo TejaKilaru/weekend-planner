@@ -16,6 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 
 
+/**
+ * RelationTripUser handles the request relates to trip user linking like jointrip, leave and remove
+ * from trip.
+ * 
+ * @author teja
+ *
+ */
 @RestController
 @RequestMapping("/reltripuser")
 public class RelationTripUserController {
@@ -45,7 +52,7 @@ public class RelationTripUserController {
    */
   @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id,
-      HttpServletResponse response) {
+      HttpServletResponse response) throws NullEntityException {
     service.delete(id);
     ResponseEntity<Boolean> re = new ResponseEntity<Boolean>(true, HttpStatus.NO_CONTENT);
     return re;

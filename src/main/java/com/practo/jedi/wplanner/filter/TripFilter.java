@@ -9,6 +9,12 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.Date;
 
+/**
+ * TripFilter is the Object of all filters and generates the custom query
+ * 
+ * @author teja
+ *
+ */
 public class TripFilter {
 
   private int locationid;

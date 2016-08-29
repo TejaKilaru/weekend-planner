@@ -55,7 +55,7 @@ public class RelationTripUserServiceTest {
   }
 
   @Test
-  public void test4() {
+  public void test4() throws NullEntityException {
     service.delete(2);
     RelationTripUser reltripuser = service.get(2);
     assertEquals("true", reltripuser.getDeleteStatus());

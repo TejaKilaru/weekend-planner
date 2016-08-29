@@ -19,6 +19,6 @@ public interface RelationTripUserService {
   RelationTripUser update(RelationTripUser obj) throws NullEntityException;
 
   @Transactional
-  void delete(Integer id);
+  void delete(Integer id) throws NullEntityException;
 
 }

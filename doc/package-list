@@ -1,0 +1,11 @@
+com.practo.jedi.wplanner.controllers
+com.practo.jedi.wplanner.data.dao
+com.practo.jedi.wplanner.data.entity
+com.practo.jedi.wplanner.exceptions
+com.practo.jedi.wplanner.filter
+com.practo.jedi.wplanner.model
+com.practo.jedi.wplanner.run
+com.practo.jedi.wplanner.service
+com.practo.jedi.wplanner.test
+com.practo.jedi.wplanner.utility
+com.practo.jedi.wplanner.webcontroller

@@ -11,6 +11,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
+/**
+ * LocarionDao per-forms the curd operation and custom functionalities.
+ * 
+ * @author teja
+ *
+ */
 @Repository
 public class LocationDao {
 

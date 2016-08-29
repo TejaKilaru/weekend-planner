@@ -1,11 +1,14 @@
 package com.practo.jedi.wplanner.test;
 
+import com.practo.jedi.wplanner.exceptions.NullEntityException;
+import com.practo.jedi.wplanner.filter.TripFilter;
+import com.practo.jedi.wplanner.model.Trip;
+import com.practo.jedi.wplanner.model.User;
+import com.practo.jedi.wplanner.run.ApplicationRun;
+import com.practo.jedi.wplanner.service.TripService;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,12 +17,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.practo.jedi.wplanner.exceptions.NullEntityException;
-import com.practo.jedi.wplanner.filter.TripFilter;
-import com.practo.jedi.wplanner.model.Trip;
-import com.practo.jedi.wplanner.model.User;
-import com.practo.jedi.wplanner.run.ApplicationRun;
-import com.practo.jedi.wplanner.service.TripService;
+import java.util.ArrayList;
+import java.util.Date;
+
 
 
 @RunWith(SpringRunner.class)

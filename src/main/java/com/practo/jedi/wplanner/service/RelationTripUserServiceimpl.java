@@ -73,11 +73,16 @@ public class RelationTripUserServiceimpl implements RelationTripUserService {
   }
 
   @Override
-  public void delete(Integer id) {
+  public void delete(Integer id) throws NullEntityException {
     RelationTripUserentity entity = reltripuserrepository.findRel(id);
-    entity.setModifyOn(new Date(System.currentTimeMillis()));
-    entity.setDeleteStatus("true");
-    entity = reltripuserrepository.updateRel(entity);
+    Tripentity tripentity = tripdao.findTrip(entity.getTrip().getId());
+    if (tripentity != null) {
+      entity.setModifyOn(new Date(System.currentTimeMillis()));
+      entity.setDeleteStatus("true");
+      entity = reltripuserrepository.updateRel(entity);
+      tripentity.setVacancy(tripentity.getVacancy() + 1);
+      tripentity = tripdao.updateTrip(tripentity);
+    }
   }
 
 }

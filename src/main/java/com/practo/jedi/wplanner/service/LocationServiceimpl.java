@@ -26,7 +26,6 @@ public class LocationServiceimpl implements LocationService {
     Iterable<Locationentity> entity = locationrepository.getAllLocations();
     List<Location> alllocations = new ArrayList<Location>();
     for (Locationentity temp : entity) {
-      System.out.println(temp);
       try {
         Location dto = Location.class.newInstance();
         dto.entitytomodel(temp);
