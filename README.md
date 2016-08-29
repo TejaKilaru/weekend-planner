@@ -19,7 +19,6 @@ Java 8, Maven, MySql
 * Javascript, Css, Jsp
 * Google Signin (User Authentication)
 * Travis
-* Sentry
 * Google Formater/Checklist
 * Amazon Ec2
   
