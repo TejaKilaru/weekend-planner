@@ -50,5 +50,5 @@ Java 8, Maven, MySql
 
 ### Newrelic 
 [link](https://rpm.newrelic.com/accounts/1410170/applications/21607548) 
-user=poorna.t@practo.com pass=testing123
+
 
